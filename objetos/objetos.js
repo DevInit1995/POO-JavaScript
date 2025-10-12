@@ -55,4 +55,41 @@ class Pessoa2 {
 const pessoa2 = new Pessoa("Jhonny" + 25);
 pessoa2.falar();
 
+const exibe = document.getElementById("btnExibir");
+const descricao = document.getElementById("descricao");
+const liberado = document.getElementById("liberacao");
+
+class Carros {
+    constructor(fabricante, ano, cor, dataFabri, modelo, liberacao){
+        this.fabricante = fabricante;
+        this.ano = ano;
+        this.cor = cor;
+        this.dataFabri = dataFabri;
+        this.modelo = modelo;
+        this.liberacao = true;
+    }
+
+    descricao = () => {
+        exibe.addEventListener("click", () => {
+            descricao.innerHTML = "Descrição: " + " Fabricante: " + this.fabricante
+        + "Ano: " + this.ano + "Cor: " + this.cor + "Data Fabricação: " + this.dataFabri 
+        + "Modelo: " + this.modelo; 
+        })
+    }
+
+    libera = () => {
+        if(this.liberacao === false){
+            liberado.innerHTML= ("O veículo não sairá da linha de produção");
+        }else{
+            liberado.innerHTML = ("Veículo liberado para venda");
+        }
+    }
+}
+
+const carros = new Carros("Fiat", "2012", "Preto", "2011", "fire");
+carros.descricao();
+carros.libera();
+
+
+
 

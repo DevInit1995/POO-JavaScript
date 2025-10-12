@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Bancário</title>
+</head>
+
+<body>
+    <div class="form-container">
+            <div class="form-step active">
+                <h1>Cadastro bancário</h1>
+                <h3>Dados Pessoais</h3>
+            
+                <label for="nomeCompleto">Nome completo:</label>
+                <input type="text" id="nomeCompleto" placeholder="Ex.: Jhon Kennedy Alves Dos Santos">
+                    
+                <label for="dataNascimento">Data Nascimento:</label>
+                <input type="date" id="dataNascimento">
+
+                <label for="nacionalidade">Nacionalidade:</label>
+                <input type="text" id="nacionalidade" placeholder="Brasil">
+
+                <label for="estadoCivil">Estado Civil:</label>
+                <input type="text" id="estadoCivil" placeholder="Ex.: Solteiro">
+                       
+                <label for="nomeMae">Nome da Mãe:</label>
+                <input type="text" id="nomeMae" placeholder="Ex.: Maria Da Conceição">
+                       
+                <label for="nomePai">Nome do Pai:</label>
+                <input type="text" id="nomePai" placeholder="Ex.: Antônio Nogueira Martins">
+
+                <label for="telefone">Telefone:</label>
+                <input type="number" id="telefone" placeholder="Ex.: 00000-000">
+                <label for="celular">Celular:</label>
+                <input type="number" id="celular" placeholder="Ex.: 00000-000">
+                    
+                <label for="email">E-MAIL:</label>
+                <input type="text" id="email" placeholder="Ex.: exemple@gmail.com">
+                    
+                <div class="buttons">
+                    <button class="next">Avançar</button>
+                </div>
+            </div>
+        
+            <div class="form-step">
+                <h1>Cadastro bancário</h1>
+                <h3>Documentos de identificação</h3>
+            
+                <label for="nomeCompleto">CPF:</label>
+                <input type="number" id="cpf" placeholder="Ex.: 000.000.000-00">
+                
+                <label for="rg">RG:</label>
+                <input type="number" id="rg" placeholder="Ex.: 00.000.000-0">
+
+                <label for="tituloEleitor">Titulo Eleitor:</label>
+                <input type="number" id="tituloEleitor" placeholder="Ex.: 000000000000">
+                
+                <div class="buttons">
+                    <button class="prev">Voltar</button>
+                    <button class="next">Avançar</button>
+                </div>
+            </div>
+                
+            <div class="form-step">
+                <h1>Cadastro bancário</h1>
+                <h3>Endereço</h3>
+            
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" placeholder="Ex.: MG">
+                
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" placeholder="Ex.: Belo Horizonte">
+
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" placeholder="Ex.: Serra Verde">
+
+                <label for="rua">Rua:</label>
+                <input type="text" id="rua" placeholder="Ex.: Lazurita">
+
+                <label for="numero">Número:</label>
+                <input type="number" id="numero" placeholder="Ex.: 56">
+
+                <label for="cep">CEP:</label>
+                <input type="number" id="cep" placeholder="Ex.: 00000-000">
+
+                <label for="numero">Número:</label>
+                <input type="number" id="numero" placeholder="Ex.: 56">
+            
+                <div class="buttons">
+                    <button class="prev">Voltar</button>
+                    <button class="next">Avançar</button>
+                </div>
+            </div>
+        
+           <div class="form-step">
+                <h1>Cadastro bancário</h1>
+                <h3>Dados profissionais</h3>
+            
+                <label for="profissao">Profissão / Ocupação:</label>
+                <input type="text" id="profissao" placeholder="Ex.: Mecânico">
+                
+                <label for="nomeEmpresa">Empresa que trabalha:</label>
+                <input type="text" id="nomeEmpresa" placeholder="Ex.: Vale">
+
+                <label for="renda">Renda Mensal:</label>
+                <input type="number" id="renda" placeholder="Ex.: 1.500,00">
+                <input type="number" id="cep" placeholder="Ex.: 00000-000">
+            
+                <div class="buttons">
+                    <button class="prev">Voltar</button>
+                    <button class="next">Avançar</button>
+                </div>
+           </div>
+        
+            <div class="form-step">
+                <h1>Cadastro bancário</h1>
+                <h3>Dados financeiros</h3>
+            
+                <label for="numeroConta">Número Conta:</label>
+                <input type="number" id="numeroConta" placeholder="Ex.: 00000-0">
+                
+                <label for="agencia">Agência:</label>
+                <input type="number" id="agencia" placeholder="Ex.: 0000">
+
+                <label for="tipoConta">Tipo conta:</label>
+                <input type="text" id="tipoConta" placeholder="Ex.: Corrente">
+            
+                <div class="buttons">
+                    <button class="prev">Voltar</button>
+                    <button id="btnCadastrar">Cadastrar</button>
+                    <p id="descricaoCadastro"></p>
+                </div>
+            </div>
+    </div>
+
+    <script src="cadastro.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212830;
+            color: #798252;
+            font-family: "Cabin", sans-serif;
+            font-weight: 400;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            width: 650px;
+            background: #2a313a;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .form-step {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-step.active {
+            display: flex;
+            animation: fade 0.4s ease-in-out;
+        }
+
+        @keyframes fade {
+            from {opacity: 0; transform: btnCadastrar(20px);}
+            to {opacity: 1; transform: translateX(0);}
+        }
+
+        header {
+            padding: 2rem;
+            background-color: #331f19;
+            text-align: center;
+        }
+
+        h1, h3 {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #666;
+            border-radius: 8px;
+            background: #1a1f25;
+            color: white;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #9aa96d;
+        }
+
+        input::placeholder {
+            color: #cbbba7;
+        }
+    </style>
+</body>
+</html>

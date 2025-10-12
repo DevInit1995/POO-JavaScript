@@ -17,7 +17,86 @@
         <p id="mensagem-objeto-literal"></p>
         <p id="dados-objeto-literal"></p>
     </div>
+    <br>
+    <div>
+        <h1>Ficha carros</h1>
+        <label for="descricao">Clique para exibir a descrição dos carros</label>
+        <button type="button" id="btnExibir">Exibir</button>
+        <br>
+        <p id="descricao"></p>
+        <p id="liberacao"></p>
+    </div>
+    <br>
+    <br>
+    <form id="DadosPessoais">
+        <h1>Cadastro báncario</h1>
+        <h4>Dados Pessoais</h4>
+        
+        <div class="controles">
+            <label for="nomeCompleto">Nome completo:</label>
+            <input type="text" id="nomeCompleto" placeholder="Ex.: Jhon Kennedy Alves Dos Santos">
+        
+            <label for="dataNascimento">Data Nascimento:</label>
+            <input type="date" id="dataNascimento">
+
+            <label for="nacionalidade">Nacionalidade:</label>
+            <input type="text" id="nacionalidade" placeholder="Brasil">
+
+            <label for="estadoCivil">Estado Civil:</label>
+            <input type="text" id="estadoCivil" placeholder="Ex.: Solteiro">
+            
+            <label for="nomeMae">Nome da Mãe:</label>
+            <input type="text" id="nomeMae" placeholder="Ex.: Maria Da Conceição">
+            
+            <label for="nomePai">Nome do Pai:</label>
+            <input type="text" id="nomePai" placeholder="Ex.: Antônio Nogueira Martins">
+        </div>
+
+        <button type="button" id="btnCadastrar">Cadastrar</button>
+        <br>
+        <p id="descricaoCadastro"></p>
+    </form>
 
     <script src="objetos.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212830;
+            color: #798252;
+            font-family: "Cabin", sans-serif;
+            font-weight: 400;
+        }
+
+        header {
+            padding: 2rem;
+            background-color: #331f19;
+            text-align: center;
+        }
+
+        h1, h4 {
+            text-align: center;
+        }
+
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 0.6rem;
+            border: 2px solid #ccd595;
+            outline: none;
+            border-radius: 5px;
+            background-color: transparent;
+            font-size: large;
+            color: white;
+        }
+
+        input::placeholder {
+            color: #cbbba7;
+        }
+    </style>
 </body>
 </html>
