@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fornecedores</title>
+    <link rel="stylesheet" href="/cadastro-oficina/css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-step active">
+            <h1>Cadastro de Fornecedores</h1>
+            <h3>Identificação do Fornecedor</h3>
+
+            <label for="id">ID:</label>
+            <input type="number" id="id">
+
+            <label for="razaoSocial">Razão Social:</label>
+            <input type="text" id="razaoSocial" placeholder="Ex.: Pirelli Ltda">
+
+            <label for="nomeFantasia">Nome Fantasia:</label>
+            <input type="text" id="nomeFantasia" placeholder="Ex.: Pirelli">
+
+            <label for="cnpj">CNPJ:</label>
+            <input type="number" id="cnpj" placeholder="92.411.045/0001-77">
+
+            <label for="inscricaoEstadual">Inscrição Estadual:</label>
+            <input type="number" id="inscricaoEstadual" placeholder="418.210.400.402">
+
+            <label for="segmento">Segmento:</label>
+            <input type="text" id="segmento" placeholder="Ex.: Amortecedores">
+
+            <div class="buttons">
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Endereço</h3>
+
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" placeholder="Ex.: Minas Gerais">
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" placeholder="Ex.: Belo Horizonte">
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" placeholder="Ex.: Serra Verde">
+
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" placeholder="Ex.: Andreia Margarete Camilo">
+
+            <label for="numero">Número:</label>
+            <input type="number" id="numero">
+
+            <label for="cep">CEP:</label>
+            <input type="number" id="cep" placeholder="Ex.: 00000-000">
+
+            <label for="complemento">Complemento:</label>
+            <input type="text" id="complemento" placeholder="Ex.: Em frente a padaria Ki-Pão">
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Contato</h3>
+
+            <label for="telefone">Telefone:</label>
+            <input type="number" id="telefone" placeholder="Ex.: (00) 0000-0000">
+
+            <label for="celular">Celular:</label>
+            <input type="number" id="celular" placeholder="Ex.: (00) 0000-0000">
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" placeholder="Ex.: exemplo@gmail.com" autocomplete="email">
+
+            <label for="site">Site:</label>
+            <input type="text" id="site" placeholder="amortecedores@gmail.com">
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Informações comerciais</h3>
+
+            <label for="formaPagamento">Forma Pagamento:</label>
+            <input type="text" id="formaPagamento" placeholder="Ex.: Boleto">
+
+            <label for="prazoPagamento">Prazo Pagamento:</label>
+            <input type="text" id="prazoPagamento" placeholder="Ex.: 30 dias">
+
+            <label for="limiteCredito">Limite Crédito:</label>
+            <input type="text" id="limiteCredito" placeholder="Ex.: 1.500,00">
+
+            <label for="condicaoEntrega">Condição Entrega:</label>
+            <input type="text" id="condicaoEntrega" placeholder="Ex.: Frete">
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Controle Interno</h3>
+
+            <label for="dataCadastro">Data Cadastro:</label>
+            <input type="date" id="dataCadastro">
+
+            <div class="status">
+                <label>Status:</label>
+                <label for="ativo">Ativo:</label>
+                <input type="radio" id="ativo">
+
+                <label for="inativo">Inativo:</label>
+                <input type="radio" id="inativo">
+            </div>
+
+            <label for="observacoes">Observações:</label>
+            <textarea id="observacoes" cols="50" 
+                rows="8" placeholder="Ex.: fornecedor confiável">
+            </textarea>
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Produtos Fornecidos</h3>
+
+            <label for="nomeProduto">Nome Produto:</label>
+            <input type="text" id="nomeProduto" placeholder="Ex.: Pastilha de freio">
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" placeholder="Ex.: Bosch">
+
+            <label for="precoUnitario">Preço Únitario:</label>
+            <input type="number" id="precoUnitario" placeholder="Ex.: 50,00">
+
+            <label for="codigoProduto">Código Produto:</label>
+            <input type="number" id="codigoProduto" placeholder="Ex.: 1478522">
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnConcluir">Concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/cadastro-oficina/js/fornecedores.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+const passagem = document.querySelectorAll(".form-step");
+const avancar = document.querySelectorAll(".btnAvancar");
+const voltar = document.querySelectorAll(".btnVoltar");
+let etapaAtual = 0;
+
+class Fornecedores {
+    /*constructor(id, razaoSocial, nomeFantasia, cnpj, inscricaoEstadual, segmento,
+        estado, cidade, bairro, rua, numero, cep,complemento, telefone, celular, 
+        email, site, responsavel, formaPagamento, prazoPagamento, limiteCredito, 
+        condicaoEntrega, dataCadastro, status, observacoes, nomeProduto, marca, 
+        precoUnitario, codigoProduto, fornecedor, listaProdutos, dataPedido, status) {
+        this.id = id;
+        this.razaoSocial = razaoSocial;
+        this.nomeFantasia = nomeFantasia;
+        this.cnpj = cnpj;
+        this.inscricaoEstadual = inscricaoEstadual;
+        this.segmento = segmento;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.complemento = complemento;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.email = email;
+        this.site = site;
+        this.responsavel = responsavel;
+        this.formaPagamento = formaPagamento;
+        this.prazoPagamento = prazoPagamento;
+        this.limiteCredito = limiteCredito;
+        this.condicaoEntrega = condicaoEntrega;
+        this.dataCadastro = dataCadastro;
+        this.status = status;
+        this.observacoes = observacoes;
+        this.nomeProduto = nomeProduto;
+        this.marca = marca;
+        this.precoUnitario = precoUnitario;
+        this.codigoProduto = codigoProduto;
+        this.fornecedor = fornecedor;
+        this.listaProdutos = listaProdutos;
+        this.dataPedido = dataPedido;
+        this.status = status;
+    }*/
+
+    validar = (valor) => valor.trim().length > 0;
+
+    validarPrimeiraEtapa = () => {
+        const campos = [
+            {id: "razaoSocial", mensagem: "Preencha o campo razão social"},
+            {id: "nomeFantasia", mensagem: "Preencha o campo nome fantasia"},
+            {id: "cnpj", mensagem: "Preencha o campo cnpj"},
+            {id: "inscricaoEstadual", mensagem: "Preencha o campo inscrição estadual"},
+            {id: "segmento", mensagem: "Preencha o campo segmento"},            
+        ]
+
+        for(let campo of campos){
+            const valor = document.getElementById(campo.id).value;
+            if(!this.validar(valor)){
+                this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
+                return false;
+            }
+        }
+
+        this.proximaEtapa();
+    }
+
+    validarSegundaEtapa = () => {
+        //validação dos campos
+        const campos = [
+            {id: "estado", mensagem: "Preencha o campo estado "},
+            {id: "cidade", mensagem: "Preencha o campo cidade"},
+            {id: "bairro", mensagem: "Preencha o campo bairro"},
+            {id: "rua", mensagem: "Preencha o campo rua"},
+            {id: "numero", mensagem: "Preencha o campo numero"},
+            {id: "cep", mensagem: "Preencha o campo cep"},
+            {id: "complemento", mensagem: "Preencha o campo complemento"},
+        ]
+
+        for(let campo of campos){
+            const valor = document.getElementById(campo.id).value;
+            if(!this.validar(valor)){
+                this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
+                return false;
+            }
+        }
+        this.proximaEtapa();
+    }
+
+    validarTerceiraEtapa = () => {
+        //validação de campos
+        const campos = [
+            {id: "telefone", mensagem: "Preencha o campo telefone"},
+            {id: "celular", mensagem: "Preencha o campo celular"},
+            {id: "email", mensagem: "Preencha o campo email"},
+            {id: "site", mensagem: "Preencha o campo site"},
+        ]
+
+        for(let campo of campos){
+            const valor = document.getElementById(campo.id).value;
+            if(!this.validar(valor)){
+                this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
+                return false;
+            }
+        }
+        this.proximaEtapa();
+    }
+
+    validarQuartaEtapa = () => {
+        //validação de campos
+        const campos = [
+            {id: "formaPagamento", mensagem: "Preencha o campo forma de pagamento"},
+            {id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento"},
+            {id: "limiteCredito", mensagem: "Preencha o campo limite de crédito"},
+            {id: "condicaoEntrega", mensagem: "Preencha o campo condição de entrega"},
+        ]
+
+        for(let campo of campos){
+            const valor = document.getElementById(campo.id).value;
+            if(!this.validar(valor)){
+                this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
+                return false;
+            }
+        }
+        this.proximaEtapa();
+    }
+
+    validarQuintaEtapa = () => {
+        //validação de campos
+        const campos = [
+            {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
+            {id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento"},
+        ]
+
+        for(let campo of campos){
+            const valor = document.getElementById(campo.id).value;
+            if(!this.validar(valor)){
+                this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
+                return false;
+            }
+        }
+        this.proximaEtapa();
+    }
+
+    validarSextaEtapa = () => {
+        //validação de campos
+        const campos = [
+            {id: "nomeProduto", mensagem: "Preencha o campo nome do produto"},
+            {id: "marca", mensagem: "Preencha o campo marca"},
+            {id: "precoUnitario", mensagem: "Preencha o campo preço unitário"},
+            {id: "codigoProduto", mensagem: "Preencha o campo código do produto"},
+        ]
+
+        for(let campo of campos){
+            const valor = document.getElementById(campo.id).value;
+            if(!this.validar(valor)){
+                this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
+                return false;
+            }
+        }
+        this.proximaEtapa();
+    }
+
+    proximaEtapa = () => {
+        passagem[etapaAtual].classList.remove("active");
+        etapaAtual++;
+        passagem[etapaAtual].classList.add("active");
+    }
+
+    etapaAnterior = () => {
+        passagem[etapaAtual].classList.remove("active");
+        etapaAtual--;
+        passagem[etapaAtual].classList.add("active");
+    }
+    
+    exibirAlerta(icone, titulo, texto){
+        Swal.fire ({
+            icon: icone,
+            title: titulo, 
+            text: texto,
+        });
+    }
+}
+
+const fornecedores = new Fornecedores();
+
+avancar.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        switch(etapaAtual){
+            case 0:
+                fornecedores.validarPrimeiraEtapa();
+                break;
+            case 1:
+                fornecedores.validarSegundaEtapa();
+                break;
+            case 2:
+                fornecedores.validarTerceiraEtapa();
+                break;
+            case 3:
+                fornecedores.validarQuartaEtapa();
+                break;
+            case 4:
+                fornecedores.validarQuintaEtapa();
+                break;
+            case 5:
+                fornecedores.validarSextaEtapa();
+                break;
+            default:
+                fornecedores.proximaEtapa();
+        }
+    });
+});
+
+//voltar
+voltar.forEach(btn => {
+    btn.addEventListener("click", () => {
+        fornecedores.etapaAnterior();
+    })
+})

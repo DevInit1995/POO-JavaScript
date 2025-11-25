@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionários</title>
+    <link rel="stylesheet" href="/cadastro-oficina/css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-step active">
+            <h1>Cadastro de Funcionários</h1>
+            <h3>Dados Pessoais</h3>
+
+            <label for="nomeCompleto">Nome Completo:</label>
+            <input type="text" id="nomeCompleto" placeholder="Ex.: Luciana Almeida da Silva">
+
+            <label for="dataNascimento">Data Nascimento:</label>
+            <input type="date" id="dataNascimento">
+
+            <label for="sexo">Sexo:</label>
+            <input type="text" id="sexo" placeholder="Ex.: Masculino">
+
+            <label for="cpf">CPF:</label>
+            <input type="number" id="cpf" placeholder="Ex.: 000.000.000-00">
+
+            <label for="rg">RG:</label>
+            <input type="number" id="rg" placeholder="Ex.: 00.000.000-0">
+
+            <label for="estadoCivil">Estado Civil:</label>
+            <input type="text" id="estadoCivil" placeholder="Ex.: Solteiro">
+            
+            <div class="buttons">
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h1>Endereço</h1>
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" placeholder="Ex.: Minas Gerais">
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" placeholder="Ex.: Belo Horizonte">
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" placeholder="Ex.: Serra Verde">
+
+            <label for="rua">Rua:</label>
+            <input type="text" id="rua" placeholder="Ex.: Av.Leontino Francisco Alves">
+
+            <label for="numero">Número:</label>
+            <input type="number" id="numero" placeholder="Ex.: 56">
+            
+            <label for="cep">CEP:</label>
+            <input type="number" id="cep" placeholder="Ex.: 00000-000">
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h1>Contato</h1>
+
+            <label for="telefone">Telefone (fixo):</label>
+            <input type="number" id="telefone" placeholder="Ex.: (00) 0000-0000">
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" placeholder="Ex.: rodrigues@gmail.com">
+
+            <label for="contatoEmergencia">Contato Emergência:</label>
+            <input type="number" id="contatoEmergencia" placeholder="Ex.: (00) 0000-0000">
+            
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>          
+        </div>
+
+        <div class="form-step">
+            <h1>Dados Profissionais</h1>
+
+            <label for="cargo">Cargo:</label>
+            <input type="text" id="cargo" placeholder="Ex.: Mecânico">
+
+            <label for="setor">Setor:</label>
+            <input type="text" id="setor" placeholder="Ex.: Manutenção">
+
+            <label for="salario">Salário:</label>
+            <input type="number" id="salario" placeholder="Ex.: 1.500,00">
+
+            <label for="dataAdmissao">Data Admissão:</label>
+            <input type="date" id="dataAdmissao">
+
+            <label for="cargaHoraria">Carga Horária:</label>
+            <input type="time" id="cargaHoraria">
+
+            <label for="turno">Turno:</label>
+            <input type="text" id="turno" placeholder="Ex.: Manhã">
+            
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>          
+        </div>
+
+        <div class="form-step">
+            <h1>Dados Bancários (para pagamento)</h1>
+
+            <label for="banco">Banco:</label>
+            <input type="text" id="banco" placeholder="Ex.: Caixa Ecômica">
+
+            <label for="agencia">Agência:</label>
+            <input type="number" id="agencia" placeholder="Ex.: 0000-0">
+
+            <label for="conta">Conta:</label>
+            <input type="number" id="conta" placeholder="Ex.: 000000">
+
+            <label for="tipoConta">Tipo Conta:</label>
+            <input type="text" id="tipoConta" placeholder="Ex.: Corrente">
+            
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>          
+        </div>
+
+        <div class="form-step">
+            <h1>Documentos complementares</h1>
+            <label for="cnh">CNH:</label>
+            <input type="number" id="cnh" placeholder="Ex.: 00000000000">
+
+            <label for="pis">PIS:</label>
+            <input type="number" id="pis" placeholder="Ex.: 000.00000.00-0">
+
+            <label for="tituloEleitor">Titulo Eleitor:</label>
+            <input type="number" id="tituloEleitor" placeholder="Ex.: 000000">
+
+            <label for="certificadoReservista">Certificado Reservista(RA):</label>
+            <input type="number" id="tipoConta" placeholder="Ex.: 00.000.000000.0">
+            
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h1>Controle Interno</h1>
+            <label for="id">ID:</label>
+            <input type="number" id="id">
+
+            <div class="status">
+                <label for="status">Status:</label>
+                <label for="ativo">Ativo:</label>
+                <input type="radio" id="ativo">
+
+                <label for="inativo">Inativo:</label>
+                <input type="radio" id="inativo">
+            </div>
+
+            <label for="dataCadastro">Data Cadastro:</label>
+            <input type="date" id="dataCadastro">
+
+            <label for="ultimaAtualizacao">Última Atualização:</label>
+            <input type="datetime" id="ultimaAtualizacao">
+            
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnConclur">Concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/cadastro-oficina/js/funcionarios.js"></script>
+</body>
+</html>
