@@ -72,6 +72,12 @@ button:hover {
     background: #9aa96d;
 }
 
+img {
+    display: block;
+    max-width: 80%;
+    height: 500px;
+}
+
 input::placeholder {
     color: #cbbba7;
 }
@@ -82,6 +88,32 @@ input[type=number]::-webkit-inner-spin-button {
 
 .status {
     padding: 0px 0px 15px;
+}
+
+.menu-opcoes {
+    display: block;
+    width: 40%;
+    margin: 14px;
+    background-color: #cbdad5;
+    padding: 0 25px;
+    position: relative;
+}
+
+.menu-opcoes ul {
+    font-size: 20px;
+}
+
+.menu-opcoes ul li {
+    display: flex;
+    margin-right: 10px;
+}
+
+.menu-opcoes a:hover {
+    color: #007dc6;
+}
+
+.menu-opcoes a:active {
+    color: #1a1f25;
 }
 
 
