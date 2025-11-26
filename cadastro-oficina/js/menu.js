@@ -1,6 +1,6 @@
 class Menu {
     banner = () => {
-        let banners = ["img/1.jpg", "img/2.jpg", "img/3.jpg"];
+        let banners = ["img/ferramentas.jpg", "img/mecanico.jpg", "img/motor.jpg", "img/roda.jpg"];
         let bannerAtual = 0;
        
         const trocarBanner = () => {
