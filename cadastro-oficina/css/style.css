@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: #616246;
+    background-color: #7b90ff;
     color: white;
     font-family: "Cabin", sans-serif;
     font-weight: 550;
@@ -94,7 +94,8 @@ input[type=number]::-webkit-inner-spin-button {
 
 .menu-opcoes {
     display: block;
-    width: 40%;
+    width: 50%;
+    height: 220px;
     margin: 14px;
     padding: 0 15px;
     position: relative;
@@ -130,6 +131,11 @@ input[type=number]::-webkit-inner-spin-button {
     color: #1a1f25;
 }
 
+.logo-oficina {
+    float: left;
+    height: 560px;
+    margin: 15px;
+}
 
 
 

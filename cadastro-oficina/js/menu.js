@@ -22,5 +22,5 @@ class Menu {
 }
 
 menu = new Menu();
-menu.banner();
+//menu.banner();
 
