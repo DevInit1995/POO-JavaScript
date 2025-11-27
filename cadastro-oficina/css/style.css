@@ -28,6 +28,7 @@ body {
     display: none;
     flex-direction: column;
     gap: 10px;
+    text-transform: uppercase;
 }
 
 .form-step.active {
@@ -137,6 +138,46 @@ input[type=number]::-webkit-inner-spin-button {
     margin: 15px;
 }
 
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu > ul > li {
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    background: #2c3e50;
+    color: white;
+}
+
+.menu a:hover {
+    background: #1abc9c;
+}
+
+/* Submenu fica escondido */
+.submenu {
+    position: absolute;
+    background: #34495e;
+    display: none;
+    min-width: 180px;
+    top: 100%; /* aparece abaixo do item principal */
+    left: 0;
+    padding: 0;
+    z-index: 10;
+}
+
+/* Itens do submenu */
+
+/* Mostrar submenu ao passar mouse */
+.dropdown:hover .submenu {
+    display: block;
+}
 
 
 

@@ -17,11 +17,16 @@
 
     <nav class="menu-opcoes">
         <ul>
-            
             <li><a id="btnFuncionarios" href="funcionarios.html" target="_blank">Funcionários</a></li> 
             <li><a id="btnClientes" href="clientes.html" target="_blank">Clientes</a></li>
             <li><a id="btnFornecedores" href="fornecedores.html" target="_blank">Fornecedores</a></li>
-            <li><a id="btnServicos" href="servicos.html" target="_blank">Serviços</a></li>
+            <li class="dropdown">
+                <a id="btnServicos" href="#">Serviços ▾</a>
+                <ul class="submenu">
+                    <li><a href="ordem-servicos-cadastro.html" target="_blank">Cadastrar OS</a></li>
+                    <li><a href="servicos.html" target="_blank">Adicionar Serviços e peças</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
