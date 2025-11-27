@@ -93,7 +93,7 @@ class Carrossel {
     }
 
     validarTerceiraEtapa = () => {
-       /* //Validação dos campos
+        /*//Validação dos campos
         const campos = [
             {id: "estado", mensagem: "Informe o estado"},
             {id: "cidade", mensagem: "Informe o cidade"},
@@ -150,7 +150,7 @@ class Carrossel {
     }
 
     validarQuintaEtapa = () => {
-        /*//Validação dos campos
+       /* //Validação dos campos
         const campos = [
             {id: "dataCadastro", mensagem: "Informe a data de cadastro"},
             {id: "historicoServicos", mensagem: "Informe o historico de serviços"},
