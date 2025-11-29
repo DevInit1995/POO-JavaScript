@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 95vh;
     background-image: url(/cadastro-oficina/img/4.jpg);
 }
 
@@ -95,6 +95,10 @@ input[type=number]::-webkit-inner-spin-button {
 
 .status {
     padding: 0px 0px 15px;
+}
+
+#servico, #calculoServicos {
+    text-align: center;
 }
 
 .menu-opcoes {

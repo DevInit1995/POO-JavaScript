@@ -15,10 +15,30 @@
             <label for="id">Número da O.S (ID):</label>
             <input type="number" id="id">
 
-            <label for="descricao">Descrição do serviço:</label>
-                <textarea id="descricao" cols="50" 
-                    rows="8" placeholder="Ex.: Troca de óleo, troca de pastilha">
-            </textarea>
+            <label id="calculoServicos">Serviços e Peças</label>
+            <label id="servico">Serviços:</label>
+            <select id="servicoSelecao" onchange="calcularTotal()">
+                <option value="0">Selecione</option>
+                <option value="150">Troca de óleo e filtro – R$ 150,00</option>
+                <option value="120">Alinhamento e balanceamento – R$ 120,00</option>
+                <option value="150">Troca de tensores - R$ 150,00</option>
+                <option value="200">Diagnósticos - R$ 200,00</option>
+                <option value="1.500">Reparo de suspensão - R$ 1.500,00</option>
+            </select>
+
+            <label id="servico">Peças:</label>
+            <select id="pecasSelecao" onchange="calcularTotal()">
+                <option value="0">Selecione</option>
+                <option value="50">Óleo motor – R$ 50,00</option>
+                <option value="80">Filtro de ar – R$ 80,00</option>
+                <option value="50">Filtro de óleo - R$ 50,00</option>
+                <option value="45">Filtro de combustivél - R$ 45,00</option>
+                <option value="120">Pastilhas de freios - R$ 120,00</option>
+                <option value="190">Amortecedores - R$ 190,00</option>
+                <option value="85">Lonas de freios - R$ 85,00</option>
+                <option value="45">Óleo de freio - R$ 45,00</option>
+                <option value="35">Água destilada - R$ 35,00</option>
+            </select>
 
             <label for="tempoEstimado">Tempo estimado:</label>
             <input type="time" id="tempoEstimado">
