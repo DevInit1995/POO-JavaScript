@@ -88,7 +88,6 @@ class Carrossel {
         document.querySelectorAll("input, textarea").forEach(el => {
             campo[el.id] = el.value;
         });*/
-
         this.proximaEtapa(); 
     }
 
