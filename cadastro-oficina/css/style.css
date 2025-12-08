@@ -10,7 +10,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95vh;
     background-image: url(/cadastro-oficina/img/4.jpg);
 }
 
