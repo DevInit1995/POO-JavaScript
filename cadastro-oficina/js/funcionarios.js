@@ -57,13 +57,13 @@ class Funcionario {
             {id: "estadoCivil", mensagem: "Informe o campo estado civil"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -84,13 +84,13 @@ class Funcionario {
             {id: "cep", mensagem: "Informe o campo estado cep"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -108,13 +108,13 @@ class Funcionario {
             {id: "contatoEmergencia", mensagem: "Preencha o campo contato emergência"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -135,13 +135,13 @@ class Funcionario {
             {id: "turno", mensagem: "Preencha o campo turno"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -160,13 +160,13 @@ class Funcionario {
             {id: "tipoConta", mensagem: "Preencha o campo tipoConta"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -185,13 +185,13 @@ class Funcionario {
             {id: "certificadoReservista", mensagem: "Preencha o campo certificado de reservista"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -208,13 +208,13 @@ class Funcionario {
             {id: "ultimaAtualizacao", mensagem: "Preencha o campo última atualização"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -222,6 +222,55 @@ class Funcionario {
         });*/
 
         this.proximaEtapa();
+    }
+
+    concluir = () => {
+        //debugger;
+        const registro = {
+            nomeCompleto: document.getElementById("nomeCompleto").value,
+            dataNascimento: document.getElementById("dataNascimento").value,
+            sexo: document.getElementById("sexo").value,
+            cpf: document.getElementById("cpf").value,
+            rg: document.getElementById("rg").value,
+            estadoCivil: document.getElementById("estadoCivil").value,
+            estado: document.getElementById("estado").value,
+            cidade: document.getElementById("cidade").value,
+            bairro: document.getElementById("bairro").value,
+            rua: document.getElementById("rua").value,
+            numero: document.getElementById("numero").value,
+            cep: document.getElementById("cep").value,
+            telefone: document.getElementById("telefone").value,
+            email: document.getElementById("email").value,
+            rua: document.getElementById("rua").value,
+            contatoEmergencia: document.getElementById("contatoEmergencia").value,
+            cargo: document.getElementById("cargo").value,
+            setor: document.getElementById("setor").value,
+            salario: document.getElementById("salario").value,
+            dataAdmissao: document.getElementById("dataAdmissao").value,
+            cargaHoraria: document.getElementById("cargaHoraria").value,
+            turno: document.getElementById("turno").value,
+            banco: document.getElementById("banco").value,
+            agencia: document.getElementById("agencia").value,
+            conta: document.getElementById("conta").value,
+            cnh: document.getElementById("cnh").value,
+            pis: document.getElementById("pis").value,
+            tituloEleitor: document.getElementById("tituloEleitor").value,
+            tipoConta: document.getElementById("tipoConta").value,
+            id: document.getElementById("id").value,
+            ativo: document.getElementById("ativo").value,
+            inativo: document.getElementById("inativo").value,
+            dataCadastro: document.getElementById("dataCadastro").value,
+            ultimaAtualizacao: document.getElementById("ultimaAtualizacao").value
+        }
+
+        //Buscar a "tabela" no localStorage (ou criar vazia)
+        let tabela = JSON.parse(localStorage.getItem("funcionarios")) || [];
+
+        //Colocar o novo registro
+        tabela.push(registro);
+
+        //Salvar novamente no localStorage
+        localStorage.setItem("funcionarios", JSON.stringify(tabela));
     }
     
     proximaEtapa = () => {
@@ -245,7 +294,8 @@ class Funcionario {
     }  
 }
 
-funcionario = new Funcionario();
+const funcionario = new Funcionario();
+window.concluir = () => funcionario.concluir();
 
 avancar.forEach((btn) =>{
     btn.addEventListener("click", () => {
