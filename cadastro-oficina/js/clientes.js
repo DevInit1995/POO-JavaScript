@@ -92,18 +92,18 @@ class Clientes {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-
-            this.proximaEtapa();
         }*/
+
+        this.proximaEtapa();
     }
 
-    validarQuitaEtapa = () => {
+    validarQuintaEtapa = () => {
         const campos = [
             {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
             {id: "historicoServicos", mensagem: "Preencha o campo histórico de serviços"},
             {id: "dataUltimaVisita", mensagem: "Preencha o campo data última visita"},
             {id: "observacoes", mensagem: "Preencha o campo observacoes"},
-        ]
+        ];
 
         /*for(let campo of campos) {
             const valor = document.getElementById(campo.id).value;
@@ -111,9 +111,11 @@ class Clientes {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }*/
 
-        this.proximaEtapa();
+            
+        }
+        */
+       this.proximaEtapa();
     }
 
     proximaEtapa = () => {
@@ -135,9 +137,54 @@ class Clientes {
             text: texto,
         });
     }
-}
 
-const clientes = new Clientes();
+    //LocalStorage
+    concluir = () => {
+        const registro = {
+            nomeCompleto: document.getElementById("nomeCompleto").value,
+            cpf: document.getElementById("cpf").value,
+            rg: document.getElementById("rg").value,
+            dataNascimento: document.getElementById("dataNascimento").value,
+            masculino: document.getElementById("masculino").value,
+            feminino: document.getElementById("feminino").value,
+            solteiro: document.getElementById("solteiro").value,
+            separado: document.getElementById("separado").value,
+            viuvo: document.getElementById("viuvo").value,
+            telefone: document.getElementById("telefone").value,
+            celular: document.getElementById("celular").value,
+            email: document.getElementById("email").value,
+            estado: document.getElementById("estado").value,
+            cidade: document.getElementById("cidade").value,
+            bairro: document.getElementById("bairro").value,
+            rua: document.getElementById("rua").value,
+            numero: document.getElementById("numero").value,
+            cep: document.getElementById("cep").value,
+            complemento: document.getElementById("complemento").value,
+            placa: document.getElementById("placa").value,
+            marca: document.getElementById("marca").value,
+            modelo: document.getElementById("modelo").value,
+            ano: document.getElementById("ano").value,
+            cor: document.getElementById("cor").value,
+            chassi: document.getElementById("chassi").value,
+            kmAtual: document.getElementById("kmAtual").value,
+            tipoCombustivel: document.getElementById("tipoCombustivel").value,
+            observacoesVeiculo: document.getElementById("observacoes").value,
+            dataCadastro: document.getElementById("dataCadastro").value,
+            historicoServicos: document.getElementById("historicoServicos").value,
+            dataUltimaVisita: document.getElementById("dataUltimaVisita").value,
+            observacoes: document.getElementById("observacoes").value
+        };
+
+        //Buscar a "tabela" no localStorage (ou criar vazia)
+        let tabela = JSON.parse(localStorage.getItem("clientes")) || [];
+
+        //Colocar o novo registro
+        tabela.push(registro);
+
+        //Salvar novamente no localStorage
+        localStorage.setItem("clientes", JSON.stringify(tabela));
+    }
+}
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -155,7 +202,7 @@ avancar.forEach((btn) => {
                 clientes.validarQuartaEtapa();
                 break;
             case 4: 
-                clientes.validarQuitaEtapa();
+                clientes.validarQuintaEtapa();
                 break;
             default:
                 clientes.proximaEtapa();
@@ -169,3 +216,6 @@ voltar.forEach(btn => {
         clientes.etapaAnterior();
     });
 });
+
+const clientes = new Clientes();
+window.concluir = () => clientes.concluir();
