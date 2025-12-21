@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fornecedores</title>
-    <link rel="stylesheet" href="/cadastro-oficina/css/style.css">
+    <link rel="stylesheet" href="/cadastro-oficina/frontend/css/style.css">
 </head>
 <body>
     <div class="form-container">
@@ -22,10 +22,10 @@
             <input type="text" id="nomeFantasia" placeholder="Ex.: Pirelli">
 
             <label for="cnpj">CNPJ:</label>
-            <input type="number" id="cnpj" placeholder="92.411.045/0001-77">
+            <input type="text" id="cnpj" placeholder="92.411.045/0001-77">
 
             <label for="inscricaoEstadual">Inscrição Estadual:</label>
-            <input type="number" id="inscricaoEstadual" placeholder="418.210.400.402">
+            <input type="text" id="inscricaoEstadual" placeholder="418.210.400.402">
 
             <label for="segmento">Segmento:</label>
             <input type="text" id="segmento" placeholder="Ex.: Amortecedores">
@@ -54,7 +54,7 @@
             <input type="number" id="numero">
 
             <label for="cep">CEP:</label>
-            <input type="number" id="cep" placeholder="Ex.: 00000-000">
+            <input type="text" id="cep" placeholder="Ex.: 00000-000">
 
             <label for="complemento">Complemento:</label>
             <input type="text" id="complemento" placeholder="Ex.: Em frente a padaria Ki-Pão">
@@ -69,16 +69,16 @@
             <h3>Contato</h3>
 
             <label for="telefone">Telefone:</label>
-            <input type="number" id="telefone" placeholder="Ex.: (00) 0000-0000">
+            <input type="text" id="telefone" placeholder="Ex.: (00) 0000-0000">
 
             <label for="celular">Celular:</label>
-            <input type="number" id="celular" placeholder="Ex.: (00) 0000-0000">
+            <input type="text" id="celular" placeholder="Ex.: (00) 0000-0000">
 
             <label for="email">E-mail:</label>
             <input type="text" id="email" placeholder="Ex.: exemplo@gmail.com" autocomplete="email">
 
             <label for="site">Site:</label>
-            <input type="text" id="site" placeholder="amortecedores@gmail.com">
+            <input type="text" id="site" placeholder="https://www.exemplo.com">
 
             <div class="buttons">
                 <button type="button" class="btnVoltar">Voltar</button>
@@ -116,10 +116,10 @@
             <div class="status">
                 <label>Status:</label>
                 <label for="ativo">Ativo:</label>
-                <input type="radio" id="ativo">
+                <input type="radio" name="ativo" id="ativo" value="Ativo">
 
                 <label for="inativo">Inativo:</label>
-                <input type="radio" id="inativo">
+                <input type="radio" name="inativo" id="inativo" value="Inativo">
             </div>
 
             <label for="observacoes">Observações:</label>
@@ -150,12 +150,12 @@
 
             <div class="buttons">
                 <button type="button" class="btnVoltar">Voltar</button>
-                <button type="button" class="btnConcluir">Concluir</button>
+                <button type="button" value="concluir" onclick="concluir();" class="btnConcluir">Concluir</button>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/cadastro-oficina/js/fornecedores.js"></script>
+    <script src="/cadastro-oficina/frontend/js/fornecedores.js"></script>
 </body>
 </html>

@@ -43,7 +43,7 @@ class Carrossel {
     validar = (valor) => valor.trim().length > 0;
     
     validarPrimeiraEtapa = () => {     
-        // Validação dos campos
+        /*// Validação dos campos
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
             {id: "cpf", mensagem: "Preencha o campo cpf"},
@@ -58,7 +58,7 @@ class Carrossel {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -70,7 +70,7 @@ class Carrossel {
 
     validarSegundaEtapa = () => {
         //Validação dos campos
-        const campos = [
+        /*const campos = [
             {id: "telefone", mensagem: "Informe o telefone"},
             {id: "celular", mensagem: "Informe o cellular"},
             {id: "email", mensagem: "Informe o email"},
@@ -82,18 +82,17 @@ class Carrossel {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
             campo[el.id] = el.value;
         });*/
-
         this.proximaEtapa(); 
     }
 
     validarTerceiraEtapa = () => {
-        //Validação dos campos
+        /*//Validação dos campos
         const campos = [
             {id: "estado", mensagem: "Informe o estado"},
             {id: "cidade", mensagem: "Informe o cidade"},
@@ -110,7 +109,7 @@ class Carrossel {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -122,7 +121,7 @@ class Carrossel {
 
     validarQuartaEtapa = () => {
         //Validação dos campos
-        const campos = [
+       /* const campos = [
             {id: "placa", mensagem: "Informe a placa"},
             {id: "marca", mensagem: "Informe a marca"},
             {id: "modelo", mensagem: "Informe o modelo"},
@@ -139,7 +138,7 @@ class Carrossel {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
@@ -150,7 +149,7 @@ class Carrossel {
     }
 
     validarQuintaEtapa = () => {
-        //Validação dos campos
+       /* //Validação dos campos
         const campos = [
             {id: "dataCadastro", mensagem: "Informe a data de cadastro"},
             {id: "historicoServicos", mensagem: "Informe o historico de serviços"},
@@ -163,7 +162,7 @@ class Carrossel {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {

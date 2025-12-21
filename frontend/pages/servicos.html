@@ -1,0 +1,114 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/cadastro-oficina/frontend/css/style.css">
+    <title>Serviços e peças</title>
+</head>
+
+<body>
+    <div class="form-container">
+        <div class="form-step active">
+            <h1>Informações do serviço</h1>
+
+            <label for="idNumeroOs">Número da O.S (ID):</label>
+            <input type="number" id="idNumeroOs">
+
+            <label id="calculoServicos">Serviços e Peças</label>
+            <label id="calculoServicos">Serviços:</label>
+            <select id="calculoServico" onchange="calcularTotal()">
+                <option value="0">Selecione</option>
+                <option value="150">Troca de óleo e filtro – R$ 150,00</option>
+                <option value="120">Alinhamento e balanceamento – R$ 120,00</option>
+                <option value="150">Troca de tensores - R$ 150,00</option>
+                <option value="200">Diagnósticos - R$ 200,00</option>
+                <option value="1500">Reparo de suspensão - R$ 1.500,00</option>
+            </select>
+
+            <label id="pecas">Peças:</label>
+            <select id="calcularPeca" onchange="calcularTotal()">
+                <option value="0">Selecione</option>
+                <option value="50">Óleo motor – R$ 50,00</option>
+                <option value="80">Filtro de ar – R$ 80,00</option>
+                <option value="50">Filtro de óleo - R$ 50,00</option>
+                <option value="45">Filtro de combustivél - R$ 45,00</option>
+                <option value="120">Pastilhas de freios - R$ 120,00</option>
+                <option value="190">Amortecedores - R$ 190,00</option>
+                <option value="85">Lonas de freios - R$ 85,00</option>
+                <option value="45">Óleo de freio - R$ 45,00</option>
+                <option value="35">Água destilada - R$ 35,00</option>
+            </select>
+
+            <label id="valores">Informações de valores</label>
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" value="1" min="1" oninput="calcularTotal()">
+        
+            <p>Total Serviço: R$ <span id="totalServico">0.00</span></p>
+            <p>Total Peças: R$ <span id="totalPecas">0.00</span></p>
+            <p>Total Geral: R$ <span id="totalGeral">0.00</span></p>
+
+            <div class="buttons">
+                <button type="button" class="btnAvancar">Avançar</button>
+           </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Tempo, preço e categoria</h3>
+            <label for="tempoEstimado">Tempo estimado:</label>
+            <input type="time" id="tempoEstimado">
+
+            <label for="preco">Preço da mão de obra:</label>
+            <input type="number" id="precoTotal">
+
+            <details>
+                <summary>Categoria:</summary>
+                <p>Selecione uma opção abaixo:</p>
+                <select name="categoria" id="categoria">
+                    <option value="">Selecione a categoria:</option>
+                    <option value="Mecânica">Mecânica</option>
+                    <option value="Revisão">Revisão</option>
+                </select>
+            </details>
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" class="btnAvancar">Avançar</button>
+           </div>
+        </div>
+
+        <div class="form-step">
+            <h3>Informações de cada peça</h3>
+
+            <label for="id">ID:</label>
+            <input type="number" id="ids" placeholder="Ex.: 0000000">
+
+            <label for="nomePeca">Nome da peça:</label>
+            <input type="text" id="nomePeca" placeholder="Ex.: Amortecedor">
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" placeholder="Ex.: Axios">
+
+            <label for="codigoInterno">Código Interno:</label>
+            <input type="number" id="codigoInterno" placeholder="Ex.: 000000000">
+
+            <label for="quantidadeEstoque">Quantidade estoque:</label>
+            <input type="number" id="quantidadeEstoque" placeholder="Ex.: 20 un">
+
+            <label for="precoUnitario">Preço unitária:</label>
+            <input type="number" id="precoUnitario" placeholder="Ex.: 80.00">
+
+            <label for="fonecedor">Fornecedor(opcional):</label>
+            <input type="text" id="fornecedor" placeholder="Ex.: Anc">
+
+            <div class="buttons">
+                <button type="button" class="btnVoltar">Voltar</button>
+                <button type="button" value="concluir" onclick="concluir();" class="btnConcluir">Concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/cadastro-oficina/frontend/js/servicos.js"></script>
+</body>
+</html>

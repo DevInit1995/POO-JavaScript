@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #7b90ff;
+    color: white;
+    font-family: "Cabin", sans-serif;
+    font-weight: 550;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/cadastro-oficina/img/4.jpg);
+}
+
+.form-container {
+    width: 650px;
+    background: #0050C3;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 65px rgba(0,0,0,0.8);
+    overflow: hidden;
+    position: relative;
+}
+
+.form-step {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    text-transform: uppercase;
+}
+
+.form-step.active {
+    display: flex;
+    animation: fade 0.4 ease-in-out;
+}
+
+@keyframes fade {
+    from {opacity: 0; transform: btnCadastrar(20px);}
+    to {opacity: 1; transform: translateX(0);}
+}
+
+header {
+    padding: 2rem;
+    background-color: #331f19;
+    text-align: center;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #666;
+    border-radius: 8px;
+    background: #1a1f25;
+    color: white;
+    margin-top: 5px
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+.btnAvancar, .btnVoltar, .btnConcluir {
+    border-radius: 15px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+
+button:hover {
+    background: #9aa96d;
+}
+
+.destaque img {
+    display: block;
+    max-width: 80%;
+    height: 500px;
+    border-radius: 15px;
+}
+
+input::placeholder {
+    color: #cbbba7;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    appearance: none;
+}
+
+.status {
+    padding: 0px 0px 15px;
+}
+
+#servico, #peca, #valores {
+    text-align: center;
+}
+
+.menu-opcoes {
+    display: block;
+    width: 50%;
+    height: 250px;
+    margin: 14px;
+    padding: 0 15px;
+    position: relative;
+    box-shadow: 5px 20px #0578e9;
+    border-radius: 15px;
+}
+
+.menu-opcoes ul {
+    font-size: 20px;
+    background-color: #014ab0;
+    list-style: none;
+    border-radius: 15px;
+}
+
+.menu-opcoes ul li a {
+    display: flex;
+    margin-right: 10px;
+    margin: 35px;
+    color: white;
+    text-decoration: none;  
+    text-shadow: 1px 1px 2px black; 
+}
+
+.menu-opcoes a:hover {
+    color: #616161;
+    background-color: #e4e4e5;
+    font-size: 35px;
+    border-radius: 10px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.menu-opcoes a:active {
+    color: #1a1f25;
+}
+
+.logo-oficina {
+    float: left;
+    height: 560px;
+    margin: 15px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu > ul > li {
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    background: #2c3e50;
+    color: white;
+}
+
+.menu a:hover {
+    background: #1abc9c;
+}
+
+/* Submenu fica escondido */
+.submenu {
+    position: absolute;
+    background: #34495e;
+    display: none;
+    min-width: 180px;
+    top: 100%; /* aparece abaixo do item principal */
+    left: 0;
+    padding: 0;
+    z-index: 10;
+}
+
+/* Itens do submenu */
+
+/* Mostrar submenu ao passar mouse */
+.dropdown:hover .submenu {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -55,16 +55,18 @@ class Fornecedores {
             {id: "segmento", mensagem: "Preencha o campo segmento"},            
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         this.proximaEtapa();
     }
+
+    
 
     validarSegundaEtapa = () => {
         //validação dos campos
@@ -78,13 +80,14 @@ class Fornecedores {
             {id: "complemento", mensagem: "Preencha o campo complemento"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
+
         this.proximaEtapa();
     }
 
@@ -97,13 +100,14 @@ class Fornecedores {
             {id: "site", mensagem: "Preencha o campo site"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
+
         this.proximaEtapa();
     }
 
@@ -116,13 +120,14 @@ class Fornecedores {
             {id: "condicaoEntrega", mensagem: "Preencha o campo condição de entrega"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
+
         this.proximaEtapa();
     }
 
@@ -133,13 +138,14 @@ class Fornecedores {
             {id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
+       
         this.proximaEtapa();
     }
 
@@ -152,14 +158,64 @@ class Fornecedores {
             {id: "codigoProduto", mensagem: "Preencha o campo código do produto"},
         ]
 
-        for(let campo of campos){
+        /*for(let campo of campos){
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)){
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
+
         this.proximaEtapa();
+    }
+
+    //LocalStorage
+    concluir = () => {
+        const registro = {
+            razaoSocial: document.getElementById("razaoSocial").value,
+            nomeFantasia: document.getElementById("nomeFantasia").value,
+            cnpj: document.getElementById("cnpj").value,
+            inscricaoEstadual: document.getElementById("inscricaoEstadual").value,
+            segmento: document.getElementById("segmento").value,
+            estado: document.getElementById("estado").value,
+            cidade: document.getElementById("cidade").value,
+            bairro: document.getElementById("bairro").value,
+            rua: document.getElementById("rua").value,
+            numero: document.getElementById("numero").value,
+            cep: document.getElementById("cep").value,
+            complemento: document.getElementById("complemento").value,
+            estado: document.getElementById("estado").value,
+            cidade: document.getElementById("cidade").value,
+            bairro: document.getElementById("bairro").value,
+            rua: document.getElementById("rua").value,
+            numero: document.getElementById("numero").value,
+            cep: document.getElementById("cep").value,
+            complemento: document.getElementById("complemento").value,
+            telefone: document.getElementById("telefone").value,
+            celular: document.getElementById("celular").value,
+            email: document.getElementById("email").value,
+            site: document.getElementById("site").value,
+            formaPagamento: document.getElementById("formaPagamento").value,
+            prazoPagamento: document.getElementById("prazoPagamento").value,
+            limiteCredito: document.getElementById("limiteCredito").value,
+            condicaoEntrega: document.getElementById("condicaoEntrega").value,
+            dataCadastro: document.getElementById("dataCadastro").value,
+            inativo: document.getElementById("inativo").value,
+            observacoes: document.getElementById("observacoes").value,
+            nomeProduto: document.getElementById("nomeProduto").value,
+            marca: document.getElementById("marca").value,
+            precoUnitario: document.getElementById("precoUnitario").value,
+            codigoProduto: document.getElementById("codigoProduto").value
+        }
+
+        //Buscar a "tabela" no localStorage (ou criar vazia)
+        let tabela = JSON.parse(localStorage.getItem("fornecedores")) || [];
+
+        //Colocar o novo registro
+        tabela.push(registro);
+
+        //Salvar novamente no localStorage
+        localStorage.setItem("fornecedores", JSON.stringify(tabela));
     }
 
     proximaEtapa = () => {
@@ -184,6 +240,7 @@ class Fornecedores {
 }
 
 const fornecedores = new Fornecedores();
+window.concluir = () => fornecedores.concluir();
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {

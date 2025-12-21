@@ -1,0 +1,17 @@
+.nav {
+    display: grid;
+    /* Define 6 colunas com larguras iguais, usando a unidade 'fr' (fração do espaço disponível) */
+    grid-template-columns: repeat(6, 1fr); 
+    /* Opcional: Adiciona um espaçamento entre as partes */
+    gap: 10px; 
+    /* Opcional: Garante que o contêiner ocupe toda a altura da viewport */
+    height: 100vh;
+    background-color: aqua;
+}
+
+.item {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}

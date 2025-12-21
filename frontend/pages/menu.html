@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="/cadastro-oficina/frontend/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="logo-oficina">
+        <img src="/cadastro-oficina/frontend/img/oficina-formula.jpeg" alt="Oficina Fórmula">
+    </div>
+
+    <nav class="menu-opcoes">
+        <ul>
+            <li><a id="btnFuncionarios" href="/cadastro-oficina/frontend/pages/funcionarios.html" target="_blank">Funcionários</a></li> 
+            <li><a id="btnClientes" href="/cadastro-oficina/frontend/pages/clientes.html" target="_blank">Clientes</a></li>
+            <li><a id="btnFornecedores" href="/cadastro-oficina/frontend/pages/fornecedores.html" target="_blank">Fornecedores</a></li>
+            <li class="dropdown">
+                <a id="btnServicos" href="#">Serviços ▾</a>
+                <ul class="submenu">
+                    <li><a href="/cadastro-oficina/frontend/pages/ordem-servicos-cadastro.html" target="_blank">Cadastrar OS</a></li>
+                    <li><a href="/cadastro-oficina/frontend/pages/servicos.html" target="_blank">Adicionar Serviços e peças</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+   <div class="destaque">
+    <a> <img src="/cadastro-oficina/frontend/img/mecanico.jpg" alt="mecânico"></a>
+   </div>
+
+    <script src="/cadastro-oficina/frontend/js/pessoas.js"></script>
+    <script src="/cadastro-oficina/frontend/js/menu.js"></script>
+</body>
+</html>

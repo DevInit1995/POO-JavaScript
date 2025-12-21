@@ -1,0 +1,32 @@
+body{
+    background-color: #7d7673;
+}
+
+.cabecalho {
+    background-color: #859cf9;
+    border-radius: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    height: 65px;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+ul {
+    list-style-image: url("/cadastro-oficina/img/icon-home.png");
+    height: 10px;
+    display: flex;
+    gap: 30px;
+}
+
+li {
+    margin-left: 45px;
+    /* Ajuste o alinhamento vertical da imagem em relação ao texto */
+    vertical-align: middle;
+    /* Adiciona um pequeno espaçamento entre o marcador e o texto */
+    padding-left: 5px;
+}
+
+.cabecalho:hover{
+    color: white;
+    font-size: 30px;
+}
