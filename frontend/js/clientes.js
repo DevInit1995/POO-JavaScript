@@ -5,14 +5,13 @@ let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
 class CPF {
-    
     #valor; // PRIVADO
 
     set(cpf) {
         const limpo = this.#limpar(cpf);
 
         if(!this.#validar(limpo)) {
-            throw new Error("CPF inválido")
+            throw new Error("CPF inválido");
         }
 
         this.#valor = limpo;
@@ -35,16 +34,46 @@ class CPF {
 
 this.cpf = new CPF;
 
+class RG {
+    #valor;
+
+    set(rg) {
+        const limpo = this.#limpar(rg);
+
+        if (limpo.length < 6 || limpo.length > 6) {
+            throw new Error("RG inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(rg) {
+        return rg.replace(/\D/g, "");
+    }
+
+    #validar(rg) {
+        if (rg.length !== 6) return false;
+        if(/^(\d)\1+$/.test(rg)) return false;
+        return true;
+    }
+}
+
+this.rg = new RG;
+
 class Clientes {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
         this.cpf = new CPF();
+        this.rg = new RG();
     }
 
     validar = (valor) => valor.trim().length > 0;
     
     validarPrimeiraEtapa = () => {
-        debugger
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
             {id: "cpf", mensagem: "Preencha o campo CPF"},
@@ -68,6 +97,10 @@ class Clientes {
         try {
             const cpfDigitado = document.getElementById("cpf").value;
             this.cpf.set(cpfDigitado);
+
+            const rgDigitado = document.getElementById("rg").value;
+            this.rg.set(rgDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -187,7 +220,7 @@ class Clientes {
         const registro = {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             cpf: this.cpf.get(),
-            rg: document.getElementById("rg").value,
+            rg: this.rg.get(),
             dataNascimento: document.getElementById("dataNascimento").value,
             masculino: document.getElementById("masculino").value,
             feminino: document.getElementById("feminino").value,

@@ -66,8 +66,6 @@ class Fornecedores {
         this.proximaEtapa();
     }
 
-    
-
     validarSegundaEtapa = () => {
         //validação dos campos
         const campos = [
