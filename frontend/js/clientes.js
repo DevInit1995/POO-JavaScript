@@ -64,11 +64,115 @@ class RG {
 
 this.rg = new RG;
 
+class DataNascimento {
+
+    #valor;
+
+    set(dataNascimento) {
+        const dataObj = this.#validar(dataNascimento);
+
+        if(!this.#validar(dataObj)) {
+            throw new Error("Data de nascimento inválida");
+        }
+
+        this.#valor = dataObj;
+    }
+
+    get() {
+        //retorna no formato padrão brasileiro
+        return this.#valor.toLocaleDateString("pt-BR");
+    }
+
+    getDate() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+
+    /*#converterParaDate(dataNascimento) {
+        if(dataNascimento instanceof Date) return dataNascimento;
+        return new Date(dataNascimento);
+    }*/
+
+    #validar(dataNascimento) {
+       // if(!(dataNascimento instanceof Date) || isNaN(dataNascimento)) return false; 
+
+        const hoje = new Date();
+        if(dataNascimento > hoje) return false;
+
+        return true;
+    }
+}
+
+this.dataNascimento = new DataNascimento();
+
+class Telefone {
+    #valor;
+
+    set(telefone) {
+        if (typeof telefone !== "string") {
+        throw new Error("Telefone deve ser uma string");
+        }
+
+        const limpo = this.#limpar(telefone);
+
+        if (!this.#validar(limpo)) {
+        throw new Error("Telefone inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#formatar();
+    }
+
+    #limpar(telefone) {
+        return telefone.replace(/\D/g, "");
+    }
+
+    #validar(telefone) {
+        if (telefone.length !== 11) return false;
+        if(/^(\d)\1+$/.test(telefone)) return false;
+        return true;
+    }
+
+    #formatar() {
+        if (this.#valor.length === 11) {
+        return this.#valor.replace(
+            /(\d{2})(\d{5})(\d{4})/,
+            "($1) $2-$3"
+        );
+        }
+
+        return this.#valor.replace(
+        /(\d{2})(\d{4})(\d{4})/,
+        "($1) $2-$3"
+        );
+    }
+}
+
+this.telefone = new Telefone();
+//this.telefone.set(telefone.value);
+
+class Celular {   
+    
+}
+
+this.celular = new Celular();
+
+class Email {
+    
+}
+
+this.email = new Email();
+
 class Clientes {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
         this.cpf = new CPF();
         this.rg = new RG();
+        this.dataNascimento = new DataNascimento();
+        this.telefone = new Telefone();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -101,12 +205,16 @@ class Clientes {
             const rgDigitado = document.getElementById("rg").value;
             this.rg.set(rgDigitado);
 
+            const dataNascimentoDigitado = document.getElementById("dataNascimento");
+            this.dataNascimento.set(dataNascimentoDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
         }
     }
 
+    
     validarSegundaEtapa = () => {
         //validação dos campos
         const campos = [
@@ -123,7 +231,14 @@ class Clientes {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            let telefoneDigitado = document.getElementById("telefone").value;
+            this.telefone.set(telefoneDigitado);
+           
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     validarTerceiraEtapa = () => {
@@ -221,13 +336,13 @@ class Clientes {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             cpf: this.cpf.get(),
             rg: this.rg.get(),
-            dataNascimento: document.getElementById("dataNascimento").value,
+            dataNascimento: this.dataNascimento.get(),
             masculino: document.getElementById("masculino").value,
             feminino: document.getElementById("feminino").value,
             solteiro: document.getElementById("solteiro").value,
             separado: document.getElementById("separado").value,
             viuvo: document.getElementById("viuvo").value,
-            telefone: document.getElementById("telefone").value,
+            telefone: this.telefone.get(),
             celular: document.getElementById("celular").value,
             email: document.getElementById("email").value,
             estado: document.getElementById("estado").value,
