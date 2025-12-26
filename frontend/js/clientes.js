@@ -65,41 +65,23 @@ class RG {
 this.rg = new RG;
 
 class DataNascimento {
-
     #valor;
 
     set(dataNascimento) {
-        const dataObj = this.#validar(dataNascimento);
-
-        if(!this.#validar(dataObj)) {
-            throw new Error("Data de nascimento inválida");
+        if(typeof dataNascimento !== "string") {
+            throw new Error("Data de nacimento deve ser texto");
         }
 
-        this.#valor = dataObj;
+        if(dataNascimento == "") {
+            throw new Error("Data de nascimento inválida")
+        }
+
+        return this.#valor = dataNascimento;
     }
 
     get() {
-        //retorna no formato padrão brasileiro
-        return this.#valor.toLocaleDateString("pt-BR");
-    }
-
-    getDate() {
         //se precisar do objeto Date internamente
         return this.#valor;
-    }
-
-    /*#converterParaDate(dataNascimento) {
-        if(dataNascimento instanceof Date) return dataNascimento;
-        return new Date(dataNascimento);
-    }*/
-
-    #validar(dataNascimento) {
-       // if(!(dataNascimento instanceof Date) || isNaN(dataNascimento)) return false; 
-
-        const hoje = new Date();
-        if(dataNascimento > hoje) return false;
-
-        return true;
     }
 }
 
@@ -110,13 +92,13 @@ class Telefone {
 
     set(telefone) {
         if (typeof telefone !== "string") {
-        throw new Error("Telefone deve ser uma string");
+            throw new Error("Telefone deve ser uma string");
         }
 
         const limpo = this.#limpar(telefone);
 
         if (!this.#validar(limpo)) {
-        throw new Error("Telefone inválido");
+            throw new Error("Telefone inválido");
         }
 
         this.#valor = limpo;
@@ -138,30 +120,94 @@ class Telefone {
 
     #formatar() {
         if (this.#valor.length === 11) {
-        return this.#valor.replace(
-            /(\d{2})(\d{5})(\d{4})/,
-            "($1) $2-$3"
-        );
+            return this.#valor.replace(
+                /(\d{2})(\d{5})(\d{4})/,
+                "($1) $2-$3"
+            );
         }
 
         return this.#valor.replace(
-        /(\d{2})(\d{4})(\d{4})/,
-        "($1) $2-$3"
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3"
         );
     }
 }
 
 this.telefone = new Telefone();
-//this.telefone.set(telefone.value);
 
 class Celular {   
-    
+    #valor;
+
+    set(celular) {
+        if(typeof celular !== "string") {
+            throw new Error("Celular deve ser uma string");
+        }
+
+        const limpo = this.#limpar(celular);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Celular inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#formatar();
+    }
+
+    #limpar(celular) {
+        return celular.replace(/\D/g, "");
+    }
+
+    #validar(celular) {
+        if(celular.length !== 11) return false;
+        if(/^(\d)\1+$/.test(celular)) return false;
+        return true;
+    }
+
+    #formatar() {
+        if(this.#valor.length === 11) {
+            return this.#valor.replace(
+                /(\d{2}) (\d{5})(\d{4})/,
+                "($1) $2-$3"
+            );
+        }
+
+        return this.#valor.replace(
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3"
+        );
+    }
 }
 
 this.celular = new Celular();
 
 class Email {
+    #valor;
     
+    set(email) {
+        const limpo = this.#limpar(email);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("E-mail inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(email) {
+        return email.trim().toLowerCase();
+    }
+
+    #validar(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
 }
 
 this.email = new Email();
@@ -173,6 +219,8 @@ class Clientes {
         this.rg = new RG();
         this.dataNascimento = new DataNascimento();
         this.telefone = new Telefone();
+        this.celular = new Celular();
+        this.email = new Email();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -205,7 +253,7 @@ class Clientes {
             const rgDigitado = document.getElementById("rg").value;
             this.rg.set(rgDigitado);
 
-            const dataNascimentoDigitado = document.getElementById("dataNascimento");
+            const dataNascimentoDigitado = document.getElementById("dataNascimento").value;
             this.dataNascimento.set(dataNascimentoDigitado);
 
             this.proximaEtapa();
@@ -235,6 +283,12 @@ class Clientes {
             let telefoneDigitado = document.getElementById("telefone").value;
             this.telefone.set(telefoneDigitado);
            
+            let celularDigitado = document.getElementById("celular").value;
+            this.celular.set(celularDigitado);
+
+            let emailDigitado = document.getElementById("email").value;
+            this.email.set(emailDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -343,8 +397,8 @@ class Clientes {
             separado: document.getElementById("separado").value,
             viuvo: document.getElementById("viuvo").value,
             telefone: this.telefone.get(),
-            celular: document.getElementById("celular").value,
-            email: document.getElementById("email").value,
+            celular: this.celular.get(),
+            email: this.email.get(),
             estado: document.getElementById("estado").value,
             cidade: document.getElementById("cidade").value,
             bairro: document.getElementById("bairro").value,
