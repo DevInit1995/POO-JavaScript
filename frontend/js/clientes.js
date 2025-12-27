@@ -66,7 +66,7 @@ this.rg = new RG;
 
 class DataNascimento {
     #valor;
-
+    
     set(dataNascimento) {
         if(typeof dataNascimento !== "string") {
             throw new Error("Data de nacimento deve ser texto");
@@ -105,7 +105,7 @@ class Telefone {
     }
 
     get() {
-        return this.#formatar();
+        return this.#valor;
     }
 
     #limpar(telefone) {
@@ -118,7 +118,7 @@ class Telefone {
         return true;
     }
 
-    #formatar() {
+    /*#formatar() {
         if (this.#valor.length === 11) {
             return this.#valor.replace(
                 /(\d{2})(\d{5})(\d{4})/,
@@ -130,7 +130,7 @@ class Telefone {
             /(\d{2})(\d{4})(\d{4})/,
             "($1) $2-$3"
         );
-    }
+    }*/
 }
 
 this.telefone = new Telefone();
@@ -212,6 +212,39 @@ class Email {
 
 this.email = new Email();
 
+class Cep {
+    #valor;
+
+    set(cep) {
+        debugger
+        const limpo = this.#limpar(cep);
+        
+        if(!this.#validar(limpo)) {
+            throw new Error("CEP inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(cep) {
+        return cep.replace(/\D/g, "");
+    }
+
+    #validar(cep) {
+        if(cep.length < 8 || cep.length > 8) return false;
+        //evita números todos iguais (ex: 11111111)
+        if(/^(\d)\1+$/.test(cep)) return false;
+
+        return true;
+    } 
+}
+
+this.cep = new Cep();
+
 class Clientes {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -221,6 +254,7 @@ class Clientes {
         this.telefone = new Telefone();
         this.celular = new Celular();
         this.email = new Email();
+        this.cep = new Cep();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -315,7 +349,14 @@ class Clientes {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            let cepDigitado = document.getElementById("cep").value;
+            this.cep.set(cepDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     validarQuartaEtapa = () => {
@@ -404,7 +445,7 @@ class Clientes {
             bairro: document.getElementById("bairro").value,
             rua: document.getElementById("rua").value,
             numero: document.getElementById("numero").value,
-            cep: document.getElementById("cep").value,
+            cep: this.cep.get(),
             complemento: document.getElementById("complemento").value,
             placa: document.getElementById("placa").value,
             marca: document.getElementById("marca").value,
