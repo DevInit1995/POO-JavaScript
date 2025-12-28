@@ -216,7 +216,6 @@ class Cep {
     #valor;
 
     set(cep) {
-        debugger
         const limpo = this.#limpar(cep);
         
         if(!this.#validar(limpo)) {
@@ -231,11 +230,11 @@ class Cep {
     }
 
     #limpar(cep) {
-        return cep.replace(/\D/g, "");
+        return String(cep).replace(/\D/g, "");
     }
 
     #validar(cep) {
-        if(cep.length < 8 || cep.length > 8) return false;
+        if(cep.length !== 8) return false;
         //evita números todos iguais (ex: 11111111)
         if(/^(\d)\1+$/.test(cep)) return false;
 
@@ -244,6 +243,41 @@ class Cep {
 }
 
 this.cep = new Cep();
+
+class Placa {
+    #valor;
+
+    set(placa) {
+        const limpo = this.#limpar(placa);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Placa inválida")
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(placa) {
+        placa = placa.toUpperCase();
+        return String(placa).replace(/[^A-Z0-9]/g, ""); 
+    }
+
+    #validar(placa) {
+        if(placa.length !== 7) return false;
+
+        // LLLNLNN (padrão Mercosul)
+        const mercosul = /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/;
+        const antigo = /^[A-Z]{3}[0-9]{4}$/;
+        
+        return mercosul.test(placa) || antigo.test(placa);
+    }
+}
+
+this.placa = new Placa();
 
 class Clientes {
     constructor() {
@@ -255,6 +289,7 @@ class Clientes {
         this.celular = new Celular();
         this.email = new Email();
         this.cep = new Cep();
+        this.placa = new Placa();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -381,7 +416,14 @@ class Clientes {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            const placaDigitada = document.getElementById("placa").value;
+            this.placa.set(placaDigitada);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     validarQuintaEtapa = () => {
@@ -398,10 +440,9 @@ class Clientes {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-
-            
         }
         */
+       
        this.proximaEtapa();
     }
 
@@ -447,7 +488,7 @@ class Clientes {
             numero: document.getElementById("numero").value,
             cep: this.cep.get(),
             complemento: document.getElementById("complemento").value,
-            placa: document.getElementById("placa").value,
+            placa: this.placa.get(),
             marca: document.getElementById("marca").value,
             modelo: document.getElementById("modelo").value,
             ano: document.getElementById("ano").value,
