@@ -262,8 +262,8 @@ class Placa {
     }
 
     #limpar(placa) {
-        placa = placa.toUpperCase();
-        return String(placa).replace(/[^A-Z0-9]/g, ""); 
+        return String(placa).toUpperCase()
+        .replace(/[^A-Z0-9]/g, "");
     }
 
     #validar(placa) {
@@ -279,6 +279,38 @@ class Placa {
 
 this.placa = new Placa();
 
+class Chassi {
+    #valor;
+
+    set(chassi) {
+        const limpa = this.#limpar(chassi);
+
+        if(!this.#validar(limpa)) {
+            throw new Error("Chassi inválido");
+        }
+
+        this.#valor = limpa;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(chassi) {
+        return String(chassi).toUpperCase()
+        .replace(/[^A-Z0-9]/g, "");
+    }
+
+    #validar(chassi) {
+        if(chassi.length !== 17) return false;
+        
+        return chassi;
+    }
+}
+
+this.chassi = new Chassi();
+
+
 class Clientes {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -290,6 +322,7 @@ class Clientes {
         this.email = new Email();
         this.cep = new Cep();
         this.placa = new Placa();
+        this.chassi = new Chassi();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -420,6 +453,9 @@ class Clientes {
             const placaDigitada = document.getElementById("placa").value;
             this.placa.set(placaDigitada);
 
+            const chassiDigitado = document.getElementById("chassi").value;
+            this.chassi.set(chassiDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -493,7 +529,7 @@ class Clientes {
             modelo: document.getElementById("modelo").value,
             ano: document.getElementById("ano").value,
             cor: document.getElementById("cor").value,
-            chassi: document.getElementById("chassi").value,
+            chassi: this.chassi.get(),
             kmAtual: document.getElementById("kmAtual").value,
             tipoCombustivel: document.getElementById("tipoCombustivel").value,
             observacoesVeiculo: document.getElementById("observacoes").value,
