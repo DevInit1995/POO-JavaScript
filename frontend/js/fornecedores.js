@@ -33,9 +33,40 @@ class CNPJ {
 
 this.cnpj = new CNPJ();
 
+class InscricaoEstadual {
+    #valor; 
+
+    set(inscricaoEstadual) {
+        const limpo = this.#limpar(inscricaoEstadual);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Inscrição Estadual inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+    
+    #limpar(inscricaoEstadual) {
+        return inscricaoEstadual.replace(/\D/g, "");
+    }
+
+    #validar(inscricaoEstadual) {
+        if (inscricaoEstadual.length !== 13) return false;
+       
+        return true; // validação simplificada
+    }
+}
+
+this.inscricaoEstadual = new InscricaoEstadual();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
+        this.inscricaoEstadual = new InscricaoEstadual();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -60,6 +91,9 @@ class Fornecedores {
         try {
             const cnpjDigitado = document.getElementById("cnpj").value;
             this.cnpj.set(cnpjDigitado);
+
+            const inscricaoEstadualDigitado = document.getElementById("inscricaoEstadual").value;
+            this.inscricaoEstadual.set(inscricaoEstadualDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -174,7 +208,7 @@ class Fornecedores {
             razaoSocial: document.getElementById("razaoSocial").value,
             nomeFantasia: document.getElementById("nomeFantasia").value,
             cnpj: this.cnpj.get(),
-            inscricaoEstadual: document.getElementById("inscricaoEstadual").value,
+            inscricaoEstadual: this.inscricaoEstadual.get(),
             segmento: document.getElementById("segmento").value,
             estado: document.getElementById("estado").value,
             cidade: document.getElementById("cidade").value,
