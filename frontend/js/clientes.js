@@ -333,6 +333,52 @@ class Ano {
 
 this.ano = new Ano();
 
+class DataCadastro {
+    #valor;
+    
+    set(dataCadastro) {
+        if(typeof dataCadastro !== "string") {
+            throw new Error("Data de cadastro do carro deve ser texto");
+        }
+
+        if(dataCadastro == "") {
+            throw new Error("Data de cadastro do carro inválido")
+        }
+
+        return this.#valor = dataCadastro;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.dataCadastro = new DataCadastro();
+
+class UltimaVisita {
+    #valor;
+    
+    set(ultimaVisita) {
+        if(typeof ultimaVisita !== "string") {
+            throw new Error("Ano do carro deve ser texto");
+        }
+
+        if(ultimaVisita == "") {
+            throw new Error("Ano do carro inválido")
+        }
+
+        return this.#valor = ultimaVisita;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.UltimaVisita = new UltimaVisita();
+
 class Clientes {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -346,6 +392,8 @@ class Clientes {
         this.placa = new Placa();
         this.chassi = new Chassi();
         this.ano = new Ano();
+        this.ano = new DataCadastro();
+        this.ano = new UltimaVisita();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -504,7 +552,17 @@ class Clientes {
         }
         */
        
-       this.proximaEtapa();
+       try {
+            const dataCadastroDigitada = document.getElementById("dataCadastro").value;
+            this.dataCadastro.set(dataCadastroDigitada);
+
+            const dataUltimaVisitaDigitado = document.getElementById("dataUltimaVisita").value;
+            this.dataCadastro.set(dataUltimaVisitaDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     proximaEtapa = () => {
