@@ -310,6 +310,28 @@ class Chassi {
 
 this.chassi = new Chassi();
 
+class Ano {
+    #valor;
+    
+    set(ano) {
+        if(typeof ano !== "string") {
+            throw new Error("Ano do carro deve ser texto");
+        }
+
+        if(ano == "") {
+            throw new Error("Ano do carro inválido")
+        }
+
+        return this.#valor = ano;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.ano = new Ano();
 
 class Clientes {
     constructor() {
@@ -323,6 +345,7 @@ class Clientes {
         this.cep = new Cep();
         this.placa = new Placa();
         this.chassi = new Chassi();
+        this.ano = new Ano();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -364,7 +387,6 @@ class Clientes {
         }
     }
 
-    
     validarSegundaEtapa = () => {
         //validação dos campos
         const campos = [
@@ -456,6 +478,9 @@ class Clientes {
             const chassiDigitado = document.getElementById("chassi").value;
             this.chassi.set(chassiDigitado);
 
+            const anoDigitado = document.getElementById("ano").value;
+            this.ano.set(anoDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -527,7 +552,7 @@ class Clientes {
             placa: this.placa.get(),
             marca: document.getElementById("marca").value,
             modelo: document.getElementById("modelo").value,
-            ano: document.getElementById("ano").value,
+            ano: this.ano.get(),
             cor: document.getElementById("cor").value,
             chassi: this.chassi.get(),
             kmAtual: document.getElementById("kmAtual").value,
