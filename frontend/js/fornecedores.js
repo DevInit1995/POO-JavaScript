@@ -3,46 +3,40 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 let etapaAtual = 0;
 
+class CNPJ {
+    #valor;
+
+    set(cnpj) {
+        const limpo = this.#limpar(cnpj);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("CNPJ inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(cnpj) {
+        return cnpj.replace(/\D/g, '');
+    }
+
+    #validar(cnpj) {
+        if(cnpj.length !== 14) return false;
+        return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+    
+}
+
+this.cnpj = new CNPJ();
+
 class Fornecedores {
-    /*constructor(id, razaoSocial, nomeFantasia, cnpj, inscricaoEstadual, segmento,
-        estado, cidade, bairro, rua, numero, cep,complemento, telefone, celular, 
-        email, site, responsavel, formaPagamento, prazoPagamento, limiteCredito, 
-        condicaoEntrega, dataCadastro, status, observacoes, nomeProduto, marca, 
-        precoUnitario, codigoProduto, fornecedor, listaProdutos, dataPedido, status) {
-        this.id = id;
-        this.razaoSocial = razaoSocial;
-        this.nomeFantasia = nomeFantasia;
-        this.cnpj = cnpj;
-        this.inscricaoEstadual = inscricaoEstadual;
-        this.segmento = segmento;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.rua = rua;
-        this.numero = numero;
-        this.cep = cep;
-        this.complemento = complemento;
-        this.telefone = telefone;
-        this.celular = celular;
-        this.email = email;
-        this.site = site;
-        this.responsavel = responsavel;
-        this.formaPagamento = formaPagamento;
-        this.prazoPagamento = prazoPagamento;
-        this.limiteCredito = limiteCredito;
-        this.condicaoEntrega = condicaoEntrega;
-        this.dataCadastro = dataCadastro;
-        this.status = status;
-        this.observacoes = observacoes;
-        this.nomeProduto = nomeProduto;
-        this.marca = marca;
-        this.precoUnitario = precoUnitario;
-        this.codigoProduto = codigoProduto;
-        this.fornecedor = fornecedor;
-        this.listaProdutos = listaProdutos;
-        this.dataPedido = dataPedido;
-        this.status = status;
-    }*/
+    constructor() {
+        this.cnpj = new CNPJ();
+    }
 
     validar = (valor) => valor.trim().length > 0;
 
@@ -63,7 +57,14 @@ class Fornecedores {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            const cnpjDigitado = document.getElementById("cnpj").value;
+            this.cnpj.set(cnpjDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     validarSegundaEtapa = () => {
@@ -172,7 +173,7 @@ class Fornecedores {
         const registro = {
             razaoSocial: document.getElementById("razaoSocial").value,
             nomeFantasia: document.getElementById("nomeFantasia").value,
-            cnpj: document.getElementById("cnpj").value,
+            cnpj: this.cnpj.get(),
             inscricaoEstadual: document.getElementById("inscricaoEstadual").value,
             segmento: document.getElementById("segmento").value,
             estado: document.getElementById("estado").value,
