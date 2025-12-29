@@ -143,12 +143,62 @@ class Telefone {
 
 this.telefone = new Telefone();
 
+class Celular {   
+    #valor;
+
+    set(celular) {
+        //debugger
+        if(typeof celular !== "string") {
+            throw new Error("Celular deve ser uma string");
+        }
+
+        const limpo = this.#limpar(celular);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Celular inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#formatar();
+    }
+
+    #limpar(celular) {
+        return celular.replace(/\D/g, "");
+    }
+
+    #validar(celular) {
+        if(celular.length !== 11) return false;
+        if(/^(\d)\1+$/.test(celular)) return false;
+        return true;
+    }
+
+    #formatar() {
+        if(this.#valor.length === 11) {
+            return this.#valor.replace(
+                /(\d{2}) (\d{5})(\d{4})/,
+                "($1) $2-$3"
+            );
+        }
+
+        return this.#valor.replace(
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3"
+        );
+    }
+}
+
+this.celular = new Celular();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
         this.inscricaoEstadual = new InscricaoEstadual();
         this.cep = new Cep();
         this.telefone = new Telefone();
+        this.celular = new Celular();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -233,6 +283,9 @@ class Fornecedores {
         try {
             const telefoneDigitado = document.getElementById("telefone").value;
             this.telefone.set(telefoneDigitado);
+
+            const celularDigitadoDigitado = document.getElementById("celular").value;
+            this.celular.set(celularDigitadoDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -321,7 +374,7 @@ class Fornecedores {
             cep: this.cep.get(),
             complemento: document.getElementById("complemento").value,
             telefone: this.telefone.get(),
-            celular: document.getElementById("celular").value,
+            celular: this.celular.get(),
             email: document.getElementById("email").value,
             site: document.getElementById("site").value,
             formaPagamento: document.getElementById("formaPagamento").value,
