@@ -63,10 +63,43 @@ class InscricaoEstadual {
 
 this.inscricaoEstadual = new InscricaoEstadual();
 
+class Cep {
+    #valor;
+
+    set(cep) {
+        const limpo = this.#limpar(cep);
+        
+        if(!this.#validar(limpo)) {
+            throw new Error("CEP inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(cep) {
+        return String(cep).replace(/\D/g, "");
+    }
+
+    #validar(cep) {
+        if(cep.length !== 8) return false;
+        //evita números todos iguais (ex: 11111111)
+        if(/^(\d)\1+$/.test(cep)) return false;
+
+        return true;
+    } 
+}
+
+this.cep = new Cep();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
         this.inscricaoEstadual = new InscricaoEstadual();
+        this.cep = new Cep();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -121,7 +154,14 @@ class Fornecedores {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            const cepDigitado = document.getElementById("cep").value;
+            this.cep.set(cepDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     validarTerceiraEtapa = () => {
@@ -222,7 +262,7 @@ class Fornecedores {
             bairro: document.getElementById("bairro").value,
             rua: document.getElementById("rua").value,
             numero: document.getElementById("numero").value,
-            cep: document.getElementById("cep").value,
+            cep: this.cep.get(),
             complemento: document.getElementById("complemento").value,
             telefone: document.getElementById("telefone").value,
             celular: document.getElementById("celular").value,
