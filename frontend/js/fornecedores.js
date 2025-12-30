@@ -192,6 +192,35 @@ class Celular {
 
 this.celular = new Celular();
 
+class Email {
+    #valor;
+    
+    set(email) {
+        const limpo = this.#limpar(email);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("E-mail inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(email) {
+        return email.trim().toLowerCase();
+    }
+
+    #validar(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+}
+
+this.email = new Email();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
@@ -199,6 +228,7 @@ class Fornecedores {
         this.cep = new Cep();
         this.telefone = new Telefone();
         this.celular = new Celular();
+        this.email = new Email();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -284,8 +314,11 @@ class Fornecedores {
             const telefoneDigitado = document.getElementById("telefone").value;
             this.telefone.set(telefoneDigitado);
 
-            const celularDigitadoDigitado = document.getElementById("celular").value;
-            this.celular.set(celularDigitadoDigitado);
+            const celularDigitado = document.getElementById("celular").value;
+            this.celular.set(celularDigitado);
+
+            const emailDigitado = document.getElementById("email").value;
+            this.email.set(emailDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -375,8 +408,7 @@ class Fornecedores {
             complemento: document.getElementById("complemento").value,
             telefone: this.telefone.get(),
             celular: this.celular.get(),
-            email: document.getElementById("email").value,
-            site: document.getElementById("site").value,
+            email: this.email.get(),
             formaPagamento: document.getElementById("formaPagamento").value,
             prazoPagamento: document.getElementById("prazoPagamento").value,
             limiteCredito: document.getElementById("limiteCredito").value,
