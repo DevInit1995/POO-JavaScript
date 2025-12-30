@@ -259,6 +259,28 @@ class Site {
 
 this.site = new Site();
 
+class codigoProduto {
+    #valor;
+
+    set(codigoProduto) {
+        if(typeof codigoProduto !== "string") {
+            throw new Error("Código deve ser texto");
+        }
+
+        const limpo = codigoProduto.trim().toUpperCase();
+
+        if(!/^[A-Z]{3}-\d{4}$/.test(limpo)) {
+            throw new Error("Código de produto inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
@@ -268,6 +290,7 @@ class Fornecedores {
         this.celular = new Celular();
         this.email = new Email();
         this.site = new Site();
+        this.codigoProduto = new codigoProduto();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -423,7 +446,14 @@ class Fornecedores {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            const codigoProdutoDigitado = document.getElementById("codigoProduto").value;
+            this.codigoProduto.set(codigoProdutoDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     //LocalStorage
@@ -462,7 +492,7 @@ class Fornecedores {
             nomeProduto: document.getElementById("nomeProduto").value,
             marca: document.getElementById("marca").value,
             precoUnitario: document.getElementById("precoUnitario").value,
-            codigoProduto: document.getElementById("codigoProduto").value
+            codigoProduto: this.codigoProduto.get()
         }
 
         //Buscar a "tabela" no localStorage (ou criar vazia)
