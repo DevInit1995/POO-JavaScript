@@ -259,27 +259,33 @@ class Site {
 
 this.site = new Site();
 
-class codigoProduto {
+class LimiteCredito {
     #valor;
 
-    set(codigoProduto) {
-        if(typeof codigoProduto !== "string") {
-            throw new Error("Código deve ser texto");
+    set(limiteCredito) {
+        const valor = Number(limiteCredito);
+        
+        if(typeof valor !== "number" || isNaN(valor)) {
+            throw new Error("Limite de crédito inválido");
         }
 
-        const limpo = codigoProduto.trim().toUpperCase();
-
-        if(!/^[A-Z]{3}-\d{4}$/.test(limpo)) {
-            throw new Error("Código de produto inválido");
+        if(valor <= 0 ) {
+            throw new Error("Limite não pode ser negativo");
         }
 
-        this.#valor = limpo;
+        if(valor > 5000) {
+            throw new Error("Limite não ser maior que 5000")
+        }
+
+        this.#valor = valor;
     }
 
     get() {
         return this.#valor;
     }
 }
+
+this.limiteCredito = new LimiteCredito();
 
 class Fornecedores {
     constructor() {
@@ -290,7 +296,7 @@ class Fornecedores {
         this.celular = new Celular();
         this.email = new Email();
         this.site = new Site();
-        this.codigoProduto = new codigoProduto();
+        this.limiteCredito = new LimiteCredito();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -408,7 +414,14 @@ class Fornecedores {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            const limiteCreditoDigitado = document.getElementById("limiteCredito").value;
+            this.limiteCredito.set(limiteCreditoDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Error", e.message);
+        }
     }
 
     validarQuintaEtapa = () => {
@@ -447,6 +460,9 @@ class Fornecedores {
         }*/
 
         try {
+            const precoUnitarioDigitado = document.getElementById("precoUnitario").value;
+            this.precoUnitario.set(precoUnitarioDigitado);
+
             const codigoProdutoDigitado = document.getElementById("codigoProduto").value;
             this.codigoProduto.set(codigoProdutoDigitado);
 
@@ -484,15 +500,13 @@ class Fornecedores {
             site: this.site.get(),
             formaPagamento: document.getElementById("formaPagamento").value,
             prazoPagamento: document.getElementById("prazoPagamento").value,
-            limiteCredito: document.getElementById("limiteCredito").value,
+            limiteCredito: this.limiteCredito.get(),
             condicaoEntrega: document.getElementById("condicaoEntrega").value,
             dataCadastro: document.getElementById("dataCadastro").value,
             inativo: document.getElementById("inativo").value,
             observacoes: document.getElementById("observacoes").value,
             nomeProduto: document.getElementById("nomeProduto").value,
-            marca: document.getElementById("marca").value,
-            precoUnitario: document.getElementById("precoUnitario").value,
-            codigoProduto: this.codigoProduto.get()
+            marca: document.getElementById("marca").value
         }
 
         //Buscar a "tabela" no localStorage (ou criar vazia)
