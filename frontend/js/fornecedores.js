@@ -221,6 +221,44 @@ class Email {
 
 this.email = new Email();
 
+class Site {
+    #valor;
+    
+    set(site) {
+        if(typeof site !== "string") {
+            throw new Error("Site deve ser texto");
+        }
+
+        const limpo = site.trim();
+
+        const url = this.#converterParaURL(limpo);
+
+        if(!url){
+            throw new Error("URL inválida")
+        }
+
+        this.#valor = url.toString();
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #converterParaURL(valor) {
+        try {
+            if(!/^https?:\/\//i.test(valor)) {
+                valor = "https://" + valor;
+            }
+
+            return new URL(valor);
+        } catch {
+            return null;
+        }
+    }
+}
+
+this.site = new Site();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
@@ -229,6 +267,7 @@ class Fornecedores {
         this.telefone = new Telefone();
         this.celular = new Celular();
         this.email = new Email();
+        this.site = new Site();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -320,6 +359,9 @@ class Fornecedores {
             const emailDigitado = document.getElementById("email").value;
             this.email.set(emailDigitado);
 
+            const siteDigitado = document.getElementById("site").value;
+            this.site.set(siteDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -409,6 +451,7 @@ class Fornecedores {
             telefone: this.telefone.get(),
             celular: this.celular.get(),
             email: this.email.get(),
+            site: this.site.get(),
             formaPagamento: document.getElementById("formaPagamento").value,
             prazoPagamento: document.getElementById("prazoPagamento").value,
             limiteCredito: document.getElementById("limiteCredito").value,
