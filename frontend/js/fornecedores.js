@@ -353,6 +353,29 @@ class PrecoUnitario {
 
 this.precoUnitario = new PrecoUnitario();
 
+class DataCadastro {
+    #valor;
+    
+    set(dataCadastro) {
+        if(typeof dataCadastro !== "string") {
+            throw new Error("Data de cadastro do fornecedor deve ser texto");
+        }
+
+        if(dataCadastro == "") {
+            throw new Error("Data de cadastro do fornecedor inválido")
+        }
+
+        return this.#valor = dataCadastro;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.dataCadastro = new DataCadastro();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
@@ -362,6 +385,7 @@ class Fornecedores {
         this.celular = new Celular();
         this.email = new Email();
         this.site = new Site();
+        this.dataCadastro = new DataCadastro();
         this.limiteCredito = new LimiteCredito();
         this.precoUnitario = new PrecoUnitario();
         this.codigoProduto = new CodigoProduto();
@@ -507,7 +531,14 @@ class Fornecedores {
             }
         }*/
        
-        this.proximaEtapa();
+        try {
+            const dataCadastroDigitado = document.getElementById("dataCadastro").value;
+            this.dataCadastro.set(dataCadastroDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Error", e.message);
+        }
     }
 
     validarSextaEtapa = () => {
@@ -570,7 +601,7 @@ class Fornecedores {
             prazoPagamento: document.getElementById("prazoPagamento").value,
             limiteCredito: this.limiteCredito.get(),
             condicaoEntrega: document.getElementById("condicaoEntrega").value,
-            dataCadastro: document.getElementById("dataCadastro").value,
+            dataCadastro: this.dataCadastro.get(),
             inativo: document.getElementById("inativo").value,
             observacoes: document.getElementById("observacoes").value,
             nomeProduto: document.getElementById("nomeProduto").value,
