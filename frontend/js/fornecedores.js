@@ -274,7 +274,7 @@ class LimiteCredito {
         }
 
         if(valor > 5000) {
-            throw new Error("Limite não ser maior que 5000")
+            throw new Error("Limite não pode ser maior que 5000")
         }
 
         this.#valor = valor;
@@ -287,6 +287,72 @@ class LimiteCredito {
 
 this.limiteCredito = new LimiteCredito();
 
+class CodigoProduto {
+    #valor;
+
+    set(codigo) {
+        if (typeof codigo !== "string") {
+            throw new Error("Código deve ser texto");
+        }
+
+        const limpo = codigo.trim().toUpperCase();
+
+        if (!/^[A-Z]{3}-\d{4}$/.test(limpo)) {
+            throw new Error("Código de produto inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+}
+
+this.codigoProduto = new CodigoProduto();
+
+class PrecoUnitario {
+    #valor;
+
+    set(precoUnitario) {
+        const limpo = this.#limpar(precoUnitario);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Preço inválido");
+        }
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(precoUnitario) {
+        if (typeof precoUnitario === "string") {
+            precoUnitario = precoUnitario.replace(/\./g, "").replace(",", ".");
+        }
+        
+        return Number(precoUnitario);
+    };
+
+    #validar(precoUnitario) {
+        if (isNaN(precoUnitario)) return false;
+        if (precoUnitario <= 0) return false;
+        if (precoUnitario > 1_000_000) return false; // limite realista
+        
+        return true;
+    };
+    
+    #formatar(precoUnitario){
+        return precoUnitario.toLocaleString("pt-BR", 
+            {style: "currency", 
+                currency: "BRL;"});
+    }
+}
+
+this.precoUnitario = new PrecoUnitario();
+
 class Fornecedores {
     constructor() {
         this.cnpj = new CNPJ();
@@ -297,6 +363,8 @@ class Fornecedores {
         this.email = new Email();
         this.site = new Site();
         this.limiteCredito = new LimiteCredito();
+        this.precoUnitario = new PrecoUnitario();
+        this.codigoProduto = new CodigoProduto();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -506,7 +574,9 @@ class Fornecedores {
             inativo: document.getElementById("inativo").value,
             observacoes: document.getElementById("observacoes").value,
             nomeProduto: document.getElementById("nomeProduto").value,
-            marca: document.getElementById("marca").value
+            marca: document.getElementById("marca").value,
+            precoUnitario: this.precoUnitario.get(),
+            codigoProduto: this.codigoProduto.get()
         }
 
         //Buscar a "tabela" no localStorage (ou criar vazia)
