@@ -3,7 +3,31 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 let etapaAtual = 0;
 
+class Quantidade {
+    #valor;
+
+    set(quantidade) {
+        const n = Number(quantidade);
+
+        if(!Number.isInteger(n) || n <= 0) {
+            throw new Error("Quantidade inválida");
+        }
+
+        this.#valor = n;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+this.quantidade = new Quantidade();
+
 class Servicos {
+    constructor() {
+        this.quantidade = new Quantidade();
+    }
+
     validar = (valor) => valor.trim().length > 0;
 
     validarPrimeiraEtapa = () => {
@@ -26,7 +50,14 @@ class Servicos {
             }
         }*/
 
-        this.proximaEtapa();
+        try {
+            const quantidadeDigitado = document.getElementById("quantidade").value;
+            this.quantidade.set(quantidadeDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     validarSegundaEtapa = () => {
@@ -110,7 +141,7 @@ class Servicos {
             idNumeroOs: document.getElementById("idNumeroOs").value,
             calculoServico: document.getElementById("calculoServico").value,
             calcularPeca: document.getElementById("calcularPeca").value,
-            quantidade: document.getElementById("quantidade").value,
+            quantidade: this.quantidade.get(),
             totalServico: document.getElementById("totalServico").value,
             totalPecas: document.getElementById("totalPecas").value,
             totalGeral: document.getElementById("totalGeral").value,
