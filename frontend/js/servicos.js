@@ -23,9 +23,30 @@ class Quantidade {
 
 this.quantidade = new Quantidade();
 
+class CodigoInterno {
+    #valor;
+
+    set(codigoInterno) {
+        const limpo = codigoInterno.trim().toUpperCase();
+
+        if(!/^[A-Z]{3}\d{4}$/.test(limpo)) {
+            throw new Error("Código interno inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+this.codigoInterno = new CodigoInterno();
+
 class Servicos {
     constructor() {
         this.quantidade = new Quantidade();
+        this.codigoInterno = new CodigoInterno();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -96,7 +117,14 @@ class Servicos {
             }
         }*/
 
-        this.proximaEtapa();
+         try {
+            const codigoInternoDigitado = document.getElementById("codigoInterno").value;
+            this.condigoInterno.set(codigoInternoDigitado);
+
+            this.proximaEtapa();
+        } catch (e) {
+            this.exibirAlerta("warning", "Erro", e.message);
+        }
     }
 
     proximaEtapa = () => {
@@ -151,7 +179,7 @@ class Servicos {
             ids: document.getElementById("ids").value,
             nomePeca: document.getElementById("nomePeca").value,
             marca: document.getElementById("marca").value,
-            codigoInterno: document.getElementById("codigoInterno").value,
+            codigoInterno: this.condigoInterno.get(),
             quantidadeEstoque: document.getElementById("quantidadeEstoque").value,
             precoUnitario: document.getElementById("precoUnitario").value,
             fornecedor: document.getElementById("fornecedor").value
