@@ -3,6 +3,26 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 let etapaAtual = 0;
 
+class ServicoSelecionado {
+    #valor;
+
+    set(servicoSelecionado) {
+        const numero = Number(servicoSelecionado);
+
+        if(numero <= 0) {
+            throw new Error("Selecione um serviço");
+        }
+
+        this.#valor = numero;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+this.servicoSelecionado = new ServicoSelecionado();
+
 class Quantidade {
     #valor;
 
@@ -47,6 +67,7 @@ class Servicos {
     constructor() {
         this.quantidade = new Quantidade();
         this.codigoInterno = new CodigoInterno();
+        this.servicoSelecionado = new ServicoSelecionado();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -74,6 +95,9 @@ class Servicos {
         try {
             const quantidadeDigitado = document.getElementById("quantidade").value;
             this.quantidade.set(quantidadeDigitado);
+
+            const servicoSelect = document.getElementById("calculoServico");
+            this.servicoSelecionado.set(servicoSelect.value);
 
             this.proximaEtapa();
         } catch (e) {
@@ -117,7 +141,7 @@ class Servicos {
             }
         }*/
 
-         try {
+        try {
             const codigoInternoDigitado = document.getElementById("codigoInterno").value;
             this.condigoInterno.set(codigoInternoDigitado);
 
@@ -179,7 +203,7 @@ class Servicos {
             ids: document.getElementById("ids").value,
             nomePeca: document.getElementById("nomePeca").value,
             marca: document.getElementById("marca").value,
-            codigoInterno: this.condigoInterno.get(),
+            servicoSelecionado: this.servicoSelecionado.get(),
             quantidadeEstoque: document.getElementById("quantidadeEstoque").value,
             precoUnitario: document.getElementById("precoUnitario").value,
             fornecedor: document.getElementById("fornecedor").value
