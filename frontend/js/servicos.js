@@ -244,6 +244,7 @@ class Servicos {
         localStorage.setItem("servicos", JSON.stringify(tabela));
     }
 }
+
 const servicos = new Servicos();
 window.calcularTotal = () => servicos.calcularTotal();
 

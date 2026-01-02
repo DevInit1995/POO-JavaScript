@@ -206,11 +206,11 @@ class DataEntrada {
     
     set(dataEntrada) {
         if(typeof dataEntrada !== "string") {
-            throw new Error("Ano do carro deve ser texto");
+            throw new Error("Data de entrada deve ser texto");
         }
 
         if(dataEntrada == "") {
-            throw new Error("Ano do carro inválido")
+            throw new Error("Data de entrada inválida")
         }
 
         return this.#valor = dataEntrada;
@@ -222,18 +222,18 @@ class DataEntrada {
     }
 }
 
-this.dataEntrada = new DataEntrada();
+this.entrada = new DataEntrada();
 
 class DataSaida {
     #valor;
     
     set(dataSaida) {
         if(typeof dataSaida !== "string") {
-            throw new Error("Ano do carro deve ser texto");
+            throw new Error("Data de saída deve ser texto");
         }
 
         if(dataSaida == "") {
-            throw new Error("Ano do carro inválido")
+            throw new Error("Data de saída inválida")
         }
 
         return this.#valor = dataSaida;
@@ -245,7 +245,7 @@ class DataSaida {
     }
 }
 
-this.dataSaida = new DataSaida();
+this.entrega = new DataSaida();
 
 class LimiteCredito {
     #valor;
@@ -349,11 +349,11 @@ class OrdemServicosCadastro {
         this.placa = new Placa();
         this.ano = new Ano();
         //this.kmAtual = new KmAtual();
-        this.dataEntrada = new DataEntrada();
-        this.dataSaida = new DataSaida();
-        this.limiteCretito = new LimiteCredito();
+        this.entrada = new DataEntrada();
+        this.entrega = new DataSaida();
+        this.limiteCredito = new LimiteCredito();
         this.dataCadastro = new DataCadastro();
-        this.precoUnitario = new this.PrecoUnitario();
+        this.precoUnitario = new PrecoUnitario();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -427,8 +427,8 @@ class OrdemServicosCadastro {
             let anoDigitado = document.getElementById("ano").value;
             this.ano.set(anoDigitado);
 
-            let kmAtualDigitado = document.getElementById("kmAtual").value;
-            this.kmAtual.set(kmAtualDigitado);
+            /*let kmAtualDigitado = document.getElementById("kmAtual").value;
+            this.kmAtual.set(kmAtualDigitado);*/
 
             this.proximaEtapa();
         } catch (e) {
@@ -437,6 +437,7 @@ class OrdemServicosCadastro {
     }
 
     validarTerceiraEtapa = () => {
+        debugger
         //validação dos campos
         const campos = [
             {id: "identificacao", mensagem: "Preencha o campo Identificação"},
@@ -575,14 +576,14 @@ class OrdemServicosCadastro {
             ano: this.ano.get(),
             cor: document.getElementById("cor").value,
             motor: document.getElementById("motor").value,
-            kmAtual: this.kmAtual.get(),
+           // kmAtual: this.kmAtual.get(),
             tipoCombustivel: document.getElementById("tipoCombustivel").value,
             observacoes: document.getElementById("observacoes").value,
             identificacao: document.getElementById("identificacao").value,
             servicos: document.getElementById("servicos").value,
             valores: document.getElementById("valores").value,
             entrada: this.entrada.get(),
-            entrega: this.entreda.get(),
+            entrega: this.entrega.get(),
             status: document.getElementById("status").value,
             responsavel: document.getElementById("responsavel").value,
             pagamento: document.getElementById("pagamento").value,
@@ -600,18 +601,17 @@ class OrdemServicosCadastro {
         };
 
         //Buscar a "tabela" no localStorage (ou criar vazia)
-        let tabela = JSON.parse(localStorage.getItem("clientes")) || [];
+        let tabela = JSON.parse(localStorage.getItem("ordem-servicos-cadastro")) || [];
 
         //Colocar o novo registro
         tabela.push(registro);
 
         //Salvar novamente no localStorage
-        localStorage.setItem("clientes", JSON.stringify(tabela));
+        localStorage.setItem("ordem-servicos-cadastro", JSON.stringify(tabela));
     }    
 }
 
 avancar.forEach((btn) => {
-    debugger
     btn.addEventListener("click", () => {
         switch(etapaAtual) {
             case 0: 
