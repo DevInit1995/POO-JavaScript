@@ -224,6 +224,29 @@ class DataEntrada {
 
 this.dataEntrada = new DataEntrada();
 
+class DataSaida {
+    #valor;
+    
+    set(dataSaida) {
+        if(typeof dataSaida !== "string") {
+            throw new Error("Ano do carro deve ser texto");
+        }
+
+        if(dataSaida == "") {
+            throw new Error("Ano do carro inválido")
+        }
+
+        return this.#valor = dataSaida;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.dataSaida = new DataSaida();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
