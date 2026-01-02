@@ -247,6 +247,34 @@ class DataSaida {
 
 this.dataSaida = new DataSaida();
 
+class LimiteCredito {
+    #valor;
+
+    set(limiteCredito) {
+        const valor = Number(limiteCredito);
+        
+        if(typeof valor !== "number" || isNaN(valor)) {
+            throw new Error("Limite de crédito inválido");
+        }
+
+        if(valor <= 0 ) {
+            throw new Error("Limite não pode ser negativo");
+        }
+
+        if(valor > 5000) {
+            throw new Error("Limite não pode ser maior que 5000")
+        }
+
+        this.#valor = valor;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+this.limiteCredito = new LimiteCredito();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
