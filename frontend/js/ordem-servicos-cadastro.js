@@ -63,6 +63,54 @@ class Email {
 
 this.email = new Email();
 
+class Telefone {
+    #valor;
+
+    set(telefone) {
+        if (typeof telefone !== "string") {
+            throw new Error("Telefone deve ser uma string");
+        }
+
+        const limpo = this.#limpar(telefone);
+
+        if (!this.#validar(limpo)) {
+            throw new Error("Telefone inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(telefone) {
+        return telefone.replace(/\D/g, "");
+    }
+
+    #validar(telefone) {
+        if (telefone.length !== 11) return false;
+        if(/^(\d)\1+$/.test(telefone)) return false;
+        return true;
+    }
+
+    /*#formatar() {
+        if (this.#valor.length === 11) {
+            return this.#valor.replace(
+                /(\d{2})(\d{5})(\d{4})/,
+                "($1) $2-$3"
+            );
+        }
+
+        return this.#valor.replace(
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3"
+        );
+    }*/
+}
+
+this.telefone = new Telefone();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
