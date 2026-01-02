@@ -34,6 +34,35 @@ class CPF {
 
 this.cpf = new CPF;
 
+class Email {
+    #valor;
+    
+    set(email) {
+        const limpo = this.#limpar(email);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("E-mail inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(email) {
+        return email.trim().toLowerCase();
+    }
+
+    #validar(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+}
+
+this.email = new Email();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
