@@ -143,6 +143,41 @@ class Cep {
 
 this.cep = new Cep();
 
+class Placa {
+    #valor;
+
+    set(placa) {
+        const limpo = this.#limpar(placa);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Placa inválida")
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(placa) {
+        return String(placa).toUpperCase()
+        .replace(/[^A-Z0-9]/g, "");
+    }
+
+    #validar(placa) {
+        if(placa.length !== 7) return false;
+
+        // LLLNLNN (padrão Mercosul)
+        const mercosul = /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/;
+        const antigo = /^[A-Z]{3}[0-9]{4}$/;
+        
+        return mercosul.test(placa) || antigo.test(placa);
+    }
+}
+
+this.placa = new Placa();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
