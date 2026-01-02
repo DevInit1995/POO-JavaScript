@@ -3,10 +3,41 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 let etapaAtual = 0;
 
+//ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
+class CPF {
+    #valor; // PRIVADO
+
+    set(cpf) {
+        const limpo = this.#limpar(cpf);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("CPF inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+    
+    #limpar(cpf) {
+        return cpf.replace(/\D/g, "");
+    }
+
+    #validar(cpf) {
+        if (cpf.length !== 11) return false;
+        if (/^(\d)\1{10}$/.test(cpf)) return false;
+        return true; // validação simplificada
+    }
+}
+
+this.cpf = new CPF;
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
-       /* this.cpf = new CPF();
+        this.cpf = new CPF();
         this.email = new Email();
         this.telefone = new Telefone();
         this.cep = new Cep();      
@@ -17,7 +48,7 @@ class OrdemServicosCadastro {
         this.dataSaida = new DataSaida();
         this.limiteCretito = new LimiteCredito();
         this.dataCadastro = new DataCadastro();
-        this.precoUnitario = new this.PrecoUnitario();*/
+        this.precoUnitario = new this.PrecoUnitario();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -28,15 +59,12 @@ class OrdemServicosCadastro {
             {id: "cpf", mensagem: "Preencha o campo CPF"},
             {id: "email", mensagem: "Preencha o campo E-mail"},
             {id: "telefone", mensagem: "Preencha o campo Telefone"},
-            
             {id: "estado", mensagem: "Preencha o campo Estado"},
             {id: "cidade", mensagem: "Preencha o campo Cidade"},
             {id: "bairro", mensagem: "Preencha o campo Bairro"},
             {id: "rua", mensagem: "Preencha o campo Rua"},
             {id: "numero", mensagem: "Preencha o campo Número"},
-           
             {id: "cep", mensagem: "Preencha o campo cep"},
-
         ]
 
         /*for(let campo of campos) {
