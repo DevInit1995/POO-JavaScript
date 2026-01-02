@@ -111,6 +111,38 @@ class Telefone {
 
 this.telefone = new Telefone();
 
+class Cep {
+    #valor;
+
+    set(cep) {
+        const limpo = this.#limpar(cep);
+        
+        if(!this.#validar(limpo)) {
+            throw new Error("CEP inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(cep) {
+        return String(cep).replace(/\D/g, "");
+    }
+
+    #validar(cep) {
+        if(cep.length !== 8) return false;
+        //evita números todos iguais (ex: 11111111)
+        if(/^(\d)\1+$/.test(cep)) return false;
+
+        return true;
+    } 
+}
+
+this.cep = new Cep();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
