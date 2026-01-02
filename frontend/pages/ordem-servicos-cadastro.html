@@ -27,26 +27,23 @@
             <label for="telefone">Telefone:</label>
             <input type="number" id="telefone" placeholder="(31) 0000-0000">
 
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" placeholder="Ex.: Minas Gerais">
+
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" placeholder="Ex.: Belo Horizonte">
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" placeholder="Ex.: Canna">
+
             <label for="rua">Rua:</label>
             <input type="text" id="rua" placeholder="Ex.: Rua Fernandes Nogueira Santos">
 
             <label for="numero">Número:</label>
             <input type="number" id="numero" placeholder="Ex.: 6">
 
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" placeholder="Ex.: Canna">
-
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" placeholder="Ex.: Belo Horizonte">
-
-            <label for="estado">Estado:</label>
-            <input type="text" id="estado" placeholder="Ex.: Minas Gerais">
-            
-            <label for="rua">Rua:</label>
-            <input type="text" id="rua" placeholder="Ex.: Rua Fernandes Nogueira Santos">
-
             <label for="cep">CEP:</label>
-                <input type="number" id="cep" placeholder="Ex.: 00000-000">
+            <input type="number" id="cep" placeholder="Ex.: 00000-000">
 
             <div class="buttons">
                 <button type="button" class="btnAvancar">Avançar</button>
@@ -118,7 +115,7 @@
                 <summary>Status:</summary>
                 <p>Selecione uma opção abaixo:</p>
                 <select name="status" id="status">
-                    <option value="">Selecione o status:</option>
+                    <option value="0">Selecione o status:</option>
                     <option value="andamento">Andamento</option>
                     <option value="aguardando-pecas">Aguardando Peças</option>
                     <option value="concluido">Concluído</option>
@@ -212,6 +209,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/cadastro-oficina/frontend/js/cadastroServicosPecas.js"></script>
+    <script src="/cadastro-oficina/frontend/js/ordem-servicos-cadastro.js"></script>
 </body>
 </html>
