@@ -178,6 +178,29 @@ class Placa {
 
 this.placa = new Placa();
 
+class Ano {
+    #valor;
+    
+    set(ano) {
+        if(typeof ano !== "string") {
+            throw new Error("Ano do carro deve ser texto");
+        }
+
+        if(ano == "") {
+            throw new Error("Ano do carro inválido")
+        }
+
+        return this.#valor = ano;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.ano = new Ano();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
