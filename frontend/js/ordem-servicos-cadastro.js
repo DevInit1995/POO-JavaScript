@@ -275,6 +275,29 @@ class LimiteCredito {
 
 this.limiteCredito = new LimiteCredito();
 
+class DataCadastro {
+    #valor;
+    
+    set(dataCadastro) {
+        if(typeof dataCadastro !== "string") {
+            throw new Error("Ano do carro deve ser texto");
+        }
+
+        if(dataCadastro == "") {
+            throw new Error("Ano do carro inválido")
+        }
+
+        return this.#valor = dataCadastro;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.dataCadastro = new DataCadastro();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
