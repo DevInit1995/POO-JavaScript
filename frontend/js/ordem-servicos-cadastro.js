@@ -298,6 +298,47 @@ class DataCadastro {
 
 this.dataCadastro = new DataCadastro();
 
+class PrecoUnitario {
+    #valor;
+
+    set(precoUnitario) {
+        const limpo = this.#limpar(precoUnitario);
+
+        if(!this.#validar(limpo)) {
+            throw new Error("Preço inválido");
+        }
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    #limpar(precoUnitario) {
+        if (typeof precoUnitario === "string") {
+            precoUnitario = precoUnitario.replace(/\./g, "").replace(",", ".");
+        }
+        
+        return Number(precoUnitario);
+    };
+
+    #validar(precoUnitario) {
+        if (isNaN(precoUnitario)) return false;
+        if (precoUnitario <= 0) return false;
+        if (precoUnitario > 1_000_000) return false; // limite realista
+        
+        return true;
+    };
+    
+    #formatar(precoUnitario){
+        return precoUnitario.toLocaleString("pt-BR", 
+            {style: "currency", 
+                currency: "BRL;"});
+    }
+}
+
+this.precoUnitario = new PrecoUnitario();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
