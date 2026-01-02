@@ -201,6 +201,29 @@ class Ano {
 
 this.ano = new Ano();
 
+class DataEntrada {
+    #valor;
+    
+    set(dataEntrada) {
+        if(typeof dataEntrada !== "string") {
+            throw new Error("Ano do carro deve ser texto");
+        }
+
+        if(dataEntrada == "") {
+            throw new Error("Ano do carro inválido")
+        }
+
+        return this.#valor = dataEntrada;
+    }
+
+    get() {
+        //se precisar do objeto Date internamente
+        return this.#valor;
+    }
+}
+
+this.dataEntrada = new DataEntrada();
+
 class OrdemServicosCadastro {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -210,7 +233,7 @@ class OrdemServicosCadastro {
         this.cep = new Cep();      
         this.placa = new Placa();
         this.ano = new Ano();
-        this.kmAtual = new KmAtual();
+        //this.kmAtual = new KmAtual();
         this.dataEntrada = new DataEntrada();
         this.dataSaida = new DataSaida();
         this.limiteCretito = new LimiteCredito();
