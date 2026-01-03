@@ -7,9 +7,9 @@ class CNPJ {
     #valor;
 
     set(cnpj) {
-        const limpo = this.#limpar(cnpj);
+        const limpo = CNPJ.#limpar(cnpj);
 
-        if(!this.#validar(limpo)) {
+        if(!CNPJ.#validar(limpo)) {
             throw new Error("CNPJ inválido");
         }
 
@@ -20,11 +20,11 @@ class CNPJ {
         return this.#valor;
     }
 
-    #limpar(cnpj) {
+    static #limpar(cnpj) {
         return cnpj.replace(/\D/g, '');
     }
 
-    #validar(cnpj) {
+    static #validar(cnpj) {
         if(cnpj.length !== 14) return false;
         return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
     }
