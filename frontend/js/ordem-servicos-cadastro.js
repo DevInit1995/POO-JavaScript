@@ -302,9 +302,9 @@ class PrecoUnitario {
     #valor;
 
     set(precoUnitario) {
-        const limpo = this.#limpar(precoUnitario);
+        const limpo = PrecoUnitario.#limpar(precoUnitario);
 
-        if(!this.#validar(limpo)) {
+        if(!PrecoUnitario.#validar(limpo)) {
             throw new Error("Preço inválido");
         }
         this.#valor = limpo;
@@ -314,7 +314,7 @@ class PrecoUnitario {
         return this.#valor;
     }
 
-    #limpar(precoUnitario) {
+    static #limpar(precoUnitario) {
         if (typeof precoUnitario === "string") {
             precoUnitario = precoUnitario.replace(/\./g, "").replace(",", ".");
         }
@@ -322,7 +322,7 @@ class PrecoUnitario {
         return Number(precoUnitario);
     };
 
-    #validar(precoUnitario) {
+    static #validar(precoUnitario) {
         if (isNaN(precoUnitario)) return false;
         if (precoUnitario <= 0) return false;
         if (precoUnitario > 1_000_000) return false; // limite realista
@@ -330,7 +330,7 @@ class PrecoUnitario {
         return true;
     };
     
-    #formatar(precoUnitario){
+    static #formatar(precoUnitario){
         return precoUnitario.toLocaleString("pt-BR", 
             {style: "currency", 
                 currency: "BRL;"});
