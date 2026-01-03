@@ -231,7 +231,7 @@ class Site {
 
         const limpo = site.trim();
 
-        const url = this.#converterParaURL(limpo);
+        const url = Site.#converterParaURL(limpo);
 
         if(!url){
             throw new Error("URL inválida")
@@ -244,7 +244,7 @@ class Site {
         return this.#valor;
     }
 
-    #converterParaURL(valor) {
+    static #converterParaURL(valor) {
         try {
             if(!/^https?:\/\//i.test(valor)) {
                 valor = "https://" + valor;
