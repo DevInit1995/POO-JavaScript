@@ -216,9 +216,9 @@ class Cep {
     #valor;
 
     set(cep) {
-        const limpo = this.#limpar(cep);
+        const limpo = Cep.#limpar(cep);
         
-        if(!this.#validar(limpo)) {
+        if(!Cep.#validar(limpo)) {
             throw new Error("CEP inválido");
         }
 
@@ -229,11 +229,11 @@ class Cep {
         return this.#valor;
     }
 
-    #limpar(cep) {
+    static #limpar(cep) {
         return String(cep).replace(/\D/g, "");
     }
 
-    #validar(cep) {
+    static #validar(cep) {
         if(cep.length !== 8) return false;
         //evita números todos iguais (ex: 11111111)
         if(/^(\d)\1+$/.test(cep)) return false;
