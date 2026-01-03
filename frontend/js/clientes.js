@@ -187,9 +187,9 @@ class Email {
     #valor;
     
     set(email) {
-        const limpo = this.#limpar(email);
+        const limpo = Email.#limpar(email);
 
-        if(!this.#validar(limpo)) {
+        if(!Email.#validar(limpo)) {
             throw new Error("E-mail inválido");
         }
 
@@ -200,11 +200,11 @@ class Email {
         return this.#valor;
     }
 
-    #limpar(email) {
+    static #limpar(email) {
         return email.trim().toLowerCase();
     }
 
-    #validar(email) {
+    static #validar(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     }
