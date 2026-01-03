@@ -55,11 +55,7 @@ class RG {
         return rg.replace(/\D/g, "");
     }
 
-    static #validar(rg) {
-        if (rg.length !== 6) return false;
-        if(/^(\d)\1+$/.test(rg)) return false;
-        return true;
-    }
+   
 }
 
 this.rg = new RG;
