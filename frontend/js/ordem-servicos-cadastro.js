@@ -147,9 +147,9 @@ class Placa {
     #valor;
 
     set(placa) {
-        const limpo = this.#limpar(placa);
+        const limpo = Placa.#limpar(placa);
 
-        if(!this.#validar(limpo)) {
+        if(!Placa.#validar(limpo)) {
             throw new Error("Placa inválida")
         }
 
@@ -160,12 +160,12 @@ class Placa {
         return this.#valor;
     }
 
-    #limpar(placa) {
+    static #limpar(placa) {
         return String(placa).toUpperCase()
         .replace(/[^A-Z0-9]/g, "");
     }
 
-    #validar(placa) {
+    static #validar(placa) {
         if(placa.length !== 7) return false;
 
         // LLLNLNN (padrão Mercosul)
