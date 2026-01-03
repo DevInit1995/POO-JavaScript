@@ -55,7 +55,11 @@ class RG {
         return rg.replace(/\D/g, "");
     }
 
-   
+    static #validar(rg) {
+        if (rg.length !== 6) return false;
+        if(/^(\d)\1+$/.test(rg)) return false;
+        return true;
+    }
 }
 
 this.rg = new RG;
@@ -91,9 +95,9 @@ class Telefone {
             throw new Error("Telefone deve ser uma string");
         }
 
-        const limpo = this.#limpar(telefone);
+        const limpo = Telefone.#limpar(telefone);
 
-        if (!this.#validar(limpo)) {
+        if (!Telefone.#validar(limpo)) {
             throw new Error("Telefone inválido");
         }
 
@@ -104,11 +108,11 @@ class Telefone {
         return this.#valor;
     }
 
-    #limpar(telefone) {
+    static #limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
 
-    #validar(telefone) {
+    static #validar(telefone) {
         if (telefone.length !== 11) return false;
         if(/^(\d)\1+$/.test(telefone)) return false;
         return true;
