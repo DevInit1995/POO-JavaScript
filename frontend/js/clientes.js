@@ -283,9 +283,9 @@ class Chassi {
     #valor;
 
     set(chassi) {
-        const limpa = this.#limpar(chassi);
+        const limpa = Chassi.#limpar(chassi);
 
-        if(!this.#validar(limpa)) {
+        if(!Chassi.#validar(limpa)) {
             throw new Error("Chassi inválido");
         }
 
@@ -296,12 +296,12 @@ class Chassi {
         return this.#valor;
     }
 
-    #limpar(chassi) {
+    static #limpar(chassi) {
         return String(chassi).toUpperCase()
         .replace(/[^A-Z0-9]/g, "");
     }
 
-    #validar(chassi) {
+    static #validar(chassi) {
         if(chassi.length !== 17) return false;
         
         return chassi;
