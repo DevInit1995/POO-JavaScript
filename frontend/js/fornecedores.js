@@ -103,9 +103,9 @@ class Telefone {
             throw new Error("Telefone deve ser uma string");
         }
 
-        const limpo = this.#limpar(telefone);
+        const limpo = Telefone.#limpar(telefone);
 
-        if (!this.#validar(limpo)) {
+        if (!Telefone.#validar(limpo)) {
             throw new Error("Telefone inválido");
         }
 
@@ -116,11 +116,11 @@ class Telefone {
         return this.#valor;
     }
 
-    #limpar(telefone) {
+    static #limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
 
-    #validar(telefone) {
+    static #validar(telefone) {
         if (telefone.length !== 11) return false;
         if(/^(\d)\1+$/.test(telefone)) return false;
         return true;
@@ -152,9 +152,9 @@ class Celular {
             throw new Error("Celular deve ser uma string");
         }
 
-        const limpo = this.#limpar(celular);
+        const limpo = Celular.#limpar(celular);
 
-        if(!this.#validar(limpo)) {
+        if(!Celular.#validar(limpo)) {
             throw new Error("Celular inválido");
         }
 
@@ -162,28 +162,28 @@ class Celular {
     }
 
     get() {
-        return this.#formatar();
+        return Celular.#formatar(this.#valor);
     }
 
-    #limpar(celular) {
+    static #limpar(celular) {
         return celular.replace(/\D/g, "");
     }
 
-    #validar(celular) {
+    static #validar(celular) {
         if(celular.length !== 11) return false;
         if(/^(\d)\1+$/.test(celular)) return false;
         return true;
     }
 
-    #formatar() {
-        if(this.#valor.length === 11) {
-            return this.#valor.replace(
+    static #formatar(valor) {
+        if(valor.length === 11) {
+            return valor.replace(
                 /(\d{2}) (\d{5})(\d{4})/,
                 "($1) $2-$3"
             );
         }
 
-        return this.#valor.replace(
+        return valor.replace(
             /(\d{2})(\d{4})(\d{4})/,
             "($1) $2-$3"
         );
