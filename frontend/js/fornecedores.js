@@ -37,9 +37,9 @@ class InscricaoEstadual {
     #valor; 
 
     set(inscricaoEstadual) {
-        const limpo = this.#limpar(inscricaoEstadual);
+        const limpo = InscricaoEstadual.#limpar(inscricaoEstadual);
 
-        if(!this.#validar(limpo)) {
+        if(!InscricaoEstadual.#validar(limpo)) {
             throw new Error("Inscrição Estadual inválido");
         }
 
@@ -50,11 +50,11 @@ class InscricaoEstadual {
         return this.#valor;
     }
     
-    #limpar(inscricaoEstadual) {
+    static #limpar(inscricaoEstadual) {
         return inscricaoEstadual.replace(/\D/g, "");
     }
 
-    #validar(inscricaoEstadual) {
+    static #validar(inscricaoEstadual) {
         if (inscricaoEstadual.length !== 13) return false;
        
         return true; // validação simplificada
