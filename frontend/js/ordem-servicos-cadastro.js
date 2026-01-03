@@ -8,9 +8,9 @@ class CPF {
     #valor; // PRIVADO
 
     set(cpf) {
-        const limpo = this.#limpar(cpf);
+        const limpo = CPF.#limpar(cpf);
 
-        if(!this.#validar(limpo)) {
+        if(!CPF.#validar(limpo)) {
             throw new Error("CPF inválido");
         }
 
@@ -21,11 +21,11 @@ class CPF {
         return this.#valor;
     }
     
-    #limpar(cpf) {
+    static #limpar(cpf) {
         return cpf.replace(/\D/g, "");
     }
 
-    #validar(cpf) {
+    static #validar(cpf) {
         if (cpf.length !== 11) return false;
         if (/^(\d)\1{10}$/.test(cpf)) return false;
         return true; // validação simplificada
