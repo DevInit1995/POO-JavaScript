@@ -377,7 +377,7 @@ class UltimaVisita {
     }
 }
 
-const UltimaVisita = new UltimaVisita();
+const ultimaVisita = new UltimaVisita();
 
 class Clientes {
     constructor() {
@@ -392,8 +392,8 @@ class Clientes {
         this.placa = new Placa();
         this.chassi = new Chassi();
         this.ano = new Ano();
-        this.ano = new DataCadastro();
-        this.ano = new UltimaVisita();
+        this.dataCadastro = new DataCadastro();
+        this.ultimaVisita = new UltimaVisita();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -557,7 +557,7 @@ class Clientes {
             this.dataCadastro.set(dataCadastroDigitada);
 
             const dataUltimaVisitaDigitado = document.getElementById("dataUltimaVisita").value;
-            this.dataCadastro.set(dataUltimaVisitaDigitado);
+            this.ultimaVisita.set(dataUltimaVisitaDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -618,7 +618,7 @@ class Clientes {
             observacoesVeiculo: document.getElementById("observacoes").value,
             dataCadastro: document.getElementById("dataCadastro").value,
             historicoServicos: document.getElementById("historicoServicos").value,
-            dataUltimaVisita: document.getElementById("dataUltimaVisita").value,
+            ultimaVisita: document.getElementById("dataUltimaVisita").value,
             observacoes: document.getElementById("observacoes").value
         };
 
