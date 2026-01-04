@@ -31,7 +31,7 @@ class CNPJ {
     
 }
 
-this.cnpj = new CNPJ();
+const cnpj = new CNPJ();
 
 class InscricaoEstadual {
     #valor; 
@@ -61,7 +61,7 @@ class InscricaoEstadual {
     }
 }
 
-this.inscricaoEstadual = new InscricaoEstadual();
+const inscricaoEstadual = new InscricaoEstadual();
 
 class Cep {
     #valor;
@@ -93,7 +93,7 @@ class Cep {
     } 
 }
 
-this.cep = new Cep();
+const cep = new Cep();
 
 class Telefone {
     #valor;
@@ -141,7 +141,7 @@ class Telefone {
     }
 }
 
-this.telefone = new Telefone();
+const telefone = new Telefone();
 
 class Celular {   
     #valor;
@@ -189,7 +189,7 @@ class Celular {
     }
 }
 
-this.celular = new Celular();
+const celular = new Celular();
 
 class Email {
     #valor;
@@ -218,7 +218,7 @@ class Email {
     }
 }
 
-this.email = new Email();
+const email = new Email();
 
 class Site {
     #valor;
@@ -256,7 +256,7 @@ class Site {
     }
 }
 
-this.site = new Site();
+const site = new Site();
 
 class LimiteCredito {
     #valor;
@@ -284,7 +284,7 @@ class LimiteCredito {
     }
 }
 
-this.limiteCredito = new LimiteCredito();
+const limiteCredito = new LimiteCredito();
 
 class CodigoProduto {
     #valor;
@@ -309,7 +309,7 @@ class CodigoProduto {
 
 }
 
-this.codigoProduto = new CodigoProduto();
+const codigoProduto = new CodigoProduto();
 
 class PrecoUnitario {
     #valor;
@@ -350,7 +350,7 @@ class PrecoUnitario {
     }
 }
 
-this.precoUnitario = new PrecoUnitario();
+const precoUnitario = new PrecoUnitario();
 
 class DataCadastro {
     #valor;
@@ -373,7 +373,7 @@ class DataCadastro {
     }
 }
 
-this.dataCadastro = new DataCadastro();
+const dataCadastro = new DataCadastro();
 
 class Fornecedores {
     constructor() {
