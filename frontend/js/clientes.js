@@ -40,7 +40,7 @@ class RG {
     set(rg) {
         const limpo = RG.#limpar(rg);
 
-        if (limpo.length < 6 || limpo.length > 6) {
+        if (!RG.#validar(limpo)) {
             throw new Error("RG inválido");
         }
 
