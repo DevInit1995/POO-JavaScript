@@ -21,7 +21,7 @@ class PecaSelecionado {
     }
 }
 
-this.pecaSelecionado = new PecaSelecionado();
+const pecaSelecionado = new PecaSelecionado();
 
 class ServicoSelecionado {
     #valor;
@@ -41,7 +41,7 @@ class ServicoSelecionado {
     }
 }
 
-this.servicoSelecionado = new ServicoSelecionado();
+const servicoSelecionado = new ServicoSelecionado();
 
 class Quantidade {
     #valor;
@@ -61,7 +61,7 @@ class Quantidade {
     }
 }
 
-this.quantidade = new Quantidade();
+const quantidade = new Quantidade();
 
 class CodigoInterno {
     #valor;
@@ -81,7 +81,7 @@ class CodigoInterno {
     }
 }
 
-this.codigoInterno = new CodigoInterno();
+const codigoInterno = new CodigoInterno();
 
 class Servicos {
     constructor() {
