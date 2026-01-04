@@ -32,7 +32,7 @@ class CPF {
     }
 }
 
-this.cpf = new CPF;
+const cpf = new CPF;
 
 class Email {
     #valor;
@@ -61,7 +61,7 @@ class Email {
     }
 }
 
-this.email = new Email();
+const email = new Email();
 
 class Telefone {
     #valor;
@@ -109,7 +109,7 @@ class Telefone {
     }
 }
 
-this.telefone = new Telefone();
+const telefone = new Telefone();
 
 class Cep {
     #valor;
@@ -141,7 +141,7 @@ class Cep {
     } 
 }
 
-this.cep = new Cep();
+const cep = new Cep();
 
 class Placa {
     #valor;
@@ -176,7 +176,7 @@ class Placa {
     }
 }
 
-this.placa = new Placa();
+const placa = new Placa();
 
 class Ano {
     #valor;
@@ -199,7 +199,7 @@ class Ano {
     }
 }
 
-this.ano = new Ano();
+const ano = new Ano();
 
 class DataEntrada {
     #valor;
@@ -222,7 +222,7 @@ class DataEntrada {
     }
 }
 
-this.entrada = new DataEntrada();
+const entrada = new DataEntrada();
 
 class DataSaida {
     #valor;
@@ -245,7 +245,7 @@ class DataSaida {
     }
 }
 
-this.entrega = new DataSaida();
+const entrega = new DataSaida();
 
 class LimiteCredito {
     #valor;
@@ -273,7 +273,7 @@ class LimiteCredito {
     }
 }
 
-this.limiteCredito = new LimiteCredito();
+const limiteCredito = new LimiteCredito();
 
 class DataCadastro {
     #valor;
@@ -296,7 +296,7 @@ class DataCadastro {
     }
 }
 
-this.dataCadastro = new DataCadastro();
+const dataCadastro = new DataCadastro();
 
 class PrecoUnitario {
     #valor;
@@ -338,7 +338,7 @@ class PrecoUnitario {
     }
 }
 
-this.precoUnitario = new PrecoUnitario();
+const precoUnitario = new PrecoUnitario();
 
 class OrdemServicosCadastro {
     constructor() {
