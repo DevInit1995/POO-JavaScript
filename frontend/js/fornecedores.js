@@ -113,7 +113,7 @@ class Telefone {
     }
 
     get() {
-        return this.#valor;
+        return Telefone.#formatar(this.#valor);
     }
 
     static #limpar(telefone) {
@@ -126,19 +126,19 @@ class Telefone {
         return true;
     }
 
-    /*#formatar() {
-        if (this.#valor.length === 11) {
-            return this.#valor.replace(
+    static #formatar(valor) {
+        if (valor.length === 11) {
+            return valor.replace(
                 /(\d{2})(\d{5})(\d{4})/,
                 "($1) $2-$3"
             );
         }
 
-        return this.#valor.replace(
+        return valor.replace(
             /(\d{2})(\d{4})(\d{4})/,
             "($1) $2-$3"
         );
-    }*/
+    }
 }
 
 this.telefone = new Telefone();
