@@ -196,7 +196,6 @@ class Servicos {
     }
 
     calcularTotal = () => {
-        //debugger
         const idNumeroOs = parseFloat(document.getElementById("idNumeroOs").value);
         const calcularPeca = parseFloat(document.getElementById("calcularPeca").value);
         const quantidade = parseFloat(document.getElementById("quantidade").value);

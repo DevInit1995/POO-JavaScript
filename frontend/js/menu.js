@@ -4,7 +4,6 @@ class Menu {
         let bannerAtual = 0;
        
         const trocarBanner = () => {
-            //debugger
             bannerAtual = (bannerAtual + 1) % banners.length;
             let imgElement = document.querySelector('.destaque img')
             

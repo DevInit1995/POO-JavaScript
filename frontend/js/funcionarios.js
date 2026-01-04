@@ -5,16 +5,10 @@ const concluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 class Funcionario {
-    constructor(/*id, nomeCompleto, dataNascimento, sexo, cpf, rg, estadoCivil, 
-        estado, cidade, bairro,rua, numero, cep, telefone, email, contatoEmergencia, 
-        cargo, setor, salario, dataAdmissao, cargaHoraria, turno, banco, agencia, 
-        conta, tipoConta, cnh, pis, tituloEleitor, certificadoReservista, 
-        status, dataCadastro, ultimaAtualizacao*/) {
-        
+    constructor() {
         /*this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;*/
         //this.sexo = sexo;
-        //debugger
         this.cpf = this._criarCPF(); //encapsulado;
         this.rg = this._criarRG();
         /*this.estadoCivil = estadoCivil;
@@ -49,7 +43,6 @@ class Funcionario {
     validar = (valor) => valor.trim().length > 0;
 
     validarPrimeiraEtapa = () => {
-        //debugger
         //validação dos campos
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
@@ -428,7 +421,6 @@ class Funcionario {
     }
 
     validarSetimaEtapa = () => {
-        debugger
         //validação dos campos
         const campos = [
             {id: "status", mensagem: "Selecione o status"},
@@ -490,7 +482,6 @@ class Funcionario {
     };
 
     concluir = () => {
-        //debugger;
         const registro = {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             dataNascimento: document.getElementById("dataNascimento").value,

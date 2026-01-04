@@ -147,7 +147,6 @@ class Celular {
     #valor;
 
     set(celular) {
-        //debugger
         if(typeof celular !== "string") {
             throw new Error("Celular deve ser uma string");
         }

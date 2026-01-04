@@ -81,7 +81,7 @@ class Telefone {
     }
 
     get() {
-        return this.#valor;
+        return Telefone.#formatar(this.#valor);
     }
 
     static #limpar(telefone) {
@@ -94,19 +94,19 @@ class Telefone {
         return true;
     }
 
-    /*#formatar() {
-        if (this.#valor.length === 11) {
-            return this.#valor.replace(
+    static #formatar(valor) {
+        if (valor.length === 11) {
+            return valor.replace(
                 /(\d{2})(\d{5})(\d{4})/,
                 "($1) $2-$3"
             );
         }
 
-        return this.#valor.replace(
+        return valor.replace(
             /(\d{2})(\d{4})(\d{4})/,
             "($1) $2-$3"
         );
-    }*/
+    }
 }
 
 this.telefone = new Telefone();
@@ -307,6 +307,7 @@ class PrecoUnitario {
         if(!PrecoUnitario.#validar(limpo)) {
             throw new Error("Preço inválido");
         }
+
         this.#valor = limpo;
     }
 
@@ -437,7 +438,6 @@ class OrdemServicosCadastro {
     }
 
     validarTerceiraEtapa = () => {
-        debugger
         //validação dos campos
         const campos = [
             {id: "identificacao", mensagem: "Preencha o campo Identificação"},
@@ -570,6 +570,9 @@ class OrdemServicosCadastro {
     //LocalStorage
     concluir = () => {
         const registro = {
+            nomeCompleto: document.getElementById("nomeCompleto").value,
+            cpf: this.cpf.get(),
+            email: this.email.get(),
             placa: this.placa.get(),
             marca: document.getElementById("marca").value,
             modelo: document.getElementById("modelo").value,
