@@ -32,7 +32,7 @@ class CPF {
     }
 }
 
-this.cpf = new CPF;
+const cpf = new CPF;
 
 class RG {
     #valor;
@@ -62,7 +62,7 @@ class RG {
     }
 }
 
-this.rg = new RG;
+const rg = new RG;
 
 class DataNascimento {
     #valor;
@@ -85,7 +85,7 @@ class DataNascimento {
     }
 }
 
-this.dataNascimento = new DataNascimento();
+const dataNascimento = new DataNascimento();
 
 class Telefone {
     #valor;
@@ -133,7 +133,7 @@ class Telefone {
     }
 }
 
-this.telefone = new Telefone();
+const telefone = new Telefone();
 
 class Celular {   
     #valor;
@@ -181,7 +181,7 @@ class Celular {
     }
 }
 
-this.celular = new Celular();
+const celular = new Celular();
 
 class Email {
     #valor;
@@ -210,7 +210,7 @@ class Email {
     }
 }
 
-this.email = new Email();
+const email = new Email();
 
 class Cep {
     #valor;
@@ -242,7 +242,7 @@ class Cep {
     } 
 }
 
-this.cep = new Cep();
+const cep = new Cep();
 
 class Placa {
     #valor;
@@ -277,7 +277,7 @@ class Placa {
     }
 }
 
-this.placa = new Placa();
+const placa = new Placa();
 
 class Chassi {
     #valor;
@@ -308,7 +308,7 @@ class Chassi {
     }
 }
 
-this.chassi = new Chassi();
+const chassi = new Chassi();
 
 class Ano {
     #valor;
@@ -331,7 +331,7 @@ class Ano {
     }
 }
 
-this.ano = new Ano();
+const ano = new Ano();
 
 class DataCadastro {
     #valor;
@@ -354,7 +354,7 @@ class DataCadastro {
     }
 }
 
-this.dataCadastro = new DataCadastro();
+const dataCadastro = new DataCadastro();
 
 class UltimaVisita {
     #valor;
@@ -377,7 +377,7 @@ class UltimaVisita {
     }
 }
 
-this.UltimaVisita = new UltimaVisita();
+const UltimaVisita = new UltimaVisita();
 
 class Clientes {
     constructor() {

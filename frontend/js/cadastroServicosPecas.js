@@ -9,5 +9,5 @@ class CadastroServicosPecas {
     }
 }
 
-cadastroServicosPecas = new CadastroServicosPecas();
+const cadastroServicosPecas = new CadastroServicosPecas();
 cadastroServicosPecas.paginaCadastroServicosPecas();
