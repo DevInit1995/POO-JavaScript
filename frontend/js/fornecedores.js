@@ -392,7 +392,7 @@ class Fornecedores {
 
     validar = (valor) => valor.trim().length > 0;
 
-    validarPrimeiraEtapa = () => {
+    validarPrimeiraEtapa() {
         const campos = [
             {id: "razaoSocial", mensagem: "Preencha o campo razão social"},
             {id: "nomeFantasia", mensagem: "Preencha o campo nome fantasia"},
@@ -422,7 +422,7 @@ class Fornecedores {
         }
     }
 
-    validarSegundaEtapa = () => {
+    validarSegundaEtapa() {
         //validação dos campos
         const campos = [
             {id: "estado", mensagem: "Preencha o campo estado "},
@@ -452,7 +452,7 @@ class Fornecedores {
         }
     }
 
-    validarTerceiraEtapa = () => {
+    validarTerceiraEtapa() {
         //validação de campos
         const campos = [
             {id: "telefone", mensagem: "Preencha o campo telefone"},
@@ -488,7 +488,7 @@ class Fornecedores {
         }
     }
 
-    validarQuartaEtapa = () => {
+    validarQuartaEtapa() {
         //validação de campos
         const campos = [
             {id: "formaPagamento", mensagem: "Preencha o campo forma de pagamento"},
@@ -515,7 +515,7 @@ class Fornecedores {
         }
     }
 
-    validarQuintaEtapa = () => {
+    validarQuintaEtapa() {
         //validação de campos
         const campos = [
             {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
@@ -540,7 +540,7 @@ class Fornecedores {
         }
     }
 
-    validarSextaEtapa = () => {
+    validarSextaEtapa() {
         //validação de campos
         const campos = [
             {id: "nomeProduto", mensagem: "Preencha o campo nome do produto"},
@@ -571,7 +571,7 @@ class Fornecedores {
     }
 
     //LocalStorage
-    concluir = () => {
+    concluir() {
         const registro = {
             razaoSocial: document.getElementById("razaoSocial").value,
             nomeFantasia: document.getElementById("nomeFantasia").value,
@@ -619,13 +619,13 @@ class Fornecedores {
         localStorage.setItem("fornecedores", JSON.stringify(tabela));
     }
 
-    proximaEtapa = () => {
+    proximaEtapa() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual++;
         passagem[etapaAtual].classList.add("active");
     }
 
-    etapaAnterior = () => {
+    etapaAnterior() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual--;
         passagem[etapaAtual].classList.add("active");
