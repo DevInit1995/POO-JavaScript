@@ -42,7 +42,7 @@ class Funcionario {
 
     validar = (valor) => valor.trim().length > 0;
 
-    validarPrimeiraEtapa = () => {
+    validarPrimeiraEtapa() {
         //validação dos campos
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
@@ -127,7 +127,7 @@ class Funcionario {
         };
     };
 
-    validarSegundaEtapa = () => {
+    validarSegundaEtapa() {
         //validação dos campos
         const campos = [
             {id: "estado", mensagem: "Preencha o campo estado"},
@@ -186,7 +186,7 @@ class Funcionario {
         };
     };
 
-    validarTerceiraEtapa = () => {
+    validarTerceiraEtapa() {
         //validação dos campos
         const campos = [
             {id: "telefone", mensagem: "Preencha o campo telefone"},
@@ -266,7 +266,7 @@ class Funcionario {
         };
     }
 
-    validarQuartaEtapa = () => {
+    validarQuartaEtapa() {
         //validação dos campos
         const campos = [
             {id: "cargo", mensagem: "Preencha o campo cargo"},
@@ -370,7 +370,7 @@ class Funcionario {
         };
     };
 
-    validarQuintaEtapa = () => {
+    validarQuintaEtapa() {
         //validação dos campos
         const campos = [
             {id: "banco", mensagem: "Preencha o campo banco"},
@@ -395,7 +395,7 @@ class Funcionario {
         this.proximaEtapa();
     }
 
-    validarSextaEtapa = () => {
+    validarSextaEtapa() {
         //validação dos campos
         const campos = [
             {id: "cnh", mensagem: "Preencha o campo cnh"},
@@ -420,7 +420,7 @@ class Funcionario {
         this.proximaEtapa();
     }
 
-    validarSetimaEtapa = () => {
+    validarSetimaEtapa() {
         //validação dos campos
         const campos = [
             {id: "status", mensagem: "Selecione o status"},
@@ -481,7 +481,7 @@ class Funcionario {
         };
     };
 
-    concluir = () => {
+    concluir() {
         const registro = {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             dataNascimento: document.getElementById("dataNascimento").value,
@@ -527,13 +527,13 @@ class Funcionario {
         localStorage.setItem("funcionarios", JSON.stringify(tabela));
     }
     
-    proximaEtapa = () => {
+    proximaEtapa() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual++;
         passagem[etapaAtual].classList.add("active");
     }
 
-    etapaAnterior = () => {
+    etapaAnterior() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual--;
         passagem[etapaAtual].classList.add("active");
