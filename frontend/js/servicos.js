@@ -93,7 +93,7 @@ class Servicos {
 
     validar = (valor) => valor.trim().length > 0;
 
-    validarPrimeiraEtapa = () => {
+    validarPrimeiraEtapa() {
         const campos = [
             {id: "calculoServico", mensagem: "Selecione o serviço"},
             {id: "calcularPeca", mensagem: "Selecione a peça"},
@@ -129,7 +129,7 @@ class Servicos {
         }
     }
 
-    validarSegundaEtapa = () => {
+    validarSegundaEtapa() {
         const campos = [
             {id: "tempoEstimado", mensagem: "Preencha o campo tempo estimado"},
             {id: "precoTotal", mensagem: "Preencha o campo preço da mão de obra"},
@@ -147,7 +147,7 @@ class Servicos {
         this.proximaEtapa();
     }
 
-    validarTerceiraEtapa = () => {
+    validarTerceiraEtapa() {
         const campos = [
             {id: "nomePeca", mensagem: "Preencha o campo nome peça"},
             {id: "marca", mensagem: "Preencha o campo marca"},
@@ -175,13 +175,13 @@ class Servicos {
         }
     }
 
-    proximaEtapa = () => {
+    proximaEtapa() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual++;
         passagem[etapaAtual].classList.add("active");
     }
 
-    etapaAnterior = () => {
+    etapaAnterior() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual--;
         passagem[etapaAtual].classList.add("active");
@@ -195,7 +195,7 @@ class Servicos {
         });
     }
 
-    calcularTotal = () => {
+    calcularTotal() {
         const idNumeroOs = parseFloat(document.getElementById("idNumeroOs").value);
         const calcularPeca = parseFloat(document.getElementById("calcularPeca").value);
         const quantidade = parseFloat(document.getElementById("quantidade").value);
@@ -211,7 +211,7 @@ class Servicos {
         //document.getElementById("precoTotal").innerText = totalGeral;
     }
 
-    concluir = () => {
+    concluir() {
         const registro = {
             idNumeroOs: document.getElementById("idNumeroOs").value,
             calculoServico: document.getElementById("calculoServico").value,
