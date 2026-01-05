@@ -398,7 +398,7 @@ class Clientes {
 
     validar = (valor) => valor.trim().length > 0;
     
-    validarPrimeiraEtapa = () => {
+     validarPrimeiraEtapa() {
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
             {id: "cpf", mensagem: "Preencha o campo CPF"},
@@ -435,7 +435,7 @@ class Clientes {
         }
     }
 
-    validarSegundaEtapa = () => {
+    validarSegundaEtapa() {
         //validação dos campos
         const campos = [
             {id: "telefone", mensagem: "Preencha o campo telefone"},
@@ -467,7 +467,7 @@ class Clientes {
         }
     }
 
-    validarTerceiraEtapa = () => {
+    validarTerceiraEtapa() {
         //validação dos campos
         const campos = [
             {id: "estado", mensagem: "Preencha o campo estado"},
@@ -497,7 +497,7 @@ class Clientes {
         }
     }
 
-    validarQuartaEtapa = () => {
+    validarQuartaEtapa() {
         //validação dos campos
         const campos = [
             {id: "placa", mensagem: "Preencha o campo placa"},
@@ -565,13 +565,13 @@ class Clientes {
         }
     }
 
-    proximaEtapa = () => {
+    proximaEtapa() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual++;
         passagem[etapaAtual].classList.add("active");
     }
 
-    etapaAnterior = () => {
+    etapaAnterior() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual--;
         passagem[etapaAtual].classList.add("active");
@@ -586,7 +586,7 @@ class Clientes {
     }
 
     //LocalStorage
-    concluir = () => {
+    concluir() {
         const registro = {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             cpf: this.cpf.get(),
