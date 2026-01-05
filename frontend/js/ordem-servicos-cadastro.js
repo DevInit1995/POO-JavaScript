@@ -359,7 +359,7 @@ class OrdemServicosCadastro {
 
     validar = (valor) => valor.trim().length > 0;
     
-    validarPrimeiraEtapa = () => {
+    validarPrimeiraEtapa() {
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo Nome Completo"},
             {id: "cpf", mensagem: "Preencha o campo CPF"},
@@ -400,7 +400,7 @@ class OrdemServicosCadastro {
         }
     }
 
-    validarSegundaEtapa = () => {
+    validarSegundaEtapa() {
         //validação dos campos
         const campos = [
             {id: "placa", mensagem: "Preencha o campo Placa"},
@@ -437,7 +437,7 @@ class OrdemServicosCadastro {
         }
     }
 
-    validarTerceiraEtapa = () => {
+    validarTerceiraEtapa() {
         //validação dos campos
         const campos = [
             {id: "identificacao", mensagem: "Preencha o campo Identificação"},
@@ -469,7 +469,7 @@ class OrdemServicosCadastro {
         }
     }
 
-    validarQuartaEtapa = () => {
+    validarQuartaEtapa() {
         //validação dos campos
         const campos = [
             {id: "formaPagamento", mensagem: "Infomre a Forma de Pagamento "},
@@ -496,7 +496,7 @@ class OrdemServicosCadastro {
         }
     }
 
-    validarQuintaEtapa = () => {
+    validarQuintaEtapa() {
         const campos = [
             {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
         ];
@@ -520,7 +520,7 @@ class OrdemServicosCadastro {
         }
     }
 
-    validarSextaEtapa = () => {
+    validarSextaEtapa() {
         const campos = [
             {id: "nomeProduto", mensagem: "Informe o Nome Produto"},
             {id: "marca", mensagem: "Informe a Marca"},
@@ -547,13 +547,13 @@ class OrdemServicosCadastro {
         }
     }
 
-    proximaEtapa = () => {
+    proximaEtapa() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual++;
         passagem[etapaAtual].classList.add("active");
     }
 
-    etapaAnterior = () => {
+    etapaAnterior() {
         passagem[etapaAtual].classList.remove("active");
         etapaAtual--;
         passagem[etapaAtual].classList.add("active");
@@ -568,7 +568,7 @@ class OrdemServicosCadastro {
     }
 
     //LocalStorage
-    concluir = () => {
+    concluir() {
         const registro = {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             cpf: this.cpf.get(),
