@@ -549,7 +549,6 @@ class Funcionario {
 }
 
 const funcionario = new Funcionario();
-window.concluir = () => funcionario.concluir();
 
 avancar.forEach((btn) =>{
     btn.addEventListener("click", () => {
@@ -587,3 +586,5 @@ voltar.forEach(btn => {
         funcionario.etapaAnterior();
     });
 });
+
+window.concluir = () => funcionario.concluir();

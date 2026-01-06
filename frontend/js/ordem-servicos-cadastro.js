@@ -614,6 +614,8 @@ class OrdemServicosCadastro {
     }    
 }
 
+const ordemServicosCadastro = new OrdemServicosCadastro();
+
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
         switch(etapaAtual) {
@@ -648,5 +650,4 @@ voltar.forEach(btn => {
     });
 });
 
-const ordemServicosCadastro = new OrdemServicosCadastro();
 window.concluir = () => ordemServicosCadastro.concluir();

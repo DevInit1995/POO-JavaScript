@@ -535,7 +535,7 @@ class Clientes {
         }
     }
 
-    validarQuintaEtapa = () => {
+    validarQuintaEtapa() {
         const campos = [
             {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
             {id: "historicoServicos", mensagem: "Preencha o campo histórico de serviços"},
@@ -633,6 +633,8 @@ class Clientes {
     }
 }
 
+const clientes = new Clientes();
+
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
         switch(etapaAtual) {
@@ -664,6 +666,5 @@ voltar.forEach(btn => {
     });
 });
 
-const clientes = new Clientes();
 window.concluir = () => clientes.concluir();
 

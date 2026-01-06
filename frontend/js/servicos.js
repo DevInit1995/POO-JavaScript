@@ -245,10 +245,6 @@ class Servicos {
 }
 
 const servicos = new Servicos();
-window.calcularTotal = () => servicos.calcularTotal();
-
-//localStorage
-window.concluir = () => servicos.concluir();
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -274,3 +270,7 @@ voltar.forEach(btn => {
         servicos.etapaAnterior();
     });
 });
+
+//localStorage
+window.concluir = () => servicos.concluir();
+window.calcularTotal = () => servicos.calcularTotal();

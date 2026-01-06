@@ -641,7 +641,6 @@ class Fornecedores {
 }
 
 const fornecedores = new Fornecedores();
-window.concluir = () => fornecedores.concluir();
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -674,5 +673,7 @@ avancar.forEach((btn) => {
 voltar.forEach(btn => {
     btn.addEventListener("click", () => {
         fornecedores.etapaAnterior();
-    })
-})
+    });
+});
+
+window.concluir = () => fornecedores.concluir();
