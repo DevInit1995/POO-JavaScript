@@ -1,6 +1,7 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
+const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -650,4 +651,8 @@ voltar.forEach(btn => {
     });
 });
 
-window.concluir = () => ordemServicosCadastro.concluir();
+document.querySelectorAll(".btnConcluir").forEach(btn => {
+    btn.addEventListener("click", () => {
+        ordemServicosCadastro.concluir();
+    });
+});
