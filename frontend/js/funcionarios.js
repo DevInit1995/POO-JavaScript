@@ -1,6 +1,7 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
+const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 class Funcionario {
@@ -586,4 +587,8 @@ voltar.forEach(btn => {
     });
 });
 
-window.concluir = () => funcionario.concluir();
+document.querySelectorAll(".btnConcluir").forEach(btn => {
+    btn.addEventListener("click", () => {
+        funcionario.concluir();
+    });
+});
