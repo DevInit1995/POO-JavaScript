@@ -1,6 +1,7 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
+//const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -33,6 +34,20 @@ class CPF {
 }
 
 const cpf = new CPF;
+
+//mascara cpf
+function mascaraCPF(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 11) {
+        valor = valor.slice(0, 11);
+    }
+
+    return valor 
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+}
 
 class RG {
     #valor;
@@ -666,5 +681,9 @@ voltar.forEach(btn => {
     });
 });
 
-window.concluir = () => clientes.concluir();
+document.querySelectorAll(".btnConcluir").forEach(btn => {
+    btn.addEventListener("click", () => {
+        clientes.concluir();
+    });
+});
 

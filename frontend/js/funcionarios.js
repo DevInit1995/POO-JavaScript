@@ -1,7 +1,6 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
-const concluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 class Funcionario {
@@ -481,6 +480,26 @@ class Funcionario {
         };
     };
 
+    proximaEtapa() {
+        passagem[etapaAtual].classList.remove("active");
+        etapaAtual++;
+        passagem[etapaAtual].classList.add("active");
+    }
+
+    etapaAnterior() {
+        passagem[etapaAtual].classList.remove("active");
+        etapaAtual--;
+        passagem[etapaAtual].classList.add("active");
+    }
+
+    exibirAlerta(icone, titulo, texto) {
+        Swal.fire ({
+            icon: icone,
+            title: titulo,
+            text: texto,
+        });
+    }  
+
     concluir() {
         const registro = {
             nomeCompleto: document.getElementById("nomeCompleto").value,
@@ -526,26 +545,6 @@ class Funcionario {
         //Salvar novamente no localStorage
         localStorage.setItem("funcionarios", JSON.stringify(tabela));
     }
-    
-    proximaEtapa() {
-        passagem[etapaAtual].classList.remove("active");
-        etapaAtual++;
-        passagem[etapaAtual].classList.add("active");
-    }
-
-    etapaAnterior() {
-        passagem[etapaAtual].classList.remove("active");
-        etapaAtual--;
-        passagem[etapaAtual].classList.add("active");
-    }
-
-    exibirAlerta(icone, titulo, texto) {
-        Swal.fire ({
-            icon: icone,
-            title: titulo,
-            text: texto,
-        });
-    }  
 }
 
 const funcionario = new Funcionario();
