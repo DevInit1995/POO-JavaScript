@@ -1,7 +1,8 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
-//const btnConcluir = document.querySelectorAll(".btnConcluir");
+const btnConcluir = document.querySelectorAll(".btnConcluir");
+const cpfInput = document.getElementById("cpf");
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -35,7 +36,7 @@ class CPF {
 
 const cpf = new CPF;
 
-//mascara cpf
+//máscara cpf
 function mascaraCPF(valor) {
     valor = valor.replace(/\D/g, "");
 
@@ -48,6 +49,10 @@ function mascaraCPF(valor) {
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
 }
+
+cpfInput.addEventListener("input", e => {
+    e.target.value = mascaraCPF(e.target.value);
+});
 
 class RG {
     #valor;

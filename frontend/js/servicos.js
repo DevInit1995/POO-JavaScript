@@ -1,6 +1,8 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
+const btnConcluir = document.querySelectorAll(".btnConcluir");
+
 let etapaAtual = 0;
 
 class PecaSelecionado {
@@ -272,5 +274,10 @@ voltar.forEach(btn => {
 });
 
 //localStorage
-window.concluir = () => servicos.concluir();
+document.querySelectorAll(".btnConcluir").forEach(btn => {
+    btn.addEventListener("click", () => {
+        servicos.concluir();
+    });
+});
+
 window.calcularTotal = () => servicos.calcularTotal();

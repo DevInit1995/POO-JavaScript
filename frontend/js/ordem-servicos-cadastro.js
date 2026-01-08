@@ -281,11 +281,11 @@ class DataCadastro {
     
     set(dataCadastro) {
         if(typeof dataCadastro !== "string") {
-            throw new Error("Ano do carro deve ser texto");
+            throw new Error("Data de cadastro deve ser texto");
         }
 
         if(dataCadastro == "") {
-            throw new Error("Ano do carro inválido")
+            throw new Error("Data de cadastro inválida")
         }
 
         return this.#valor = dataCadastro;
