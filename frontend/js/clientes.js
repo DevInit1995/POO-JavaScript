@@ -3,6 +3,7 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const cpfInput = document.getElementById("cpf");
 const telefoneInput = document.getElementById("telefone");
+const celularInput = document.getElementById("celular");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -222,6 +223,23 @@ class Celular {
 }
 
 const celular = new Celular();
+
+function mascaraCelular(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 11){
+        valor = valor.slice(0, 11);
+    }
+
+    return valor.replace(
+        /(\d{2})(\d{4})(\d{4})/,
+        "($1) $2-$3"
+    );
+}
+
+celularInput.addEventListener("input", e => {
+    e.target.value = mascaraCelular(e.target.value);
+})
 
 class Email {
     #valor;
