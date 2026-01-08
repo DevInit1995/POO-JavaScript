@@ -1,8 +1,9 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
-const btnConcluir = document.querySelectorAll(".btnConcluir");
 const cpfInput = document.getElementById("cpf");
+const telefoneInput = document.getElementById("telefone");
+const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -84,6 +85,8 @@ class RG {
 
 const rg = new RG;
 
+
+
 class DataNascimento {
     #valor;
     
@@ -154,6 +157,23 @@ class Telefone {
 }
 
 const telefone = new Telefone();
+
+function mascaraTelefone(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 11) {
+        valor = valor.slice(0, 11);
+    }
+
+    return valor.replace(
+        /(\d{2})(\d{4})(\d{4})/,
+        "($1) $2-$3"
+    );
+}
+
+telefoneInput.addEventListener("input", e => {
+    e.target.value = mascaraTelefone(e.target.value);
+});
 
 class Celular {   
     #valor;
