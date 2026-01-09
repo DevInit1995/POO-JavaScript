@@ -4,6 +4,8 @@ const voltar = document.querySelectorAll(".btnVoltar");
 const cpfInput = document.getElementById("cpf");
 const telefoneInput = document.getElementById("telefone");
 const celularInput = document.getElementById("celular");
+const inputDataNascimento = document.getElementById("dataNascimento");
+const rgInput = document.getElementById("rg");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -86,7 +88,22 @@ class RG {
 
 const rg = new RG;
 
+function mascaraRG(valor){
+    valor = valor.replace(/\D/g, "");
 
+    if(valor.length > 6){
+        valor = valor.slice(0, 6);
+    }
+
+    return valor 
+        .replace(/(\d{2})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1})$/, "$1-$2");
+}
+
+rgInput.addEventListener("input", e => {
+    e.target.value = mascaraRG(e.target.value);
+});
 
 class DataNascimento {
     #valor;
