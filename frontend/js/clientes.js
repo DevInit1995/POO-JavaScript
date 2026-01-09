@@ -8,6 +8,7 @@ const inputDataNascimento = document.getElementById("dataNascimento");
 const rgInput = document.getElementById("rg");
 const cepInput = document.getElementById("cep");
 const placaInput = document.getElementById("placa");
+const chassiInput = document.getElementById("chassi");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -422,6 +423,18 @@ class Chassi {
 }
 
 const chassi = new Chassi();
+
+function mascaraChassi(valor){
+    return valor 
+        .toUpperCase()
+        .replace(/[IOQ]/g, "")
+        .replace(/[^A-HJ-NPR-Z0-9]/g, "")
+        .slice(0, 17);
+}
+
+chassiInput.addEventListener("input", e => {
+    e.target.value = mascaraChassi(e.target.value);
+});
 
 class Ano {
     #valor;
