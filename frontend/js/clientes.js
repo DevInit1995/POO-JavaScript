@@ -7,6 +7,7 @@ const celularInput = document.getElementById("celular");
 const inputDataNascimento = document.getElementById("dataNascimento");
 const rgInput = document.getElementById("rg");
 const cepInput = document.getElementById("cep");
+const placaInput = document.getElementById("placa");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -368,6 +369,28 @@ class Placa {
 }
 
 const placa = new Placa();
+
+function mascaraPlaca(valor){
+    valor = valor 
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "");
+
+    if(valor.length > 7){
+        valor = valor.slice(0, 7);
+    }
+
+    // Formato Mercosul
+    if (/^[A-Z]{3}\d[A-Z]/.test(valor)) {
+        return valor;
+    }
+
+    // Formato antigo
+    return valor.replace(/^([A-Z]{3})(\d)/, "$1-$2");
+}
+
+placaInput.addEventListener("input", e => {
+    e.target.value = mascaraPlaca(e.target.value);
+});
 
 class Chassi {
     #valor;
