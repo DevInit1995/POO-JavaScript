@@ -113,23 +113,63 @@ class DataNascimento {
     
     set(dataNascimento) {
         if(typeof dataNascimento !== "string") {
-            throw new Error("Data de nacimento deve ser texto");
+            throw new Error("Data de nascimento deve ser texto");
         }
 
-        if(dataNascimento == "") {
-            throw new Error("Data de nascimento inválida")
+        if(!dataNascimento.trim()) {
+            throw new Error("Data de nascimento obrigatória");
         }
 
-        return this.#valor = dataNascimento;
+        const data = new Date(dataNascimento);
+
+        if(isNaN(data.getTime())) {
+            throw new Error("Data de nascimento inválida");
+        }
+
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if(data > hoje) {
+            throw new Error("Data de nasciemnto não pode ser futura");
+        }
+
+        this.#valor = data;
+
+        //return this.#valor = dataNascimento;
     }
 
     get() {
         //se precisar do objeto Date internamente
         return this.#valor;
     }
+
+    formatar(){
+        return this.#valor.toLocaleDateString("pt-BR");
+    }
 }
 
 const dataNascimento = new DataNascimento();
+
+function mascaraDataNascimento(data){
+    data = new Date(); // Ou new Date('2024-01-15T10:00:00');
+
+    // Formato simples: 18/02/2021
+    return data = new Intl.toLocaleDateString('pt-BR').format(data);
+
+    /*// Formato com mês abreviado: 18 de fev. de 2021
+    new Intl.DateTimeFormat('pt-BR', 
+    { day: 'numeric', month: 'short', year: 'numeric' }).
+    format(data);*/
+
+    /*// Formato com mês por extenso: 18 de fevereiro de 2021
+    new Intl.DateTimeFormat('pt-BR', 
+    { day: 'numeric', month: 'long', year: 'numeric' }).
+    format(data);*/
+}
+
+inputDataNascimento.addEventListener("formdata", e => {
+    e.target.value = mascaraDataNascimento(e.target.value);
+});
 
 class Telefone {
     #valor;
