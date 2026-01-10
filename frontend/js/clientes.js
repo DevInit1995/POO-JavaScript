@@ -9,6 +9,7 @@ const rgInput = document.getElementById("rg");
 const cepInput = document.getElementById("cep");
 const placaInput = document.getElementById("placa");
 const chassiInput = document.getElementById("chassi");
+const dataCadastroInput = document.getElementById("dataCadastro");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -507,20 +508,49 @@ class DataCadastro {
             throw new Error("Data de cadastro do carro deve ser texto");
         }
 
-        if(dataCadastro == "") {
-            throw new Error("Data de cadastro do carro inválido")
+        if(!dataCadastro.trim()) {
+            throw new Error("Data de cadastro do carro obrigatória")
         }
 
-        return this.#valor = dataCadastro;
+        const data = new Date(dataCadastro);
+
+        if(isNaN(data.getTime())) {
+            throw new Error("Data de cadastro inválida");
+        };
+
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if(data > hoje){
+            throw new Error("Data de nascimento não pode set futura");
+        }
+
+        this.#valor = data;
+
+        //return this.#valor = dataCadastro;
     }
 
     get() {
         //se precisar do objeto Date internamente
         return this.#valor;
     }
+
+    formatar() {
+        return this.#valor.toLocaleDateString("pt-BR")
+    }
 }
 
 const dataCadastro = new DataCadastro();
+
+function mascaraDataCadastro(data){
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(dataCadastro);
+}
+
+dataCadastroInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataCadastro(e.target.value);
+});
 
 class UltimaVisita {
     #valor;
