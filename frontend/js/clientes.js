@@ -10,6 +10,7 @@ const cepInput = document.getElementById("cep");
 const placaInput = document.getElementById("placa");
 const chassiInput = document.getElementById("chassi");
 const dataCadastroInput = document.getElementById("dataCadastro");
+const dataUltimaVisitaInput = document.getElementById("dataUltimaVisita");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -557,23 +558,50 @@ class UltimaVisita {
     
     set(ultimaVisita) {
         if(typeof ultimaVisita !== "string") {
-            throw new Error("Ano do carro deve ser texto");
+            throw new Error("Data da última visita deve ser texto");
         }
 
-        if(ultimaVisita == "") {
-            throw new Error("Ano do carro inválido")
+        if(!ultimaVisita.trim()) {
+            throw new Error("Data da última visita obrigatória")
         }
 
-        return this.#valor = ultimaVisita;
+        const data = new Date(ultimaVisita);
+
+        if(isNaN(data.getTime())) {
+            throw new Error("Data da última visita inválida");
+        }
+
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if(data > hoje) {
+            throw new Error("Data da última visita não poder futura");
+        }
+
+        this.#valor = data;        
     }
 
     get() {
         //se precisar do objeto Date internamente
         return this.#valor;
     }
+
+    formatar() {
+        return this.#valor.toLocaleDateString("pt-BR");
+    }
 }
 
 const ultimaVisita = new UltimaVisita();
+
+function mascaraDataUltimaVisita(data){
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
+}
+
+dataUltimaVisitaInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataUltimaVisita(e.target.value);
+});
 
 class Clientes {
     constructor() {
@@ -589,7 +617,7 @@ class Clientes {
         this.chassi = new Chassi();
         this.ano = new Ano();
         this.dataCadastro = new DataCadastro();
-        this.ultimaVisita = new UltimaVisita();
+        this.DataUltimaVisita = new UltimaVisita();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -814,7 +842,7 @@ class Clientes {
             observacoesVeiculo: document.getElementById("observacoes").value,
             dataCadastro: document.getElementById("dataCadastro").value,
             historicoServicos: document.getElementById("historicoServicos").value,
-            ultimaVisita: document.getElementById("dataUltimaVisita").value,
+            dataUltimaVisita: document.getElementById("dataUltimaVisita").value,
             observacoes: document.getElementById("observacoes").value
         };
 
