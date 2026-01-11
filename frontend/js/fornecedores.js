@@ -4,7 +4,7 @@ const voltar = document.querySelectorAll(".btnVoltar");
 const cnpjInput = document.getElementById("cnpj");
 const inscricaoEstadualInput = document.getElementById("inscricaoEstadual");
 const cepInput = document.getElementById("cep");
-
+const telefoneInput = document.getElementById("telefone");
 
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
@@ -198,6 +198,23 @@ class Telefone {
 }
 
 const telefone = new Telefone();
+
+function mascaraTelefone(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 11) {
+        valor = valor.slice(0, 11);
+    }
+
+    return valor.replace(
+        /(\d{2})(\d{4})(\d{4})/,
+        "($1) $2-$3"
+    );
+}
+
+telefoneInput.addEventListener("input", e => {
+    e.target.value = mascaraTelefone(e.target.value);
+});
 
 class Celular {   
     #valor;
