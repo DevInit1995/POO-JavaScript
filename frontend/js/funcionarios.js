@@ -2,7 +2,7 @@ const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const cpfInput = document.getElementById("cpf");
-
+const dataNascimentoInput = document.getElementById("dataNascimento");
 
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
@@ -554,21 +554,14 @@ class Funcionario {
 
 const funcionario = new Funcionario();
 
-function mascaraCPF(valor) {
-    valor = valor.replace(/\D/g, "");
+function mascaraDataNascimento(data) {
+    data = new Date();
 
-    if(valor.length > 11) {
-        valor = valor.slice(0, 11);
-    }
-
-    return valor 
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d)/, "$1.$2")
-        .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
 }
 
-cpfInput.addEventListener("input", e => {
-    e.target.value = mascaraCPF(e.target.value);
+dataNascimentoInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataNascimento(e.target.value);
 });
 
 avancar.forEach((btn) =>{
