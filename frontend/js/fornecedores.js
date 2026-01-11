@@ -80,7 +80,7 @@ class InscricaoEstadual {
     }
 
     static #validar(inscricaoEstadual) {
-        if (inscricaoEstadual.length !== 13) return false;
+        if (inscricaoEstadual.length !== 12) return false;
        
         return true; // validação simplificada
     }
