@@ -6,6 +6,8 @@ const inscricaoEstadualInput = document.getElementById("inscricaoEstadual");
 const cepInput = document.getElementById("cep");
 const telefoneInput = document.getElementById("telefone");
 const celularInput = document.getElementById("celular");
+const limiteCreditoInput = document.getElementById("limiteCredito");
+
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -278,7 +280,6 @@ function mascaraCelular(valor) {
 }
 
 celularInput.addEventListener("input", e => {
-    debugger
     e.target.value = mascaraCelular(e.target.value);
 });
 
@@ -353,7 +354,13 @@ class LimiteCredito {
     #valor;
 
     set(limiteCredito) {
-        const valor = Number(limiteCredito);
+        const valor = Number(
+            limiteCredito
+            .replace(/\s/g, "")
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+        );
         
         if(typeof valor !== "number" || isNaN(valor)) {
             throw new Error("Limite de crédito inválido");
@@ -376,6 +383,22 @@ class LimiteCredito {
 }
 
 const limiteCredito = new LimiteCredito();
+
+function mascaraLimiteCredito(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+limiteCreditoInput.addEventListener("input", e => {
+    e.target.value = mascaraLimiteCredito(e.target.value);
+});
 
 class CodigoProduto {
     #valor;
