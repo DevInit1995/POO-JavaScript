@@ -1,6 +1,11 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
+const cnpjInput = document.getElementById("cnpj");
+
+
+
+
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -33,6 +38,24 @@ class CNPJ {
 }
 
 const cnpj = new CNPJ();
+
+function mascaraCNPJ(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 14) {
+        valor = valor.slice(0, 14);
+    }
+
+    return valor 
+        .replace(/^(\d{2})(\d)/, "$1.$2")
+        .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/\.(\d{3})(\d)/, ".$1/$2")
+        .replace(/(\d{4})(\d)/, "$1-$2");
+}
+
+cnpjInput.addEventListener("input", e => {
+    e.target.value = mascaraCNPJ(e.target.value);
+});
 
 class InscricaoEstadual {
     #valor; 
