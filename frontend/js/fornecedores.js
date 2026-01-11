@@ -9,7 +9,7 @@ const celularInput = document.getElementById("celular");
 const limiteCreditoInput = document.getElementById("limiteCredito");
 const codigoProdutoInput = document.getElementById("codigoProduto");
 const precoUnitarioInput = document.getElementById("precoUnitario");
-
+const dataCadastroInput = document.getElementById("dataCadastro");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
@@ -504,6 +504,16 @@ class DataCadastro {
 }
 
 const dataCadastro = new DataCadastro();
+
+function mascaraDataCadastro(valor) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR");
+}
+
+dataCadastroInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataCadastro(e.target.value);
+});
 
 class Fornecedores {
     constructor() {
