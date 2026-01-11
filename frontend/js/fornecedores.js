@@ -5,7 +5,7 @@ const cnpjInput = document.getElementById("cnpj");
 const inscricaoEstadualInput = document.getElementById("inscricaoEstadual");
 const cepInput = document.getElementById("cep");
 const telefoneInput = document.getElementById("telefone");
-
+const celularInput = document.getElementById("celular");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -263,6 +263,24 @@ class Celular {
 }
 
 const celular = new Celular();
+
+function mascaraCelular(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 11) {
+        valor = valor.slice(0, 11);
+    }
+
+    return valor.replace(
+        /(\d{2})(\d{4})(\d{4})/,
+        "($1) $2-$3"
+    );
+}
+
+celularInput.addEventListener("input", e => {
+    debugger
+    e.target.value = mascaraCelular(e.target.value);
+});
 
 class Email {
     #valor;
