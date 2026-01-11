@@ -2,6 +2,7 @@ const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const cnpjInput = document.getElementById("cnpj");
+const inscricaoEstadualInput = document.getElementById("inscricaoEstadual");
 
 
 
@@ -86,6 +87,23 @@ class InscricaoEstadual {
 }
 
 const inscricaoEstadual = new InscricaoEstadual();
+
+function mascaraInscricaoEstadual(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 12) {
+        valor = valor.slice(0, 12);
+    }
+
+    return valor 
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,3})$/, "$1.$2");
+}
+
+inscricaoEstadualInput.addEventListener("input", e => {
+    e.target.value = mascaraInscricaoEstadual(e.target.value);
+});
 
 class Cep {
     #valor;
