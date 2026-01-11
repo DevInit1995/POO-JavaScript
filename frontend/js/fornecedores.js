@@ -7,7 +7,8 @@ const cepInput = document.getElementById("cep");
 const telefoneInput = document.getElementById("telefone");
 const celularInput = document.getElementById("celular");
 const limiteCreditoInput = document.getElementById("limiteCredito");
-
+const codigoProdutoInput = document.getElementById("codigoProduto");
+const precoUnitarioInput = document.getElementById("precoUnitario");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -420,7 +421,6 @@ class CodigoProduto {
     get() {
         return this.#valor;
     }
-
 }
 
 const codigoProduto = new CodigoProduto();
@@ -465,6 +465,22 @@ class PrecoUnitario {
 }
 
 const precoUnitario = new PrecoUnitario();
+
+function mascaraPrecoUnitario(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+precoUnitarioInput.addEventListener("input", e => {
+    e.target.value = mascaraPrecoUnitario(e.target.value);
+});
 
 class DataCadastro {
     #valor;
