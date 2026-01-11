@@ -3,7 +3,7 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const cnpjInput = document.getElementById("cnpj");
 const inscricaoEstadualInput = document.getElementById("inscricaoEstadual");
-
+const cepInput = document.getElementById("cep");
 
 
 
@@ -136,6 +136,20 @@ class Cep {
 }
 
 const cep = new Cep();
+
+function mascaraCep(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 8){
+        valor = valor.slice(0, 8);
+    }
+
+    return valor.replace(/(\d{5})(\d)/, "$1-$2");
+}
+
+cepInput.addEventListener("input", e => {
+    e.target.value = mascaraCep(e.target.value);
+});
 
 class Telefone {
     #valor;

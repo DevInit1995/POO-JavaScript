@@ -301,7 +301,7 @@ function mascaraCelular(valor) {
 
 celularInput.addEventListener("input", e => {
     e.target.value = mascaraCelular(e.target.value);
-})
+});
 
 class Email {
     #valor;
