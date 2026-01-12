@@ -7,6 +7,8 @@ const rgInput = document.getElementById("rg");
 const cepInput = document.getElementById("cep");
 const telefoneInput = document.getElementById("telefone");
 const contatoEmergenciaInput = document.getElementById("contatoEmergencia");
+const salarioInput = document.getElementById("salario");
+const dataAdmissaoInput = document.getElementById("dataAdmissao");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -660,6 +662,16 @@ function mascaraContatoEmergencia(valor) {
 
 contatoEmergenciaInput.addEventListener("input", e => {
     e.target.value = mascaraContatoEmergencia(e.target.value);
+});
+
+function mascaraDataAdmissao(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(dataAdmissao);
+}
+
+dataAdmissaoInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataAdmissao(e.target.value);
 });
 
 avancar.forEach((btn) =>{
