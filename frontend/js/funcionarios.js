@@ -6,7 +6,7 @@ const cpfInput = document.getElementById("cpf");
 const rgInput = document.getElementById("rg");
 const cepInput = document.getElementById("cep");
 const telefoneInput = document.getElementById("telefone");
-
+const contatoEmergenciaInput = document.getElementById("contatoEmergencia");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -636,6 +636,30 @@ function mascaraTelefone(valor) {
 
 telefoneInput.addEventListener("input", e => {
     e.target.value = mascaraTelefone(e.target.value);
+});
+
+function mascaraContatoEmergencia(valor) {
+    valor = valor.replace(/\D/g, "").slice(0, 11);
+
+    if(valor.length === 11) {
+        return valor.replace(
+            /(\d{2})(\d{5})(\d{4})/,
+            "($1) $2-$3"
+        );
+    }
+
+    if(valor.length === 10) {
+        return valor.replace(
+            /(\d{2})(\d{5})(\d{4})/,
+            "($1) $2-$3"
+        );
+    }
+
+    return valor;
+}
+
+contatoEmergenciaInput.addEventListener("input", e => {
+    e.target.value = mascaraContatoEmergencia(e.target.value);
 });
 
 avancar.forEach((btn) =>{
