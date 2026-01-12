@@ -5,7 +5,7 @@ const dataNascimentoInput = document.getElementById("dataNascimento");
 const cpfInput = document.getElementById("cpf");
 const rgInput = document.getElementById("rg");
 const cepInput = document.getElementById("cep");
-
+const telefoneInput = document.getElementById("telefone");
 
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
@@ -613,6 +613,29 @@ function mascaraCep(valor) {
 
 cepInput.addEventListener("input", e => {
     e.target.value = mascaraCep(e.target.value);
+});
+
+function mascaraTelefone(valor) {
+    valor = valor.replace(/\D/g, "").slice(0, 11);
+
+    if(valor.length === 11) {
+        return valor.replace(
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3");
+    }
+
+    if (valor.length === 10) {
+        return valor.replace(
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3"
+        );
+    }
+
+    return valor;
+}
+
+telefoneInput.addEventListener("input", e => {
+    e.target.value = mascaraTelefone(e.target.value);
 });
 
 avancar.forEach((btn) =>{
