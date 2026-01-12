@@ -4,6 +4,9 @@ const voltar = document.querySelectorAll(".btnVoltar");
 const dataNascimentoInput = document.getElementById("dataNascimento");
 const cpfInput = document.getElementById("cpf");
 const rgInput = document.getElementById("rg");
+const cepInput = document.getElementById("cep");
+
+
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -110,7 +113,7 @@ class Funcionario {
 
         const validar = rg => {
             // RG geralmente tem 9 ou 10 dígitos
-            if(rg.length <= 6 || rg.length > 10) return false;
+            if(rg.length < 6 || rg.length > 10) return false;
             // evita números todos iguais (ex: 111111111)
             if(/^(\d)\1+$/.test(rg)) return false;
 
@@ -596,6 +599,20 @@ function mascaraRG(valor) {
 
 rgInput.addEventListener("input", e => {
     e.target.value = mascaraRG(e.target.value);
+});
+
+function mascaraCep(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 8) {
+        valor = valor.slice(0, 8);
+    }
+
+    return valor.replace(/(\d{5})(\d)/, "$1-$2");
+}
+
+cepInput.addEventListener("input", e => {
+    e.target.value = mascaraCep(e.target.value);
 });
 
 avancar.forEach((btn) =>{
