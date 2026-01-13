@@ -10,7 +10,7 @@ const contatoEmergenciaInput = document.getElementById("contatoEmergencia");
 const salarioInput = document.getElementById("salario");
 const dataAdmissaoInput = document.getElementById("dataAdmissao");
 const agenciaInput = document.getElementById("agencia");
-
+const contaInput = document.getElementById("conta");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -688,6 +688,20 @@ function mascaraAgencia(valor) {
 
 agenciaInput.addEventListener("input", e => {
     e.target.value = mascaraAgencia(e.target.value);
+});
+
+function mascaraConta(valor) {
+    valor = valor.replace(/\D/g, "").slice(0, 13);
+
+    if(valor.length > 1) {
+        return valor.replace(/(\d+)(\d)$/, "$1-$2");
+    }
+
+    return valor;
+}
+
+contaInput.addEventListener("input", e => {
+    e.target.value = mascaraConta(e.target.value);
 });
 
 avancar.forEach((btn) =>{
