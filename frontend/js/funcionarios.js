@@ -9,6 +9,8 @@ const telefoneInput = document.getElementById("telefone");
 const contatoEmergenciaInput = document.getElementById("contatoEmergencia");
 const salarioInput = document.getElementById("salario");
 const dataAdmissaoInput = document.getElementById("dataAdmissao");
+const agenciaInput = document.getElementById("agencia");
+
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -672,6 +674,20 @@ function mascaraDataAdmissao(data) {
 
 dataAdmissaoInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataAdmissao(e.target.value);
+});
+
+function mascaraAgencia(valor) {
+    valor = valor.replace(/\D/g, "");
+
+    if(valor.length > 4) {
+        return valor.replace(/(\d{4})(\d)/, "$1-$2");
+    }
+
+    return valor;
+}
+
+agenciaInput.addEventListener("input", e => {
+    e.target.value = mascaraAgencia(e.target.value);
 });
 
 avancar.forEach((btn) =>{
