@@ -285,6 +285,16 @@ class Ano {
 
 const ano = new Ano();
 
+function mascaraDataAno(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
+}
+
+anoInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataAno(e.target.value);
+});
+
 class DataEntrada {
     #valor;
     
@@ -307,6 +317,16 @@ class DataEntrada {
 }
 
 const entrada = new DataEntrada();
+
+function mascaraDataEntrada(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
+}
+
+dataEntradaInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataEntrada(e.target.value);
+});
 
 function mascaraDataAno(data) {
     data = new Date();
