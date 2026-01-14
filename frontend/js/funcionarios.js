@@ -14,7 +14,7 @@ const contaInput = document.getElementById("conta");
 const cnhInput = document.getElementById("cnh");
 const pisInput = document.getElementById("pis");
 const tituloEleitorInput = document.getElementById("tituloEleitor");
-
+const certificadoReservistaInput = document.getElementById("certificadoReservista");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
@@ -739,6 +739,17 @@ function mascaraTituloEleitor(valor) {
 
 tituloEleitorInput.addEventListener("input", e => {
     e.target.value = mascaraTituloEleitor(e.target.value);
+});
+
+function mascaraCertificadoReservista(valor) {
+    return valor
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "")
+        .slice(0, 20);
+}
+
+certificadoReservistaInput.addEventListener("input", e => {
+    e.target.value = mascaraCertificadoReservista(e.target.value);
 });
 
 avancar.forEach((btn) =>{
