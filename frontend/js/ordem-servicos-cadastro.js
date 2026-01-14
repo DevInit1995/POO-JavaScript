@@ -435,10 +435,10 @@ const dataCadastro = new DataCadastro();
 function mascaraDataCadastro(data) {
     data = new Date();
 
-    return data = new Intl.toLocaleDateString("pt-BR");
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
 }
 
-dataCadastroInput.addEventListener("input", e => {
+dataCadastroInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataCadastro(e.target.value);
 });
 
