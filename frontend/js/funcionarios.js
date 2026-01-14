@@ -12,7 +12,7 @@ const dataAdmissaoInput = document.getElementById("dataAdmissao");
 const agenciaInput = document.getElementById("agencia");
 const contaInput = document.getElementById("conta");
 const cnhInput = document.getElementById("cnh");
-
+const pisInput = document.getElementById("pis");
 
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
@@ -715,6 +715,19 @@ function mascaraCnh(valor) {
 
 cnhInput.addEventListener("input", e => {
     e.target.value = mascaraCnh(e.target.value);
+});
+
+function mascaraPis(valor) {
+    valor = valor.replace(/\D/g, "").slice(0, 11);
+
+    return valor 
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{5})(\d)/, "$1.$2")
+        .replace(/(\d{2})(\d)$/, "$1-$2");
+}
+
+pisInput.addEventListener("input", e => {
+    e.target.value = mascaraPis(e.target.value);
 });
 
 avancar.forEach((btn) =>{
