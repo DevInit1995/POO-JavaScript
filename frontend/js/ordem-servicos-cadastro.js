@@ -371,6 +371,16 @@ dataEntregaInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataEntrega(e.target.value);
 });
 
+function mascaraDataConclusao(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(data); 
+}
+
+dataConclusaoInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataConclusao(e.target.value);
+});
+
 class LimiteCredito {
     #valor;
 
