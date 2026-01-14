@@ -308,6 +308,16 @@ class DataEntrada {
 
 const entrada = new DataEntrada();
 
+function mascaraDataAno(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
+}
+
+anoInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataAno(e.target.value);
+});
+
 class DataSaida {
     #valor;
     
