@@ -422,6 +422,16 @@ class DataCadastro {
 
 const dataCadastro = new DataCadastro();
 
+function mascaraDataCadastro(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR");
+}
+
+dataCadastroInput.addEventListener("input", e => {
+    e.target.value = mascaraDataCadastro(e.target.value);
+});
+
 class PrecoUnitario {
     #valor;
 
