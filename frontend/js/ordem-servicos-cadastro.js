@@ -341,6 +341,16 @@ class DataSaida {
 
 const entrega = new DataSaida();
 
+function mascaraDataEntrega(data){
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR").format(data);
+}
+
+dataEntregaInput.addEventListener("formdata", e => {
+    e.target.value = mascaraDataEntrega(e.target.value);
+});
+
 class LimiteCredito {
     #valor;
 
