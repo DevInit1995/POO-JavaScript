@@ -205,6 +205,28 @@ cepInput.addEventListener("input", e => {
     e.target.value = mascaraCep(e.target.value);
 });
 
+function mascaraPlaca(valor) {
+    valor = valor
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "");
+    
+    if(valor.length > 7) {
+        valor = valor.slice(0, 7);
+    }
+
+    // Formato Mercosul
+    if (/^[A-Z]{3}\d[A-Z]/.test(valor)) {
+        return valor;
+    }
+
+    // Formato antigo
+    return valor.replace(/^([A-Z]{3})(\d)/, "$1-$2");
+}
+
+placaInput.addEventListener("input", e => {
+    e.target.value = mascaraPlaca(e.target.value);
+});
+
 class Placa {
     #valor;
 
