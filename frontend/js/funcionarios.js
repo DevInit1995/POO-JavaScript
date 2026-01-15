@@ -319,8 +319,16 @@ class Funcionario {
 
         const limpar = salario => {
             if (typeof salario === "string") {
-                salario = salario.replace(/\./g, "").replace(",", ".");
+                //salario = salario.replace(/\./g, "").replace(",", ".");
+                salario = Number(
+                    salario
+                    .replace(/\s/g, "")
+                    .replace("R$", "")
+                    .replace(/\./g, "")
+                    .replace(",", ".")
+                );
             }
+            
             return Number(salario);
         };
 
@@ -333,6 +341,7 @@ class Funcionario {
 
         return {
             set(salario) {
+                debugger
                 const limpo = limpar(salario);
                 if (!validar(limpo)) {
                     throw new Error("Salário inválido");
@@ -668,6 +677,22 @@ function mascaraContatoEmergencia(valor) {
 
 contatoEmergenciaInput.addEventListener("input", e => {
     e.target.value = mascaraContatoEmergencia(e.target.value);
+});
+
+function mascaraSalario(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+salarioInput.addEventListener("input", e => {
+    e.target.value = mascaraSalario(e.target.value);
 });
 
 function mascaraDataAdmissao(data) {
