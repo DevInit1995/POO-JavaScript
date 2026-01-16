@@ -1,6 +1,10 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
+
+
+
+
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
 let etapaAtual = 0;
@@ -85,12 +89,55 @@ class CodigoInterno {
 
 const codigoInterno = new CodigoInterno();
 
+class PrecoMaoObra {
+    #valor;
+
+    set(precoMaoObra) {
+        const limpo = PrecoMaoObra.#limpar(precoMaoObra);
+
+        if(!PrecoMaoObra.#validar(limpo)) {
+            throw new Error("Preço inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    static #limpar(precoMaoObra) {
+        if(typeof precoMaoObra === "string") {
+            precoMaoObra = precoMaoObra.replace(/\./g, "").replace(",", ".");
+        }
+
+        return Number(precoMaoObra);
+    };
+
+    static #validar(precoMaoObra) {
+        if (isNaN(precoMaoObra)) return false;
+        if (precoMaoObra <= 0) return false;
+        if (precoMaoObra > 1_000_000) return false;
+
+        return true;
+    };
+
+    #formatar(precoMaoObra) {
+        return precoMaoObra.toLocaleString("pt-BR",
+            {style: "currency",
+                currency: "BRL"});
+    }
+}
+
+const precoMaoObra = new PrecoMaoObra();
+
 class Servicos {
     constructor() {
         this.quantidade = new Quantidade();
         this.codigoInterno = new CodigoInterno();
         this.servicoSelecionado = new ServicoSelecionado();
         this.pecaSelecionado = new PecaSelecionado();
+        this.precoMaoObra = new PrecoMaoObra();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -169,7 +216,7 @@ class Servicos {
 
         try {
             const codigoInternoDigitado = document.getElementById("codigoInterno").value;
-            this.condigoInterno.set(codigoInternoDigitado);
+            this.codigoInterno.set(codigoInternoDigitado);
 
             this.proximaEtapa();
         } catch (e) {
