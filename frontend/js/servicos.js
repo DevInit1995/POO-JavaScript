@@ -1,7 +1,7 @@
 const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
-
+const precoMaoObraInput = document.getElementById("precoTotal");
 
 
 
@@ -95,6 +95,13 @@ class PrecoMaoObra {
     set(precoMaoObra) {
         const limpo = PrecoMaoObra.#limpar(precoMaoObra);
 
+        limpo = Number(
+            precoMaoObra
+            .replace(/\s/g, "")
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+        );
         if(!PrecoMaoObra.#validar(limpo)) {
             throw new Error("Preço inválido");
         }
@@ -130,6 +137,22 @@ class PrecoMaoObra {
 }
 
 const precoMaoObra = new PrecoMaoObra();
+
+function mascaraPrecoMaoObra(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+precoMaoObraInput.addEventListener("input", e => {
+    e.target.value = mascaraPrecoMaoObra(e.target.value);
+});
 
 class Servicos {
     constructor() {
