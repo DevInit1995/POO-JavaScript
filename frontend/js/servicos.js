@@ -2,7 +2,7 @@ const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const precoMaoObraInput = document.getElementById("precoTotal");
-
+const codigoInternoInput = document.getElementById("codigoInterno");
 
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
@@ -88,6 +88,23 @@ class CodigoInterno {
 }
 
 const codigoInterno = new CodigoInterno();
+
+function mascaraCodigoInterno(valor) {
+    valor = valor
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "")
+        .slice(0, 10);
+
+    if(valor.length > 3) {
+        return valor.replace(/([A-Z]{3})(\d+)/, "$1-$2");
+    }
+
+    return valor;
+}
+
+codigoInternoInput.addEventListener("input", e => {
+    e.target.value = mascaraCodigoInterno(e.target.value);
+});
 
 class PrecoMaoObra {
     #valor;
