@@ -3,7 +3,7 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const precoMaoObraInput = document.getElementById("precoTotal");
 const codigoInternoInput = document.getElementById("codigoInterno");
-
+const precoUnitarioInput = document.getElementById("precoUnitario");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
@@ -171,6 +171,56 @@ precoMaoObraInput.addEventListener("input", e => {
     e.target.value = mascaraPrecoMaoObra(e.target.value);
 });
 
+class PrecoUnitario {
+    #valor;
+
+    set(precoUnitario) {
+        const limpo = PrecoUnitario.#limpar(precoUnitario);
+
+        limpo = Number(
+            precoUnitario
+            .replace(/\s/g, "")
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+        );
+
+        if(!PrecoUnitario.#validar(limpo)) {
+            throw new Error("Preço inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    static #limpar(precoUnitario) {
+        if(typeof precoUnitario === "string") {
+            precoUnitario = precoUnitario.replace(/\./g, "").replace(",", ".");
+        }
+
+        return Number(precoUnitario);
+    };
+
+    static #validar(precoUnitario) {
+        if (isNaN(precoUnitario)) return false;
+        if (precoUnitario <= 0) return false;
+        if (precoUnitario > 1_000_000) return false;
+
+        return true;
+    };
+
+    #formatar(precoUnitario) {
+        return precoUnitario.toLocaleString("pt-BR",
+            {style: "currency",
+                currency: "BRL"});
+    }
+}
+
+const precoUnitario = new PrecoUnitario();
+
 class Servicos {
     constructor() {
         this.quantidade = new Quantidade();
@@ -178,6 +228,7 @@ class Servicos {
         this.servicoSelecionado = new ServicoSelecionado();
         this.pecaSelecionado = new PecaSelecionado();
         this.precoMaoObra = new PrecoMaoObra();
+        this.precoUnitario = new PrecoUnitario();
     }
 
     validar = (valor) => valor.trim().length > 0;
