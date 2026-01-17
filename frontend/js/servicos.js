@@ -386,6 +386,22 @@ class Servicos {
 
 const servicos = new Servicos();
 
+function mascaraPrecoUnitario(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency", 
+        currency: "BRL", 
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+precoUnitarioInput.addEventListener("input", e => {
+    e.target.value = mascaraPrecoUnitario(e.target.value);
+});
+
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
         switch(etapaAtual) {
