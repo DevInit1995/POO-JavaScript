@@ -75,8 +75,8 @@ class CodigoInterno {
     set(codigoInterno) {
         const limpo = codigoInterno.trim().toUpperCase();
 
-        if(!/^[A-Z]{3}\d{4}$/.test(limpo)) {
-            throw new Error("Código interno inválido");
+        if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{1}$/.test(limpo)) {
+            throw new Error("Código interno inválido (formato: XXX-XXX-XXX-XX)");
         }
 
         this.#valor = limpo;
@@ -93,7 +93,8 @@ function mascaraCodigoInterno(valor) {
     valor = valor
         .toUpperCase()
         .replace(/[^A-Z0-9]/g, "")
-        .slice(0, 10);
+        .slice(0, 11)
+        .replace(/^(.{3})(.{3})(.{3})(.{1})$/, "$1-$2-$3-$4");
 
     if(valor.length > 3) {
         return valor.replace(/([A-Z]{3})(\d+)/, "$1-$2");

@@ -622,7 +622,7 @@ class Clientes {
 
     validar = (valor) => valor.trim().length > 0;
     
-     validarPrimeiraEtapa() {
+    validarPrimeiraEtapa() {
         const campos = [
             {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
             {id: "cpf", mensagem: "Preencha o campo CPF"},
