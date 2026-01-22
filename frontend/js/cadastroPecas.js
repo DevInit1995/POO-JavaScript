@@ -4,6 +4,7 @@ const voltar = document.querySelectorAll(".btnVoltar");
 const codigoInternoInput = document.getElementById("codigoInterno");
 const precoCustoInput = document.getElementById("precoCusto");
 const precoVendaInput = document.getElementById("precoVenda");
+const codigoFabricanteInput = document.getElementById("codigoFabricante");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
@@ -210,6 +211,24 @@ class CodigoFabricante {
 
 const codigoFabricante = new CodigoFabricante();
 
+function mascaraCodigoFabricante(valor) {
+    valor = valor
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "")
+        .slice(0, 11)
+        .replace(/^(.{3})(.{3})(.{3})(.{1})$/, "$1-$2-$3-$4");
+
+    if(valor.length > 3) {
+        return valor.replace(/([A-Z]{3})(\d+)/, "$1-$2");
+    }
+
+    return valor;
+}
+
+codigoFabricanteInput.addEventListener("input", e => {
+    e.target.value = mascaraCodigoFabricante(e.target.value);
+});
+
 class CadastroPecas {
     constructor() {
         this.codigoInterno = new CodigoInterno();
@@ -291,20 +310,20 @@ class CadastroPecas {
         }
 
         try {
-            let unidadeMedidaDigitado = document.getElementById("unidadeMedida").value;
+            /*const unidadeMedidaDigitado = document.getElementById("unidadeMedida").value;
             this.unidadeMedida.set(unidadeMedidaDigitado);
            
-            let estoqueMinimoDigitado = document.getElementById("estoqueMinimo").value;
+            const estoqueMinimoDigitado = document.getElementById("estoqueMinimo").value;
             this.estoqueMinimo.set(estoqueMinimoDigitado);
 
-            let localizacaoEstoqueDigitado = document.getElementById("localizacaoEstoque").value;
-            this.localizacaoEstoque.set(localizacaoEstoqueDigitado);
+            const localizacaoEstoqueDigitado = document.getElementById("localizacaoEstoque").value;
+            this.localizacaoEstoque.set(localizacaoEstoqueDigitado);*/
 
-            let codigoFabricanteDigitado = document.getElementById("codigoFabricante").value;
+            const codigoFabricanteDigitado = document.getElementById("codigoFabricante").value;
             this.codigoFabricante.set(codigoFabricanteDigitado);
 
-            let aplicacaoDigitado = document.getElementById("aplicacao").value;
-            this.aplicacao.set(aplicacaoDigitado);
+            /*const aplicacaoDigitado = document.getElementById("aplicacao").value;
+            this.aplicacao.set(aplicacaoDigitado);*/
 
             this.proximaEtapa();
         } catch (e) {
