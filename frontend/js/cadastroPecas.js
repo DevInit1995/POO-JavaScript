@@ -2,6 +2,7 @@ const passagem = document.querySelectorAll(".form-step");
 const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const codigoInternoInput = document.getElementById("codigoInterno");
+const precoCustoInput = document.getElementById("precoCusto");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
@@ -106,6 +107,22 @@ class PrecoCusto {
 }
 
 const precoCusto = new PrecoCusto();
+
+function mascaraPrecoCusto(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+precoCustoInput.addEventListener("input", e => {
+    e.target.value = mascaraPrecoCusto(e.target.value);
+});
 
 class PrecoVenda {
     #valor;
