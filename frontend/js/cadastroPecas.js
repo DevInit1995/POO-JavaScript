@@ -190,12 +190,33 @@ precoVendaInput.addEventListener("input", e => {
     e.target.value = mascaraPrecoCusto(e.target.value);
 });
 
+class CodigoFabricante {
+    #valor;
+
+    set(codigoFabricante) {
+        const limpo = codigoFabricante.trim().toUpperCase();
+
+        if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{1}$/.test(limpo)) {
+            throw new Error("Código interno inválido (formato: XXX-XXX-XXX-XX)");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+const codigoFabricante = new CodigoFabricante();
+
 class CadastroPecas {
     constructor() {
         this.codigoInterno = new CodigoInterno();
         this.quantidadeEstoque = new Quantidade();
         this.precoCusto = new PrecoCusto();
         this.precoVenda = new PrecoVenda();
+        this.codigoFabricante = new CodigoFabricante();
     }
 
     validar = (valor) => valor.trim().length > 0;
