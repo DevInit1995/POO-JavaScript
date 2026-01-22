@@ -3,6 +3,7 @@ const avancar = document.querySelectorAll(".btnAvancar");
 const voltar = document.querySelectorAll(".btnVoltar");
 const codigoInternoInput = document.getElementById("codigoInterno");
 const precoCustoInput = document.getElementById("precoCusto");
+const precoVendaInput = document.getElementById("precoVenda");
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
@@ -165,6 +166,22 @@ class PrecoVenda {
 }
 
 const precoVenda = new PrecoVenda();
+
+function mascaraPrecoVenda(valor) {
+    valor = Number(valor.replace(/\D/g, "")) / 100;
+
+    const formatador = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        maximumFractionDigits: 2,
+    });
+
+    return valor = formatador.format(valor);
+}
+
+precoVendaInput.addEventListener("input", e => {
+    e.target.value = mascaraPrecoCusto(e.target.value);
+});
 
 class CadastroPecas {
     constructor() {
