@@ -74,7 +74,7 @@ class PrecoCusto {
         const limpo = PrecoCusto.#limpar(precoCusto);
 
         if(!PrecoCusto.#validar(limpo)) {
-            throw new Error("Preço inválido");
+            throw new Error("Preço custo inválido");
         }
 
         this.#valor = limpo;
@@ -84,24 +84,28 @@ class PrecoCusto {
         return this.#valor;
     }
 
-    static #limpar(precoCusto) {
-        if(typeof precoCusto === "string") {
-            precoCusto = precoCusto.replace(/\./g, "").replace(",", ".");
+    static #limpar(valor) {
+        if (typeof valor === "string") {
+            valor = valor
+                .replace(/\s/g, "")
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".");
         }
 
-        return Number(precoCusto);
-    };
+        return Number(valor);
+    }
 
     static #validar(precoCusto) {
-        if(isNaN(precoCusto)) return false;
-        if(precoCusto <= 0) return false;
-        if(precoCusto > 1_000_000) return false;
+        if (isNaN(precoCusto)) return false;
+        if (precoCusto <= 0) return false;
+        if (precoCusto > 1_000_000) return false;
 
         return true;
     };
 
     #formatar(precoCusto) {
-        return precoCusto.toLocaleString("pt-BR", 
+        return precoCusto.toLocaleString("pt-BR",
             {style: "currency",
                 currency: "BRL"});
     }
@@ -132,7 +136,7 @@ class PrecoVenda {
         const limpo = PrecoVenda.#limpar(precoVenda);
 
         if(!PrecoVenda.#validar(limpo)) {
-            throw new Error("Preço inválido");
+            throw new Error("Preço de venda inválido");
         }
 
         this.#valor = limpo;
@@ -142,23 +146,26 @@ class PrecoVenda {
         return this.#valor;
     }
 
-    static #limpar(precoVenda) {
-        if(typeof precoVenda === "string") {
-            precoVenda = precoVenda.replace(/\./g, "").replace(",", ".");
+    static #limpar(valor) {
+        if (typeof valor === "string") {
+            valor = valor
+                .replace(/\s/g, "")
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".");
         }
+        return Number(valor);
+    }
 
-        return Number(precoVenda);
-    };
-
-    static #validar(precoVenda) {
-        if(isNaN(precoVenda)) return false;
-        if(precoVenda <= 0) return false;
-        if(precoVenda > 1_000_000) return false;
+    static #validar(valor) {
+        if(isNaN(valor)) return false;
+        if(valor <= 0) return false;
+        if(valor > 1_000_000) return false;
 
         return true;
     };
 
-    #formatar(precoVenda) {
+    #formatar() {
         return precoVenda.toLocaleString("pt-BR", 
             {style: "currency",
                 currency: "BRL"});
