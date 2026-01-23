@@ -237,11 +237,11 @@ class DataCadastro {
 
     set(dataCadastro) {
         if(typeof dataCadastro !== "string"){
-            throw new Error("Data de cadastro do fornecedor deve ser texto");
+            throw new Error("Data de cadastro deve ser texto");
         }
 
         if(dataCadastro == "") {
-            throw new Error("Data de cadastro do fornecedor inválido");
+            throw new Error("Data de cadastro inválido");
         }
 
         return this.#valor = dataCadastro;
@@ -264,6 +264,38 @@ dataCadastroInput.addEventListener("dataform", e => {
     e.target.value = mascaraDataCadastro(e.target.value);
 });
 
+class UltimaAtualizacao {
+    #valor;
+
+    set(ultimaAtualizacao) {
+        if(typeof ultimaAtualizacao !== "string") {
+            throw new Error("Data de cadastro deve ser texto");
+        }
+
+        if(ultimaAtualizacao == "") {
+            throw new Error("Data de cadastro inválido");
+        }
+
+        return this.#valor = ultimaAtualizacao;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+const ultimaAtualizacao = new UltimaAtualizacao();
+
+function mascaraUltimaAtualizacao(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR");
+}
+
+ultimaAtualizacaoInput.addEventListener("dataform", e => {
+    e.target.value = mascaraUltimaAtualizacao(e.target.value);
+});
+
 class CadastroPecas {
     constructor() {
         this.codigoInterno = new CodigoInterno();
@@ -272,7 +304,7 @@ class CadastroPecas {
         this.precoVenda = new PrecoVenda();
         this.codigoFabricante = new CodigoFabricante();
         this.dataCadastro = new DataCadastro();
-        
+        this.ultimaAtualizacao = new UltimaAtualizacao();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -326,13 +358,13 @@ class CadastroPecas {
             {id: "aplicacao", mensagem: "Preencha o campo aplicação"},
         ]
 
-        for(let campo of campos) {
+        /*for(let campo of campos) {
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)) {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         try {
             const codigoFabricanteDigitado = document.getElementById("codigoFabricante").value;
