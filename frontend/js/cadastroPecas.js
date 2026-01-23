@@ -5,6 +5,9 @@ const codigoInternoInput = document.getElementById("codigoInterno");
 const precoCustoInput = document.getElementById("precoCusto");
 const precoVendaInput = document.getElementById("precoVenda");
 const codigoFabricanteInput = document.getElementById("codigoFabricante");
+const dataCadastroInput = document.getElementById("dataCadastro");
+const ultimaAtualizacaoInput = document.getElementById("ultimaAtualizacao");
+
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
@@ -229,6 +232,38 @@ codigoFabricanteInput.addEventListener("input", e => {
     e.target.value = mascaraCodigoFabricante(e.target.value);
 });
 
+class DataCadastro {
+    #valor;
+
+    set(dataCadastro) {
+        if(typeof dataCadastro !== "string"){
+            throw new Error("Data de cadastro do fornecedor deve ser texto");
+        }
+
+        if(dataCadastro == "") {
+            throw new Error("Data de cadastro do fornecedor inválido");
+        }
+
+        return this.#valor = dataCadastro;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+const dataCadastro = new DataCadastro();
+
+function mascaraDataCadastro(data) {
+    data = new Date();
+
+    return data = new Intl.toLocaleDateString("pt-BR");
+}
+
+dataCadastroInput.addEventListener("dataform", e => {
+    e.target.value = mascaraDataCadastro(e.target.value);
+});
+
 class CadastroPecas {
     constructor() {
         this.codigoInterno = new CodigoInterno();
@@ -236,6 +271,8 @@ class CadastroPecas {
         this.precoCusto = new PrecoCusto();
         this.precoVenda = new PrecoVenda();
         this.codigoFabricante = new CodigoFabricante();
+        this.dataCadastro = new DataCadastro();
+        
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -262,17 +299,8 @@ class CadastroPecas {
         }*/
 
         try {
-            /*const nomeProdutoDigitado = document.getElementById("nomeProduto").value;
-            this.nomeProduto.set(nomeProdutoDigitado);*/
-
             const codigoInternoDigitado = document.getElementById("codigoInterno").value;
             this.codigoInterno.set(codigoInternoDigitado);
-
-            /*const categoriaDigitado = document.getElementById("categoria").value;
-            this.categoria.set(categoriaDigitado);*/
-
-            /*const marcaDigitado = document.getElementById("marca").value;
-            this.marca.set(marcaDigitado);*/
 
             const quantidadeEstoqueDigitado = document.getElementById("quantidadeEstoque").value;
             this.quantidadeEstoque.set(quantidadeEstoqueDigitado);
@@ -282,9 +310,6 @@ class CadastroPecas {
 
             const precoVendaDigitado = document.getElementById("precoVenda").value;
             this.precoVenda.set(precoVendaDigitado);
-
-            /*const fornecedorDigitado = document.getElementById("fornecedor").value;
-            this.fornecedor.set(fornecedorDigitado);*/
 
             this.proximaEtapa();
         } catch (e) {
@@ -310,20 +335,8 @@ class CadastroPecas {
         }
 
         try {
-            /*const unidadeMedidaDigitado = document.getElementById("unidadeMedida").value;
-            this.unidadeMedida.set(unidadeMedidaDigitado);
-           
-            const estoqueMinimoDigitado = document.getElementById("estoqueMinimo").value;
-            this.estoqueMinimo.set(estoqueMinimoDigitado);
-
-            const localizacaoEstoqueDigitado = document.getElementById("localizacaoEstoque").value;
-            this.localizacaoEstoque.set(localizacaoEstoqueDigitado);*/
-
             const codigoFabricanteDigitado = document.getElementById("codigoFabricante").value;
             this.codigoFabricante.set(codigoFabricanteDigitado);
-
-            /*const aplicacaoDigitado = document.getElementById("aplicacao").value;
-            this.aplicacao.set(aplicacaoDigitado);*/
 
             this.proximaEtapa();
         } catch (e) {
@@ -340,13 +353,13 @@ class CadastroPecas {
             {id: "pesoVolume", mensagem: "Preencha o campo peso volume"},
         ]
 
-        for(let campo of campos) {
+        /*for(let campo of campos) {
             const valor = document.getElementById(campo.id).value;
             if(!this.validar(valor)) {
                 this.exibirAlerta("warning", "Campo obrigatório", campo.mensagem);
                 return false;
             }
-        }
+        }*/
 
         try {
             const dataCadastroDigitado = document.getElementById("dataCadastro").value;
@@ -355,14 +368,11 @@ class CadastroPecas {
             const ultimaAtualizacaoDigitado = document.getElementById("ultimaAtualizacao").value;
             this.ultimaAtualizacao.set(ultimaAtualizacaoDigitado);
 
-            const codigoBarrasDigitado = document.getElementById("codigoBarras").value;
+            /*const codigoBarrasDigitado = document.getElementById("codigoBarras").value;
             this.codigoBarras.set(codigoBarrasDigitado);
 
-            const garantiaDigitado = document.getElementById("garantia").value;
-            this.garantia.set(garantiaDigitado);
-
             const pesoVolumeDigitado = document.getElementById("pesoVolume").value;
-            this.pesoVolume.set(pesoVolumeDigitado);
+            this.pesoVolume.set(pesoVolumeDigitado);*/
             
             this.proximaEtapa();
         } catch (e) {
