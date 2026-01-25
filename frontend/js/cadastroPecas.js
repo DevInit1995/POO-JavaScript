@@ -7,6 +7,7 @@ const precoVendaInput = document.getElementById("precoVenda");
 const codigoFabricanteInput = document.getElementById("codigoFabricante");
 const dataCadastroInput = document.getElementById("dataCadastro");
 const ultimaAtualizacaoInput = document.getElementById("ultimaAtualizacao");
+const codigoBarrasInput = document.getElementById("codigoBarras");
 
 
 const btnConcluir = document.querySelectorAll(".btnConcluir");
@@ -17,10 +18,10 @@ class CodigoInterno {
     #valor;
 
     set(codigoInterno) {
-        const limpo = codigoInterno.trim().toUpperCase();
-
-        if(!/^[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{1}$/.test(limpo)) {
-            throw new Error("Código interno inválido (formato: XXX-XXX-XXX-XX)");
+        const limpo = CodigoInterno.#limpar(codigoInterno);
+        
+        if(!CodigoInterno.#validar(limpo)) {
+            throw new Error("Código interno inválido");
         }
 
         this.#valor = limpo;
@@ -28,6 +29,24 @@ class CodigoInterno {
 
     get() {
         return this.#valor;
+    }
+
+    formatado() {
+        return this.#valor.replace(/([A-Z0-9]{3})([A-Z0-9]{3})([A-Z0-9]{3})([A-Z0-9]{1})/,
+            "$1-$2-$3-$4");
+    }
+
+    static #limpar(codigoInterno) {
+        //codigoInterno.trim().toUpperCase();
+        return codigoInterno.trim()
+            .toUpperCase()
+            .replace(/[^A-Z0-9]/g, ""); //mantém letras e números
+    }
+
+    static #validar(codigoInterno) {
+        if(codigoInterno.length !== 10) return false;
+
+        return /^[A-Z0-9]{10}$/.test(codigoInterno);
     }
 }
 
@@ -296,6 +315,26 @@ ultimaAtualizacaoInput.addEventListener("dataform", e => {
     e.target.value = mascaraUltimaAtualizacao(e.target.value);
 });
 
+class CodigoBarras {
+    #valor;
+
+    set(codigoBarras) {
+        const limpo = codigoBarras.replace(/\D/g, "");
+
+        if(limpo.length !== 13) {
+            throw new Error("Código interno inválido (formato: 0000000000000)");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+}
+
+const codigoBarras = new CodigoBarras();
+
 class CadastroPecas {
     constructor() {
         this.codigoInterno = new CodigoInterno();
@@ -305,6 +344,7 @@ class CadastroPecas {
         this.codigoFabricante = new CodigoFabricante();
         this.dataCadastro = new DataCadastro();
         this.ultimaAtualizacao = new UltimaAtualizacao();
+        this.codigoBarras = new CodigoBarras();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -399,11 +439,11 @@ class CadastroPecas {
            
             const ultimaAtualizacaoDigitado = document.getElementById("ultimaAtualizacao").value;
             this.ultimaAtualizacao.set(ultimaAtualizacaoDigitado);
-
-            /*const codigoBarrasDigitado = document.getElementById("codigoBarras").value;
+            
+            const codigoBarrasDigitado = document.getElementById("codigoBarras").value;
             this.codigoBarras.set(codigoBarrasDigitado);
 
-            const pesoVolumeDigitado = document.getElementById("pesoVolume").value;
+            /*const pesoVolumeDigitado = document.getElementById("pesoVolume").value;
             this.pesoVolume.set(pesoVolumeDigitado);*/
             
             this.proximaEtapa();

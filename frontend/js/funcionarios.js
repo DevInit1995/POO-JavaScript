@@ -341,7 +341,6 @@ class Funcionario {
 
         return {
             set(salario) {
-                debugger
                 const limpo = limpar(salario);
                 if (!validar(limpo)) {
                     throw new Error("Salário inválido");
