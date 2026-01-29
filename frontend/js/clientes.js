@@ -15,6 +15,33 @@ const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
+
+class Id {
+    #valor;
+
+    constructor(valor = crypto.randomUUID()) {
+        if(!Id.#validar(valor)) {
+            throw new Error("Id inválido");
+        }
+
+        this.#valor = valor;
+        Object.freeze(this);
+    }
+
+    get valor() {
+        return this.#valor;
+    }
+
+    static #validar(valor) {
+        return typeof valor === "string" &&
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+               .test(valor);
+    } 
+}
+
+const id = new Id();
+document.getElementById("id").value = id.valor;
+
 class CPF {
     #valor; // PRIVADO
 
@@ -606,6 +633,7 @@ dataUltimaVisitaInput.addEventListener("formdata", e => {
 class Clientes {
     constructor() {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
+        this.id = new Id();
         this.cpf = new CPF();
         this.rg = new RG();
         this.dataNascimento = new DataNascimento();
@@ -812,6 +840,7 @@ class Clientes {
     //LocalStorage
     concluir() {
         const registro = {
+            id: document.getElementById("id").value,
             nomeCompleto: document.getElementById("nomeCompleto").value,
             cpf: this.cpf.get(),
             rg: this.rg.get(),

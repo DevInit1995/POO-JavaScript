@@ -396,9 +396,6 @@ class CadastroPecas {
         }*/
 
         try {
-            /*const idGerado = document.getElementById("id").value;
-            this.id.set(idGerado);*/
-
             const codigoInternoDigitado = document.getElementById("codigoInterno").value;
             this.codigoInterno.set(codigoInternoDigitado);
 
