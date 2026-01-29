@@ -8,11 +8,35 @@ const codigoFabricanteInput = document.getElementById("codigoFabricante");
 const dataCadastroInput = document.getElementById("dataCadastro");
 const ultimaAtualizacaoInput = document.getElementById("ultimaAtualizacao");
 const codigoBarrasInput = document.getElementById("codigoBarras");
-
-
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 
 let etapaAtual = 0;
+
+class Id {
+    #valor;
+
+    constructor(valor = crypto.randomUUID()) {
+        if(!Id.#validar(valor)) {
+            throw new Error("Id inválido");
+        }
+
+        this.#valor = valor;
+        Object.freeze(this);
+    }
+
+    get valor() {
+        return this.#valor;
+    }
+
+    static #validar(valor) {
+        return typeof valor === "string" &&
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+               .test(valor);
+    }    
+}
+
+const id = new Id();
+document.getElementById("id").value = id.valor;
 
 class CodigoInterno {
     #valor;
@@ -345,6 +369,7 @@ class CadastroPecas {
         this.dataCadastro = new DataCadastro();
         this.ultimaAtualizacao = new UltimaAtualizacao();
         this.codigoBarras = new CodigoBarras();
+        this.id = new Id();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -371,6 +396,9 @@ class CadastroPecas {
         }*/
 
         try {
+            /*const idGerado = document.getElementById("id").value;
+            this.id.set(idGerado);*/
+
             const codigoInternoDigitado = document.getElementById("codigoInterno").value;
             this.codigoInterno.set(codigoInternoDigitado);
 
@@ -442,9 +470,6 @@ class CadastroPecas {
             
             const codigoBarrasDigitado = document.getElementById("codigoBarras").value;
             this.codigoBarras.set(codigoBarrasDigitado);
-
-            /*const pesoVolumeDigitado = document.getElementById("pesoVolume").value;
-            this.pesoVolume.set(pesoVolumeDigitado);*/
             
             this.proximaEtapa();
         } catch (e) {
@@ -475,6 +500,7 @@ class CadastroPecas {
     //LocalStorage
     concluir() {
         const registro = {
+            id: document.getElementById("id").value,
             nomeProduto: document.getElementById("nomeProduto").value,
             codigoInterno: document.getElementById("codigoInterno").value,
             categoria: document.getElementById("categoria").value,
@@ -491,6 +517,7 @@ class CadastroPecas {
             dataCadastro: document.getElementById("dataCadastro").value,
             ultimaAtualizacao: document.getElementById("ultimaAtualizacao").value,
             codigoBarras: document.getElementById("codigoBarras").value,
+            pesoVolume: document.getElementById("pesoVolume").value,
             garantia: document.getElementById("garantia").value,
             pesoVolume: document.getElementById("pesoVolume").value,
         };
