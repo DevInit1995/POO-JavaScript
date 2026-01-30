@@ -198,6 +198,33 @@ precoMaoObraInput.addEventListener("input", e => {
     e.target.value = mascaraPrecoMaoObra(e.target.value);
 });
 
+class Ids {
+    #valor;
+
+    constructor(valor = crypto.randomUUID()) {
+        if(!Ids.#validar(valor)) {
+            throw new Error("Id inválido");
+        }
+
+        this.#valor = valor;
+        Object.freeze(this);
+    }
+
+    get valor() {
+        return this.#valor;
+    }
+
+    static #validar(valor) {
+        return typeof valor === "string" &&
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+               .test(valor);
+    } 
+}
+
+const ids = new Ids();
+document.getElementById("ids").value = ids.valor;
+
+
 class PrecoUnitario {
     #valor;
 
@@ -256,6 +283,7 @@ class Servicos {
         this.servicoSelecionado = new ServicoSelecionado();
         this.pecaSelecionado = new PecaSelecionado();
         this.precoMaoObra = new PrecoMaoObra();
+        this.ids = new Ids();
         this.precoUnitario = new PrecoUnitario();
     }
 
