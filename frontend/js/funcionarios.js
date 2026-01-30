@@ -88,8 +88,8 @@ class Funcionario {
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
         }
-    }       
-
+    }    
+    
     _criarCPF = () => {
         let valor = "";
 
