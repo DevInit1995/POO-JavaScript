@@ -9,6 +9,32 @@ const btnConcluir = document.querySelectorAll(".btnConcluir");
 
 let etapaAtual = 0;
 
+class IdNumeroOs {
+    #valor;
+
+    constructor(valor = crypto.randomUUID()) {
+        if(!IdNumeroOs.#validar(valor)) {
+            throw new Error("Id inválido");
+        }
+
+        this.#valor = valor;
+        Object.freeze(this);
+    }
+
+    get valor() {
+        return this.#valor;
+    }
+
+    static #validar(valor) {
+        return typeof valor === "string" &&
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+               .test(valor);
+    } 
+}
+
+const idNumeroOs = new IdNumeroOs();
+document.getElementById("idNumeroOs").value = idNumeroOs.valor;
+
 class PecaSelecionado {
     #valor;
 
@@ -224,6 +250,7 @@ const precoUnitario = new PrecoUnitario();
 
 class Servicos {
     constructor() {
+        this.idNumeroOs = new IdNumeroOs();
         this.quantidade = new Quantidade();
         this.codigoInterno = new CodigoInterno();
         this.servicoSelecionado = new ServicoSelecionado();
