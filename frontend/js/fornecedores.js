@@ -13,6 +13,32 @@ const dataCadastroInput = document.getElementById("dataCadastro");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
+class Id {
+    #valor;
+
+    constructor(valor = crypto.randomUUID()) {
+        if(!Id.#validar(valor)) {
+            throw new Error("Id inválido");
+        }
+
+        this.#valor = valor;
+        Object.freeze(this);
+    }
+
+    get valor() {
+        return this.#valor;
+    }
+
+    static #validar(valor) {
+        return typeof valor === "string" &&
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+               .test(valor);
+    }
+}
+
+const id = new Id();
+document.getElementById("id").value = id.valor;
+
 class CNPJ {
     #valor;
 
@@ -528,6 +554,7 @@ class Fornecedores {
         this.limiteCredito = new LimiteCredito();
         this.precoUnitario = new PrecoUnitario();
         this.codigoProduto = new CodigoProduto();
+        this.id = new Id();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -713,6 +740,7 @@ class Fornecedores {
     //LocalStorage
     concluir() {
         const registro = {
+            id: document.getElementById("id").value,
             razaoSocial: document.getElementById("razaoSocial").value,
             nomeFantasia: document.getElementById("nomeFantasia").value,
             cnpj: this.cnpj.get(),
