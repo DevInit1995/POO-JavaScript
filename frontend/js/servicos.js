@@ -198,12 +198,12 @@ precoMaoObraInput.addEventListener("input", e => {
     e.target.value = mascaraPrecoMaoObra(e.target.value);
 });
 
-class Ids {
+class IdPeca {
     #valor;
 
     constructor(valor = crypto.randomUUID()) {
-        if(!Ids.#validar(valor)) {
-            throw new Error("Id inválido");
+        if(!IdPeca.#validar(valor)) {
+            throw new Error("Id peça inválido");
         }
 
         this.#valor = valor;
@@ -221,8 +221,8 @@ class Ids {
     } 
 }
 
-const ids = new Ids();
-document.getElementById("ids").value = ids.valor;
+const idPeca = new IdPeca();
+document.getElementById("idPeca").value = idPeca.valor;
 
 
 class PrecoUnitario {
@@ -283,7 +283,7 @@ class Servicos {
         this.servicoSelecionado = new ServicoSelecionado();
         this.pecaSelecionado = new PecaSelecionado();
         this.precoMaoObra = new PrecoMaoObra();
-        this.ids = new Ids();
+        this.idPeca = new IdPeca();
         this.precoUnitario = new PrecoUnitario();
     }
 
@@ -419,7 +419,7 @@ class Servicos {
             tempoEstimado: document.getElementById("tempoEstimado").value,
             precoTotal: document.getElementById("precoTotal").value,
             categoria: document.getElementById("categoria").value,
-            ids: document.getElementById("ids").value,
+            ids: document.getElementById("idPeca").value,
             nomePeca: document.getElementById("nomePeca").value,
             marca: document.getElementById("marca").value,
             servicoSelecionado: this.servicoSelecionado.get(),
