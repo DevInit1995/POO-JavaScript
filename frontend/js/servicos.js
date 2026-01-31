@@ -95,7 +95,7 @@ class Quantidade {
 
 const quantidade = new Quantidade();
 
-class CodigoInterno {
+/*class CodigoInterno {
     #valor;
 
     set(codigoInterno) {
@@ -131,7 +131,7 @@ function mascaraCodigoInterno(valor) {
 
 codigoInternoInput.addEventListener("input", e => {
     e.target.value = mascaraCodigoInterno(e.target.value);
-});
+});*/
 
 class PrecoMaoObra {
     #valor;
@@ -198,7 +198,7 @@ precoMaoObraInput.addEventListener("input", e => {
     e.target.value = mascaraPrecoMaoObra(e.target.value);
 });
 
-class IdPeca {
+/*class IdPeca {
     #valor;
 
     constructor(valor = crypto.randomUUID()) {
@@ -222,7 +222,7 @@ class IdPeca {
 }
 
 const idPeca = new IdPeca();
-document.getElementById("idPeca").value = idPeca.valor;
+document.getElementById("idPeca").value = idPeca.valor;*/
 
 
 class PrecoUnitario {
@@ -279,11 +279,11 @@ class Servicos {
     constructor() {
         this.idNumeroOs = new IdNumeroOs();
         this.quantidade = new Quantidade();
-        this.codigoInterno = new CodigoInterno();
+        //this.codigoInterno = new CodigoInterno();
         this.servicoSelecionado = new ServicoSelecionado();
         this.pecaSelecionado = new PecaSelecionado();
         this.precoMaoObra = new PrecoMaoObra();
-        this.idPeca = new IdPeca();
+        //this.idPeca = new IdPeca();
         this.precoUnitario = new PrecoUnitario();
     }
 
@@ -347,7 +347,7 @@ class Servicos {
         const campos = [
             {id: "nomePeca", mensagem: "Preencha o campo nome peça"},
             {id: "marca", mensagem: "Preencha o campo marca"},
-            {id: "codigoInterno", mensagem: "Preencha o campo código interno"},
+            //{id: "codigoInterno", mensagem: "Preencha o campo código interno"},
             {id: "quantidadeEstoque", mensagem: "Preencha o campo quantidade estoque"},
             {id: "precoUnitario", mensagem: "Preencha o campo preço unitário"},
             {id: "fornecedor", mensagem: "Preencha o campo fornecedor"}
@@ -362,8 +362,8 @@ class Servicos {
         }*/
 
         try {
-            const codigoInternoDigitado = document.getElementById("codigoInterno").value;
-            this.codigoInterno.set(codigoInternoDigitado);
+            /*const codigoInternoDigitado = document.getElementById("codigoInterno").value;
+            this.codigoInterno.set(codigoInternoDigitado);*/
 
             this.proximaEtapa();
         } catch (e) {
@@ -419,7 +419,7 @@ class Servicos {
             tempoEstimado: document.getElementById("tempoEstimado").value,
             precoTotal: document.getElementById("precoTotal").value,
             categoria: document.getElementById("categoria").value,
-            ids: document.getElementById("idPeca").value,
+            //ids: document.getElementById("idPeca").value,
             nomePeca: document.getElementById("nomePeca").value,
             marca: document.getElementById("marca").value,
             servicoSelecionado: this.servicoSelecionado.get(),
