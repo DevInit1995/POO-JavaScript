@@ -4,14 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Peças</title>
-    <link rel="stylesheet" href="/cadastro-oficina/frontend/css/style.css">
 </head>
 <body>
-    <div class="form-container">
-            <div class="form-step active">
-                <h1>Cadastro de Peças</h1>
-                <h3>Descrição do produto</h3>
+    <style>
+        .painel-1 {
+            background-color: aqua;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* duas colunas */
+            gap: 20px
+        }
 
+        .form-step.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-step.active input,
+            .form-step select {
+                padding: 8px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        
+        .status {
+            padding: 0px 0px 15px;
+        }
+    </style>
+
+    <div class="painel-1">
+        <h1>Cadastro de Peças</h1>
+        <h3>Descrição do produto</h3>
+
+            <div class="form-step active">
                 <label for="id">Id:</label>
                 <input type="text" id="id" readonly>
 

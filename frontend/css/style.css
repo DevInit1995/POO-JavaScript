@@ -56,7 +56,12 @@ input {
     border-radius: 8px;
     background: #1a1f25;
     color: white;
-    margin-top: 5px
+    margin-top: 5px;
+}
+
+select {
+    width: 80%;
+    background-color: white;
 }
 
 input::placeholder {
