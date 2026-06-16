@@ -494,6 +494,21 @@ class CadastroPecas {
         });
     }
 
+    //popular os fornecedores por ids
+    carregarFornecedores() {
+        debugger
+        const selectFornecedor = document.getElementById("fornecedorId");
+        const fornecedores = JSON.parse(localStorage.getItem("fornecedores")) || [];
+        
+        fornecedores.forEach(fornecedor => {
+            const option = document.createElement("option");
+
+            option.value = fornecedor.id;
+            
+            selectFornecedor.appendChild(option);
+        });
+    }
+
     //LocalStorage
     concluir() {
         const registro = {
@@ -505,7 +520,7 @@ class CadastroPecas {
             quantidadeEstoque: document.getElementById("quantidadeEstoque").value,
             precoCusto: document.getElementById("precoCusto").value,
             precoVenda: document.getElementById("precoVenda").value,
-            fornecedor: document.getElementById("fornecedor").value,
+            //fornecedor: document.getElementById("fornecedor").value,
             unidadeMedida: document.getElementById("unidadeMedida").value,
             estoqueMinimo: document.getElementById("estoqueMinimo").value,
             localizacaoEstoque: document.getElementById("localizacaoEstoque").value,
@@ -559,3 +574,8 @@ document.querySelectorAll(".btnConcluir").forEach(btn => {
         cadastroPecas.concluir();
     });
 });
+
+cadastroPecas.carregarFornecedores();
+    
+
+
