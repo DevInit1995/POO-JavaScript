@@ -114,13 +114,13 @@ class Quantidade {
 
 const quantidadeEstoque = new Quantidade();
 
-class PrecoCusto {
+class Preco {
     #valor;
 
-    set(precoCusto) {
-        const limpo = PrecoCusto.#limpar(precoCusto);
+    set(preco) {
+        const limpo = Preco.#limpar(preco);
 
-        if(!PrecoCusto.#validar(limpo)) {
+        if(!Preco.#validar(limpo)) {
             throw new Error("Preço custo inválido");
         }
 
@@ -143,19 +143,25 @@ class PrecoCusto {
         return Number(valor);
     }
 
-    static #validar(precoCusto) {
-        if (isNaN(precoCusto)) return false;
-        if (precoCusto <= 0) return false;
-        if (precoCusto > 1_000_000) return false;
+    static #validar(preco) {
+        if (isNaN(preco)) return false;
+        if (preco <= 0) return false;
+        if (preco > 1_000_000) return false;
 
         return true;
     };
 
-    #formatar(precoCusto) {
-        return precoCusto.toLocaleString("pt-BR",
+    #formatar(preco) {
+        return preco.toLocaleString("pt-BR",
             {style: "currency",
                 currency: "BRL"});
     }
+}
+
+const preco = new Preco();
+
+class PrecoCusto extends Preco {
+
 }
 
 const precoCusto = new PrecoCusto();
@@ -176,47 +182,8 @@ precoCustoInput.addEventListener("input", e => {
     e.target.value = mascaraPrecoCusto(e.target.value);
 });
 
-class PrecoVenda {
-    #valor;
-
-    set(precoVenda) {
-        const limpo = PrecoVenda.#limpar(precoVenda);
-
-        if(!PrecoVenda.#validar(limpo)) {
-            throw new Error("Preço de venda inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
-    static #limpar(valor) {
-        if (typeof valor === "string") {
-            valor = valor
-                .replace(/\s/g, "")
-                .replace("R$", "")
-                .replace(/\./g, "")
-                .replace(",", ".");
-        }
-        return Number(valor);
-    }
-
-    static #validar(valor) {
-        if(isNaN(valor)) return false;
-        if(valor <= 0) return false;
-        if(valor > 1_000_000) return false;
-
-        return true;
-    };
-
-    #formatar() {
-        return precoVenda.toLocaleString("pt-BR", 
-            {style: "currency",
-                currency: "BRL"});
-    }
+class PrecoVenda extends Preco{
+   
 }
 
 const precoVenda = new PrecoVenda();
