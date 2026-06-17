@@ -275,7 +275,7 @@ codigoFabricanteInput.addEventListener("input", e => {
     e.target.value = mascaraCodigoFabricante(e.target.value);
 });
 
-class DataCadastro {
+class Data {
     #valor;
 
     set(dataCadastro) {
@@ -295,6 +295,10 @@ class DataCadastro {
     }
 }
 
+class DataCadastro extends Data {
+
+}
+
 const dataCadastro = new DataCadastro();
 
 function mascaraDataCadastro(data) {
@@ -307,24 +311,8 @@ dataCadastroInput.addEventListener("dataform", e => {
     e.target.value = mascaraDataCadastro(e.target.value);
 });
 
-class UltimaAtualizacao {
-    #valor;
+class UltimaAtualizacao extends Data {
 
-    set(ultimaAtualizacao) {
-        if(typeof ultimaAtualizacao !== "string") {
-            throw new Error("Data de cadastro deve ser texto");
-        }
-
-        if(ultimaAtualizacao == "") {
-            throw new Error("Data de cadastro inválido");
-        }
-
-        return this.#valor = ultimaAtualizacao;
-    }
-
-    get() {
-        return this.#valor;
-    }
 }
 
 const ultimaAtualizacao = new UltimaAtualizacao();
@@ -576,7 +564,6 @@ document.querySelectorAll(".btnConcluir").forEach(btn => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    debugger
     cadastroPecas.carregarFornecedores();
 });
     
