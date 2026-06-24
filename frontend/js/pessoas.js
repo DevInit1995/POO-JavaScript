@@ -23,22 +23,24 @@ let p1 = new Pessoa("João", 30);
 p1.apresentar();*/
 
 class Pessoa {
-    constructor(id, nome, sexo, idade, profissao, 
-        estado, cidade, bairro, rua, numero, cep, 
-        telefone, email, cpf, rg, cnh, tipoPessoa, 
-        dataCadastro, veiculos, historicoServicos){
+    constructor(id, nomeCompleto, sexo, dataNascimento, especialidade, 
+        estado, cidade, bairro, rua, numero, cep, complemento, 
+        telefone, celular, email, cpf, rg, cnh, tipoPessoa, 
+        dataCadastro, veiculos, historicoServicos) {
             this.id = id;
-            this.nome = nome;
+            this.nomeCompleto = nomeCompleto;
             this.sexo = sexo;
-            this.idade = idade;
-            this.profissao = profissao;
+            this.dataNascimento = dataNascimento;
+            this.especialidade = especialidade;
             this.estado = estado;
             this.cidade = cidade;
             this.bairro = bairro;
             this.rua = rua;
             this.numero = numero;
             this.cep = cep;
+            this.complemento = complemento;
             this.telefone = telefone;
+            this.celular = celular;
             this.email = email;
             this.cpf = cpf;
             this.rg = rg;
