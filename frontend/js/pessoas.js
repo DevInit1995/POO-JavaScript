@@ -23,15 +23,17 @@ let p1 = new Pessoa("João", 30);
 p1.apresentar();*/
 
 class Pessoa {
-    constructor(id, nomeCompleto, sexo, dataNascimento, especialidade, 
-        estado, cidade, bairro, rua, numero, cep, complemento, 
-        telefone, celular, email, cpf, rg, cnh, tipoPessoa, 
-        dataCadastro, veiculos, historicoServicos) {
+    constructor(id, nomeCompleto, sexo, dataNascimento, especialidade, funcao, 
+        salario, estado, cidade, bairro, rua, numero, cep, complemento, telefone,
+        celular, email, contatoEmergencia, cpf, rg, cnh, pis, tipoPessoa, dataCadastro,
+        dataAdmissao, cargaHoraria, turno, banco, agencia, conta, tituloEleitor, tipoConta,
+        status, ultimaAtualizacao, veiculos, historicoServicos) {
             this.id = id;
             this.nomeCompleto = nomeCompleto;
             this.sexo = sexo;
             this.dataNascimento = dataNascimento;
             this.especialidade = especialidade;
+            this.funcao = funcao;
             this.estado = estado;
             this.cidade = cidade;
             this.bairro = bairro;
@@ -42,11 +44,21 @@ class Pessoa {
             this.telefone = telefone;
             this.celular = celular;
             this.email = email;
+            this.contatoEmergencia = contatoEmergencia;
             this.cpf = cpf;
             this.rg = rg;
             this.cnh = cnh;
+            this.pis = pis;
             this.tipoPessoa = tipoPessoa;
             this.dataCadastro = dataCadastro;
+            this.dataAdmissao = dataAdmissao;
+            this.cargaHoraria = cargaHoraria;
+            this.turno = turno;
+            this.banco = banco;
+            this.agencia = agencia;
+            this.conta = conta;
+            this.tituloEleitor = tituloEleitor;
+            this.tipoConta = tipoConta;
             this.veiculos = veiculos;
             this.historicoServicos = historicoServicos;
     }
