@@ -630,22 +630,44 @@ dataUltimaVisitaInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataUltimaVisita(e.target.value);
 });
 
-class Clientes {
-    constructor() {
+class Clientes extends Pessoa {
+    constructor(id, nomeCompleto, sexo, cpf, rg, dataNascimento, telefone, celular,
+        email, cep, placa, marca, modelo, chassi, ano, dataCadastro,
+        kmAtual, tipoCombustivel, observacoesVeiculo, historicoServicos) {
         //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
-        this.id = new Id();
-        this.cpf = new CPF();
-        this.rg = new RG();
-        this.dataNascimento = new DataNascimento();
-        this.telefone = new Telefone();
-        this.celular = new Celular();
-        this.email = new Email();
-        this.cep = new Cep();
-        this.placa = new Placa();
-        this.chassi = new Chassi();
-        this.ano = new Ano();
-        this.dataCadastro = new DataCadastro();
-        this.DataUltimaVisita = new UltimaVisita();
+        
+        super(
+            id,
+            nomeCompleto,
+            sexo,
+            cpf,
+            rg,
+            dataNascimento,
+            telefone,
+            celular,
+            email,
+            estado,
+            cidade,
+            bairro,
+            rua,
+            numero,
+            cep,
+            complemento,
+            ano,
+            dataCadastro,
+        );
+
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.cor = cor;
+        this.chassi = chassi;
+        this.kmAtual = kmAtual;
+        this.tipoCombustivel = tipoCombustivel;
+        this.observacoesVeiculo = observacoesVeiculo;
+        this.historicoServicos = historicoServicos;
+        this.dataUltimaVisita = new UltimaVisita();
     }
 
     validar = (valor) => valor.trim().length > 0;
@@ -924,4 +946,5 @@ document.querySelectorAll(".btnConcluir").forEach(btn => {
         clientes.concluir();
     });
 });
+
 
