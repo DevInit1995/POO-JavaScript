@@ -44,40 +44,10 @@ class Pessoa {
             this.rg = rg;
             this.cnh = cnh;
             this.dataCadastro = dataCadastro;
-    }
-
-    paginaFucionarioCadastro = () => {
-      const botao = document.getElementById("btnFuncionarios");
-      const urlParaAbrir = "funcionarios.html";
-
-      botao.addEventListener('click', function() {
-        window.open(urlParaAbrir, '_blank');
-      });
-    }
-
-    paginaClientesCadastro = () => {
-      const botao = document.getElementById("btnClientes");
-      const urlParaAbrir = "clientes.html";
-
-      botao.addEventListener('click', function() {
-        window.open(urlParaAbrir, '_blank');
-      });
-    }
-
-    paginaFornecedoresCadastro = () => {
-      const botao = document.getElementById("btnFornecedores");
-      const urlParaAbrir = "fornecedores.html";
-
-      botao.addEventListener('click', function() {
-        window.open(urlParaAbrir, '_blank');
-      });
-    }
+    }    
 }
 
 aberturaPagina = new Pessoa();
-aberturaPagina.paginaFucionarioCadastro();
-aberturaPagina.paginaClientesCadastro();
-aberturaPagina.paginaFornecedoresCadastro();
 
 /*📘 Praticar:
 
