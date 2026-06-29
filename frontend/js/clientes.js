@@ -16,6 +16,32 @@ let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
 
+class Campo {
+    #valor; // PRIVADO
+
+    set(valor) {
+        const limpo = this.limpar(valor);
+
+        if(!this.validar(limpo)) {
+            throw new Error("Valor inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    limpar(valor) {
+        return valor;
+    }
+
+    validar() {
+        return true;
+    }
+}
+
 class Id {
     #valor;
 
@@ -42,23 +68,7 @@ class Id {
 const id = new Id();
 document.getElementById("id").value = id.valor;
 
-class CPF {
-    #valor; // PRIVADO
-
-    set(cpf) {
-        const limpo = CPF.#limpar(cpf);
-
-        if(!CPF.#validar(limpo)) {
-            throw new Error("CPF inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-    
+class CPF extends Campo {
     static #limpar(cpf) {
         return cpf.replace(/\D/g, "");
     }
