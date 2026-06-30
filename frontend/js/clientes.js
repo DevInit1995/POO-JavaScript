@@ -239,38 +239,18 @@ telefoneInput.addEventListener("input", e => {
     e.target.value = mascaraTelefone(e.target.value);
 });
 
-class Celular {   
-    #valor;
-
-    set(celular) {
-        if(typeof celular !== "string") {
-            throw new Error("Celular deve ser uma string");
-        }
-
-        const limpo = Celular.#limpar(celular);
-
-        if(!Celular.#validar(limpo)) {
-            throw new Error("Celular inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return Celular.#formatar(this.#valor);
-    }
-
-    static #limpar(celular) {
+class Celular extends Campo {   
+    limpar(celular) {
         return celular.replace(/\D/g, "");
     }
 
-    static #validar(celular) {
+    validar(celular) {
         if(celular.length !== 11) return false;
         if(/^(\d)\1+$/.test(celular)) return false;
         return true;
     }
 
-    static #formatar(valor) {
+    formatar(valor) {
         if(valor.length === 11) {
             return valor.replace(
                 /(\d{2}) (\d{5})(\d{4})/,
