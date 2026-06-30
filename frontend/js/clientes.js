@@ -18,7 +18,7 @@ let etapaAtual = 0;
 
 class Campo {
     #valor; // PRIVADO
-
+    
     set(valor) {
         const limpo = this.limpar(valor);
 
@@ -69,11 +69,11 @@ const id = new Id();
 document.getElementById("id").value = id.valor;
 
 class CPF extends Campo {
-    static #limpar(cpf) {
+    static limpar(cpf) {
         return cpf.replace(/\D/g, "");
     }
 
-    static #validar(cpf) {
+    static validar(cpf) {
         if (cpf.length !== 11) return false;
         if (/^(\d)\1{10}$/.test(cpf)) return false;
         return true; // validação simplificada
@@ -100,28 +100,12 @@ cpfInput.addEventListener("input", e => {
     e.target.value = mascaraCPF(e.target.value);
 });
 
-class RG {
-    #valor;
-
-    set(rg) {
-        const limpo = RG.#limpar(rg);
-
-        if (!RG.#validar(limpo)) {
-            throw new Error("RG inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
-    static #limpar(rg) {
+class RG extends Campo {
+    limpar(rg) {
         return rg.replace(/\D/g, "");
     }
 
-    static #validar(rg) {
+    validar(rg) {
         if (rg.length !== 6) return false;
         if(/^(\d)\1+$/.test(rg)) return false;
         return true;
@@ -210,27 +194,7 @@ inputDataNascimento.addEventListener("formdata", e => {
     e.target.value = mascaraDataNascimento(e.target.value);
 });
 
-class Telefone {
-    #valor;
-
-    set(telefone) {
-        if (typeof telefone !== "string") {
-            throw new Error("Telefone deve ser uma string");
-        }
-
-        const limpo = Telefone.#limpar(telefone);
-
-        if (!Telefone.#validar(limpo)) {
-            throw new Error("Telefone inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return Telefone.#formatar(this.#valor);
-    }
-
+class Telefone extends Campo {
     static #limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
@@ -644,8 +608,7 @@ class Clientes extends Pessoa {
     constructor(id, nomeCompleto, sexo, cpf, rg, dataNascimento, telefone, celular,
         email, cep, placa, marca, modelo, chassi, ano, dataCadastro,
         kmAtual, tipoCombustivel, observacoesVeiculo, historicoServicos) {
-        //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
-        
+        //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS        
         super(
             id,
             nomeCompleto,
@@ -705,13 +668,13 @@ class Clientes extends Pessoa {
         
         try {
             const cpfDigitado = document.getElementById("cpf").value;
-            this.cpf.set(cpfDigitado);
-
+            cpf.set(cpfDigitado);
+            
             const rgDigitado = document.getElementById("rg").value;
-            this.rg.set(rgDigitado);
+            rg.set(rgDigitado);
 
             const dataNascimentoDigitado = document.getElementById("dataNascimento").value;
-            this.dataNascimento.set(dataNascimentoDigitado);
+            dataNascimento.set(dataNascimentoDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -737,13 +700,13 @@ class Clientes extends Pessoa {
 
         try {
             let telefoneDigitado = document.getElementById("telefone").value;
-            this.telefone.set(telefoneDigitado);
+            telefone.set(telefoneDigitado);
            
             let celularDigitado = document.getElementById("celular").value;
-            this.celular.set(celularDigitado);
+            celular.set(celularDigitado);
 
             let emailDigitado = document.getElementById("email").value;
-            this.email.set(emailDigitado);
+            email.set(emailDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -773,7 +736,7 @@ class Clientes extends Pessoa {
 
         try {
             let cepDigitado = document.getElementById("cep").value;
-            this.cep.set(cepDigitado);
+            cep.set(cepDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -805,13 +768,13 @@ class Clientes extends Pessoa {
 
         try {
             const placaDigitada = document.getElementById("placa").value;
-            this.placa.set(placaDigitada);
+            placa.set(placaDigitada);
 
             const chassiDigitado = document.getElementById("chassi").value;
-            this.chassi.set(chassiDigitado);
+            chassi.set(chassiDigitado);
 
             const anoDigitado = document.getElementById("ano").value;
-            this.ano.set(anoDigitado);
+            ano.set(anoDigitado);
 
             this.proximaEtapa();
         } catch (e) {
@@ -838,10 +801,10 @@ class Clientes extends Pessoa {
        
        try {
             const dataCadastroDigitada = document.getElementById("dataCadastro").value;
-            this.dataCadastro.set(dataCadastroDigitada);
+            dataCadastro.set(dataCadastroDigitada);
 
             const dataUltimaVisitaDigitado = document.getElementById("dataUltimaVisita").value;
-            this.ultimaVisita.set(dataUltimaVisitaDigitado);
+            ultimaVisita.set(dataUltimaVisitaDigitado);
 
             this.proximaEtapa();
         } catch (e) {
