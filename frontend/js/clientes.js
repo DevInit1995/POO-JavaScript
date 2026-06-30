@@ -195,17 +195,17 @@ inputDataNascimento.addEventListener("formdata", e => {
 });
 
 class Telefone extends Campo {
-    static #limpar(telefone) {
+    limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
 
-    static #validar(telefone) {
+    validar(telefone) {
         if (telefone.length !== 11) return false;
         if(/^(\d)\1+$/.test(telefone)) return false;
         return true;
     }
 
-    static #formatar(valor) {
+    formatar(valor) {
         if (valor.length === 11) {
             return valor.replace(
                 /(\d{2})(\d{5})(\d{4})/,
