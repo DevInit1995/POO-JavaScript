@@ -368,29 +368,13 @@ placaInput.addEventListener("input", e => {
     e.target.value = mascaraPlaca(e.target.value);
 });
 
-class Chassi {
-    #valor;
-
-    set(chassi) {
-        const limpa = Chassi.#limpar(chassi);
-
-        if(!Chassi.#validar(limpa)) {
-            throw new Error("Chassi inválido");
-        }
-
-        this.#valor = limpa;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
-    static #limpar(chassi) {
+class Chassi extends Campo {
+    limpar(chassi) {
         return String(chassi).toUpperCase()
         .replace(/[^A-Z0-9]/g, "");
     }
 
-    static #validar(chassi) {
+   validar(chassi) {
         if(chassi.length !== 17) return false;
         
         return chassi;
