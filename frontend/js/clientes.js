@@ -327,29 +327,13 @@ cepInput.addEventListener("input", e => {
     e.target.value = mascaraCep(e.target.value);
 });
 
-class Placa {
-    #valor;
-
-    set(placa) {
-        const limpo = Placa.#limpar(placa);
-
-        if(!Placa.#validar(limpo)) {
-            throw new Error("Placa inválida")
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
-    static #limpar(placa) {
+class Placa extends Campo {
+    limpar(placa) {
         return String(placa).toUpperCase()
         .replace(/[^A-Z0-9]/g, "");
     }
 
-    static #validar(placa) {
+    validar(placa) {
         if(placa.length !== 7) return false;
 
         // LLLNLNN (padrão Mercosul)
