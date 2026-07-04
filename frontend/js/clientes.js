@@ -69,11 +69,11 @@ const id = new Id();
 document.getElementById("id").value = id.valor;
 
 class CPF extends Campo {
-    static limpar(cpf) {
+    limpar(cpf) {
         return cpf.replace(/\D/g, "");
     }
 
-    static validar(cpf) {
+    validar(cpf) {
         if (cpf.length !== 11) return false;
         if (/^(\d)\1{10}$/.test(cpf)) return false;
         return true; // validação simplificada
@@ -753,30 +753,30 @@ class Clientes extends Pessoa {
         const registro = {
             id: document.getElementById("id").value,
             nomeCompleto: document.getElementById("nomeCompleto").value,
-            cpf: this.cpf.get(),
-            rg: this.rg.get(),
-            dataNascimento: this.dataNascimento.get(),
+            cpf: cpf.get(),
+            rg: rg.get(),
+            dataNascimento: dataNascimento.get(),
             masculino: document.getElementById("masculino").value,
             feminino: document.getElementById("feminino").value,
             solteiro: document.getElementById("solteiro").value,
             separado: document.getElementById("separado").value,
             viuvo: document.getElementById("viuvo").value,
-            telefone: this.telefone.get(),
-            celular: this.celular.get(),
-            email: this.email.get(),
+            telefone: telefone.get(),
+            celular: celular.get(),
+            email: email.get(),
             estado: document.getElementById("estado").value,
             cidade: document.getElementById("cidade").value,
             bairro: document.getElementById("bairro").value,
             rua: document.getElementById("rua").value,
             numero: document.getElementById("numero").value,
-            cep: this.cep.get(),
+            cep: cep.get(),
             complemento: document.getElementById("complemento").value,
-            placa: this.placa.get(),
+            placa: placa.get(),
             marca: document.getElementById("marca").value,
             modelo: document.getElementById("modelo").value,
-            ano: this.ano.get(),
+            ano: ano.get(),
             cor: document.getElementById("cor").value,
-            chassi: this.chassi.get(),
+            chassi: chassi.get(),
             kmAtual: document.getElementById("kmAtual").value,
             tipoCombustivel: document.getElementById("tipoCombustivel").value,
             observacoesVeiculo: document.getElementById("observacoes").value,
