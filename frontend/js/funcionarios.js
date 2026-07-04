@@ -44,28 +44,36 @@ class Campo {
     }
 }
 
-class Funcionario {
-    constructor() {
-        /*this.nomeCompleto = nomeCompleto;
-        this.dataNascimento = dataNascimento;*/
-        //this.sexo = sexo;
-        this.cpf = this._criarCPF(); //encapsulado;
-        this.rg = this._criarRG();
-        /*this.estadoCivil = estadoCivil;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.rua = rua;
-        this.numero = numero;*/
-        this.cep = this._criarCEP();
-        this.telefone = this._criarTelefone();
-        this.email = this._criarEmail();
-        /*this.contatoEmergencia = contatoEmergencia;
+class Funcionario extends Campo {
+    constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
+        bairro, rua, numero, cep, complemento, telefone, celular, email, 
+        cpf, rg, dataCadastro) {
+        super(
+            id,
+            nomeCompleto,
+            sexo,
+            cpf,
+            rg,
+            dataNascimento,
+            telefone,
+            celular,
+            email,
+            estado,
+            cidade,
+            bairro,
+            rua,
+            numero,
+            cep,
+            complemento,
+            ano,
+            dataCadastro,
+        );
+        
         this.cargo = cargo;
-        this.setor = setor;*/
+        this.setor = setor;
         this.salario = this._criarSalario();
         this.dataAdmissao = this._criarDataAdmissao();
-        /*this.cargaHoraria = cargaHoraria;
+        this.cargaHoraria = cargaHoraria;
         this.turno = turno;
         this.banco = banco;
         this.agencia = agencia;
@@ -74,10 +82,10 @@ class Funcionario {
         this.cnh = cnh;
         this.pis = pis;
         this.tituloEleitor = tituloEleitor;
-        this.certificadoReservista = certificadoReservista;*/
+        this.certificadoReservista = certificadoReservista;
         this.status = this._criarStatus();
-        /*this.dataCadastro = dataCadastro
-        this.ultimaAtualizacao = ultimaAtualizacao;*/
+        this.dataCadastro = dataCadastro
+        this.ultimaAtualizacao = ultimaAtualizacao;
     }
 
     validar = (valor) => valor.trim().length > 0;
