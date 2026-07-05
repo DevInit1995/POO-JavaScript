@@ -44,7 +44,17 @@ class Campo {
     }
 }
 
-class Funcionario extends Campo {
+class CPF extends Campo {
+    limpar = cpf => cpf.replace(/\D/g, "");
+
+    validar = cpf => {
+        if (cpf.length !== 11) return false;
+        if (/^(\d)\1{10}$/.test(cpf)) return false;
+        return true;
+    };   
+}
+
+class Funcionario extends Pessoa {
     constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
         bairro, rua, numero, cep, complemento, telefone, celular, email, 
         cpf, rg, dataCadastro) {
@@ -123,30 +133,7 @@ class Funcionario extends Campo {
         }
     }    
     
-    _criarCPF = () => {
-        let valor = "";
-
-        const limpar = cpf => cpf.replace(/\D/g, "");
-
-        const validar = cpf => {
-            if (cpf.length !== 11) return false;
-            if (/^(\d)\1{10}$/.test(cpf)) return false;
-            return true;
-        };
-
-        return {
-            set(cpf) {
-                const limpo = limpar(cpf);
-                if (!validar(limpo)) {
-                    throw new Error("CPF inválido");
-                }
-                valor = limpo;
-            },
-            get() {
-                return valor;
-            }
-        };
-    };       
+           
 
     _criarRG = () => {
         let valor = "";
