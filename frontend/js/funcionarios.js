@@ -93,6 +93,15 @@ class Telefone extends Campo {
     }        
 }
 
+class Email extends Campo {
+    limpar = email => email.trim().toLowerCase();
+
+    validar = email => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    }
+}
+
 class Funcionario extends Pessoa {
     constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
         bairro, rua, numero, cep, complemento, telefone, celular, email, 
@@ -232,29 +241,6 @@ class Funcionario extends Pessoa {
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
         }
-    }
-
-    _criarEmail = () => {
-        let valor = "";
-        const limpar = email => email.trim().toLowerCase();
-
-        const validar = email => {
-           const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-           return regex.test(email);
-        };
-
-        return {
-            set(email) {
-                const limpo = limpar(email);
-                if(!validar(limpo)){
-                    throw new Error("E-mail inválido");
-                }
-                valor = limpo;
-            },
-            get() {
-                return valor;
-            }
-        };
     }
 
     validarQuartaEtapa() {
