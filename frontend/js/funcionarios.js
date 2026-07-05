@@ -170,11 +170,37 @@ class DataAdmissao {
     get() {
         return valor;
     }
-    
+
     formatar() {
         if (!valor) return "";
         return valor.toLocaleDateString("pt-BR");
     }
+}
+
+class Status {
+    valoresValidos = ["ATIVO", "INATIVO"];
+
+    validar = status => valoresValidos.includes(status);
+
+    set(status) {
+        if (!validar(status)) {
+            throw new Error("Status inválido");
+        }
+        valor = status;
+    }
+
+    get() {
+        return valor;
+    }
+
+    isAtivo() {
+        return valor === "ATIVO";
+    }
+
+    isInativo() {
+        return valor === "INATIVO";
+    }
+
 }
 
 class Funcionario extends Pessoa {
@@ -435,32 +461,6 @@ class Funcionario extends Pessoa {
             this.exibirAlerta("warning", "Erro", e.message);
         }
     }
-
-    _criarStatus = () => {
-        let valor = null;
-
-        const valoresValidos = ["ATIVO", "INATIVO"];
-
-        const validar = status => valoresValidos.includes(status);
-
-        return {
-            set(status) {
-                if (!validar(status)) {
-                    throw new Error("Status inválido");
-                }
-                valor = status;
-            },
-            get() {
-                return valor;
-            },
-            isAtivo() {
-                return valor === "ATIVO";
-            },
-            isInativo() {
-                return valor === "INATIVO";
-            }
-        };
-    };
 
     proximaEtapa() {
         passagem[etapaAtual].classList.remove("active");
