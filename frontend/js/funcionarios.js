@@ -136,12 +136,44 @@ class Salario {
     get() {
         return valor;
     }
-    
+
     formatar() {
         return valor.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL;"
         });
+    }
+}
+
+class DataAdmissao {
+    limpar = dataAdmissao => new Date(dataAdmissao);
+
+    validar = dataAdmissao => {
+        if (!(dataAdmissao instanceof Date) || isNaN(dataAdmissao)) return false;
+
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if (dataAdmissao > hoje) return false;
+
+        return true;
+    }
+
+    set(dataAdmissao) {
+        const dataObj = limpar(dataAdmissao);
+        if (!validar(dataObj)) {
+            throw new Error("Data de admissão inválida");
+        }
+        valor = dataObj;
+    }
+
+    get() {
+        return valor;
+    }
+    
+    formatar() {
+        if (!valor) return "";
+        return valor.toLocaleDateString("pt-BR");
     }
 }
 
@@ -318,42 +350,6 @@ class Funcionario extends Pessoa {
             this.exibirAlerta("warning", "Erro", e.message);
         }
     }
-
-
-
-    _criarDataAdmissao = () => {
-        let valor = null;
-
-        const limpar = dataAdmissao => new Date(dataAdmissao);
-
-        const validar = dataAdmissao => {
-            if (!(dataAdmissao instanceof Date) || isNaN(dataAdmissao)) return false;
-
-            const hoje = new Date();
-            hoje.setHours(0, 0, 0, 0);
-
-            if (dataAdmissao > hoje) return false;
-
-            return true;
-        };
-
-        return {
-            set(dataAdmissao) {
-                const dataObj = limpar(dataAdmissao);
-                if (!validar(dataObj)) {
-                    throw new Error("Data de admissão inválida");
-                }
-                valor = dataObj;
-            },
-            get() {
-                return valor;
-            },
-            formatar() {
-                if (!valor) return "";
-                return valor.toLocaleDateString("pt-BR");
-            }
-        };
-    };
 
     validarQuintaEtapa() {
         //validação dos campos
