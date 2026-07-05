@@ -20,11 +20,11 @@ let etapaAtual = 0;
 
 class Campo {
     #valor; // PRIVADO
-    
+
     set(valor) {
         const limpo = this.limpar(valor);
 
-        if(!this.validar(limpo)) {
+        if (!this.validar(limpo)) {
             throw new Error("Valor inválido");
         }
 
@@ -51,33 +51,33 @@ class CPF extends Campo {
         if (cpf.length !== 11) return false;
         if (/^(\d)\1{10}$/.test(cpf)) return false;
         return true;
-    };   
+    };
 }
 
 class RG extends Campo {
-        
+
     limpar = rg => rg.replace(/\D/g, "");
-    
+
     validar = rg => {
         // RG geralmente tem 9 ou 10 dígitos
-        if(rg.length < 6 || rg.length > 10) return false;
+        if (rg.length < 6 || rg.length > 10) return false;
         // evita números todos iguais (ex: 111111111)
-        if(/^(\d)\1+$/.test(rg)) return false;
+        if (/^(\d)\1+$/.test(rg)) return false;
 
         return true;
-    };   
+    };
 }
 
-class Cep extends Campo {  
+class Cep extends Campo {
     limpar = cep => cep.replace(/\D/g, "");
 
     validar = cep => {
         //CEP geralmente tem 8 digítos
-        if(cep.length < 8 || cep.length > 8) return false;
+        if (cep.length < 8 || cep.length > 8) return false;
         //evita números todos iguais (ex: 11111111)
-        if(/^(\d)\1+$/.test(cep)) return false;
+        if (/^(\d)\1+$/.test(cep)) return false;
         return true;
-    }        
+    }
 }
 
 class Telefone extends Campo {
@@ -85,12 +85,12 @@ class Telefone extends Campo {
 
     validar = telefone => {
         // telefone geralmente tem 9 ou 10 dígitos
-        if(telefone.length < 11 || telefone.length > 11) return false;
+        if (telefone.length < 11 || telefone.length > 11) return false;
         // evita números todos iguais (ex: 111111111)
-        if(/^(\d)\1+$/.test(telefone)) return false;
+        if (/^(\d)\1+$/.test(telefone)) return false;
 
         return true;
-    }        
+    }
 }
 
 class Email extends Campo {
@@ -102,9 +102,52 @@ class Email extends Campo {
     }
 }
 
+class Salario {
+    limpar = salario => {
+        if (typeof salario === "string") {
+            //salario = salario.replace(/\./g, "").replace(",", ".");
+            salario = Number(
+                salario
+                    .replace(/\s/g, "")
+                    .replace("R$", "")
+                    .replace(/\./g, "")
+                    .replace(",", ".")
+            );
+        }
+
+        return Number(salario);
+    }
+
+    validar = salario => {
+        if (isNaN(salario)) return false;
+        if (salario <= 0) return false;
+        if (salario > 1_000_000) return false; // limite realista
+        return true;
+    }
+
+    set(salario) {
+        const limpo = limpar(salario);
+        if (!validar(limpo)) {
+            throw new Error("Salário inválido");
+        }
+        valor = limpo;
+    }
+
+    get() {
+        return valor;
+    }
+    
+    formatar() {
+        return valor.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL;"
+        });
+    }
+}
+
 class Funcionario extends Pessoa {
-    constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
-        bairro, rua, numero, cep, complemento, telefone, celular, email, 
+    constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade,
+        bairro, rua, numero, cep, complemento, telefone, celular, email,
         cpf, rg, dataCadastro) {
         super(
             id,
@@ -126,7 +169,7 @@ class Funcionario extends Pessoa {
             ano,
             dataCadastro,
         );
-        
+
         this.cargo = cargo;
         this.setor = setor;
         this.salario = this._criarSalario();
@@ -151,12 +194,12 @@ class Funcionario extends Pessoa {
     validarPrimeiraEtapa() {
         //validação dos campos
         const campos = [
-            {id: "nomeCompleto", mensagem: "Preencha o campo nome"},
-            {id: "dataNascimento", mensagem: "Preencha o campo data de nascimento"},
-            {id: "sexo", mensagem: "Preencha o campo sexo"},
-            {id: "cpf", mensagem: "Preencha o campo cpf"},
-            {id: "rg", mensagem: "Informe o campo rg"},
-            {id: "estadoCivil", mensagem: "Informe o campo estado civil"},
+            { id: "nomeCompleto", mensagem: "Preencha o campo nome" },
+            { id: "dataNascimento", mensagem: "Preencha o campo data de nascimento" },
+            { id: "sexo", mensagem: "Preencha o campo sexo" },
+            { id: "cpf", mensagem: "Preencha o campo cpf" },
+            { id: "rg", mensagem: "Informe o campo rg" },
+            { id: "estadoCivil", mensagem: "Informe o campo estado civil" },
         ];
 
         /*for(let campo of campos){
@@ -170,7 +213,7 @@ class Funcionario extends Pessoa {
         /*const campo = {};
         document.querySelectorAll("input, textarea").forEach(el => {
             campo[el.id] = el.value;
-        });*/ 
+        });*/
 
         try {
             this.cpf.set(document.getElementById("cpf").value);
@@ -179,17 +222,17 @@ class Funcionario extends Pessoa {
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
         }
-    }    
-    
+    }
+
     validarSegundaEtapa() {
         //validação dos campos
         const campos = [
-            {id: "estado", mensagem: "Preencha o campo estado"},
-            {id: "cidade", mensagem: "Preencha o campo cidade"},
-            {id: "bairro", mensagem: "Preencha o campo bairro"},
-            {id: "rua", mensagem: "Preencha o campo rua"},
-            {id: "numero", mensagem: "Informe o campo numero"},
-            {id: "cep", mensagem: "Informe o campo estado cep"},
+            { id: "estado", mensagem: "Preencha o campo estado" },
+            { id: "cidade", mensagem: "Preencha o campo cidade" },
+            { id: "bairro", mensagem: "Preencha o campo bairro" },
+            { id: "rua", mensagem: "Preencha o campo rua" },
+            { id: "numero", mensagem: "Informe o campo numero" },
+            { id: "cep", mensagem: "Informe o campo estado cep" },
         ]
 
         /*for(let campo of campos){
@@ -216,9 +259,9 @@ class Funcionario extends Pessoa {
     validarTerceiraEtapa() {
         //validação dos campos
         const campos = [
-            {id: "telefone", mensagem: "Preencha o campo telefone"},
-            {id: "email", mensagem: "Preencha o campo email"},
-            {id: "contatoEmergencia", mensagem: "Preencha o campo contato emergência"},
+            { id: "telefone", mensagem: "Preencha o campo telefone" },
+            { id: "email", mensagem: "Preencha o campo email" },
+            { id: "contatoEmergencia", mensagem: "Preencha o campo contato emergência" },
         ]
 
         /*for(let campo of campos){
@@ -246,12 +289,12 @@ class Funcionario extends Pessoa {
     validarQuartaEtapa() {
         //validação dos campos
         const campos = [
-            {id: "cargo", mensagem: "Preencha o campo cargo"},
-            {id: "setor", mensagem: "Preencha o campo setor"},
-            {id: "salario", mensagem: "Preencha o campo salario"},
-            {id: "dataAdmissao", mensagem: "Preencha o campo data de admissão"},
-            {id: "cargaHoraria", mensagem: "Preencha o campo carga horária"},
-            {id: "turno", mensagem: "Preencha o campo turno"},
+            { id: "cargo", mensagem: "Preencha o campo cargo" },
+            { id: "setor", mensagem: "Preencha o campo setor" },
+            { id: "salario", mensagem: "Preencha o campo salario" },
+            { id: "dataAdmissao", mensagem: "Preencha o campo data de admissão" },
+            { id: "cargaHoraria", mensagem: "Preencha o campo carga horária" },
+            { id: "turno", mensagem: "Preencha o campo turno" },
         ]
 
         /*for(let campo of campos){
@@ -276,50 +319,7 @@ class Funcionario extends Pessoa {
         }
     }
 
-    _criarSalario = () => {
-        let valor = 0;
 
-        const limpar = salario => {
-            if (typeof salario === "string") {
-                //salario = salario.replace(/\./g, "").replace(",", ".");
-                salario = Number(
-                    salario
-                    .replace(/\s/g, "")
-                    .replace("R$", "")
-                    .replace(/\./g, "")
-                    .replace(",", ".")
-                );
-            }
-            
-            return Number(salario);
-        };
-
-        const validar = salario => {
-           if (isNaN(salario)) return false;
-           if (salario <= 0) return false;
-           if (salario > 1_000_000) return false; // limite realista
-           return true;
-        };
-
-        return {
-            set(salario) {
-                const limpo = limpar(salario);
-                if (!validar(limpo)) {
-                    throw new Error("Salário inválido");
-                }
-                valor = limpo;
-            },
-            get() {
-                return valor;
-            },
-            formatar() {
-                return valor.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL;"
-                });
-            }
-        };
-    };
 
     _criarDataAdmissao = () => {
         let valor = null;
@@ -328,7 +328,7 @@ class Funcionario extends Pessoa {
 
         const validar = dataAdmissao => {
             if (!(dataAdmissao instanceof Date) || isNaN(dataAdmissao)) return false;
-            
+
             const hoje = new Date();
             hoje.setHours(0, 0, 0, 0);
 
@@ -358,10 +358,10 @@ class Funcionario extends Pessoa {
     validarQuintaEtapa() {
         //validação dos campos
         const campos = [
-            {id: "banco", mensagem: "Preencha o campo banco"},
-            {id: "agencia", mensagem: "Preencha o campo agencia"},
-            {id: "conta", mensagem: "Preencha o campo conta"},
-            {id: "tipoConta", mensagem: "Preencha o campo tipoConta"},
+            { id: "banco", mensagem: "Preencha o campo banco" },
+            { id: "agencia", mensagem: "Preencha o campo agencia" },
+            { id: "conta", mensagem: "Preencha o campo conta" },
+            { id: "tipoConta", mensagem: "Preencha o campo tipoConta" },
         ]
 
         /*for(let campo of campos){
@@ -383,10 +383,10 @@ class Funcionario extends Pessoa {
     validarSextaEtapa() {
         //validação dos campos
         const campos = [
-            {id: "cnh", mensagem: "Preencha o campo cnh"},
-            {id: "pis", mensagem: "Preencha o campo pis"},
-            {id: "tituloEleitor", mensagem: "Preencha o campo titulo de eleitor"},
-            {id: "certificadoReservista", mensagem: "Preencha o campo certificado de reservista"},
+            { id: "cnh", mensagem: "Preencha o campo cnh" },
+            { id: "pis", mensagem: "Preencha o campo pis" },
+            { id: "tituloEleitor", mensagem: "Preencha o campo titulo de eleitor" },
+            { id: "certificadoReservista", mensagem: "Preencha o campo certificado de reservista" },
         ]
 
         /*for(let campo of campos){
@@ -408,9 +408,9 @@ class Funcionario extends Pessoa {
     validarSetimaEtapa() {
         //validação dos campos
         const campos = [
-            {id: "status", mensagem: "Selecione o status"},
-            {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
-            {id: "ultimaAtualizacao", mensagem: "Preencha o campo última atualização"}
+            { id: "status", mensagem: "Selecione o status" },
+            { id: "dataCadastro", mensagem: "Preencha o campo data de cadastro" },
+            { id: "ultimaAtualizacao", mensagem: "Preencha o campo última atualização" }
         ]
 
         /*for(let campo of campos){
@@ -427,7 +427,7 @@ class Funcionario extends Pessoa {
         });*/
 
         try {
-            const statusSelecionado = 
+            const statusSelecionado =
                 document.querySelector('input[name="status"]:checked')?.value;
             if (!statusSelecionado) {
                 throw new Error("Selecione um status");
@@ -446,10 +446,10 @@ class Funcionario extends Pessoa {
         const valoresValidos = ["ATIVO", "INATIVO"];
 
         const validar = status => valoresValidos.includes(status);
-        
+
         return {
             set(status) {
-                if(!validar(status)) {
+                if (!validar(status)) {
                     throw new Error("Status inválido");
                 }
                 valor = status;
@@ -479,12 +479,12 @@ class Funcionario extends Pessoa {
     }
 
     exibirAlerta(icone, titulo, texto) {
-        Swal.fire ({
+        Swal.fire({
             icon: icone,
             title: titulo,
             text: texto,
         });
-    }  
+    }
 
     concluir() {
         const registro = {
@@ -548,11 +548,11 @@ dataNascimentoInput.addEventListener("formdata", e => {
 function mascaraCPF(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 11) {
+    if (valor.length > 11) {
         valor = valor.slice(0, 11);
     }
 
-    return valor 
+    return valor
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
@@ -565,11 +565,11 @@ cpfInput.addEventListener("input", e => {
 function mascaraRG(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 6) {
+    if (valor.length > 6) {
         valor = valor.slice(0, 6);
     }
 
-    return valor 
+    return valor
         .replace(/(\d{2})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d{1})$/, "$1-$2");
@@ -582,7 +582,7 @@ rgInput.addEventListener("input", e => {
 function mascaraCep(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 8) {
+    if (valor.length > 8) {
         valor = valor.slice(0, 8);
     }
 
@@ -596,7 +596,7 @@ cepInput.addEventListener("input", e => {
 function mascaraTelefone(valor) {
     valor = valor.replace(/\D/g, "").slice(0, 11);
 
-    if(valor.length === 11) {
+    if (valor.length === 11) {
         return valor.replace(
             /(\d{2})(\d{4})(\d{4})/,
             "($1) $2-$3");
@@ -619,14 +619,14 @@ telefoneInput.addEventListener("input", e => {
 function mascaraContatoEmergencia(valor) {
     valor = valor.replace(/\D/g, "").slice(0, 11);
 
-    if(valor.length === 11) {
+    if (valor.length === 11) {
         return valor.replace(
             /(\d{2})(\d{5})(\d{4})/,
             "($1) $2-$3"
         );
     }
 
-    if(valor.length === 10) {
+    if (valor.length === 10) {
         return valor.replace(
             /(\d{2})(\d{5})(\d{4})/,
             "($1) $2-$3"
@@ -669,7 +669,7 @@ dataAdmissaoInput.addEventListener("formdata", e => {
 function mascaraAgencia(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 4) {
+    if (valor.length > 4) {
         return valor.replace(/(\d{4})(\d)/, "$1-$2");
     }
 
@@ -683,7 +683,7 @@ agenciaInput.addEventListener("input", e => {
 function mascaraConta(valor) {
     valor = valor.replace(/\D/g, "").slice(0, 13);
 
-    if(valor.length > 1) {
+    if (valor.length > 1) {
         return valor.replace(/(\d+)(\d)$/, "$1-$2");
     }
 
@@ -707,7 +707,7 @@ cnhInput.addEventListener("input", e => {
 function mascaraPis(valor) {
     valor = valor.replace(/\D/g, "").slice(0, 11);
 
-    return valor 
+    return valor
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{5})(\d)/, "$1.$2")
         .replace(/(\d{2})(\d)$/, "$1-$2");
@@ -718,7 +718,7 @@ pisInput.addEventListener("input", e => {
 });
 
 function mascaraTituloEleitor(valor) {
-    return valor 
+    return valor
         .replace(/\D/g, "")
         .slice(0, 12);
 }
@@ -738,19 +738,19 @@ certificadoReservistaInput.addEventListener("input", e => {
     e.target.value = mascaraCertificadoReservista(e.target.value);
 });
 
-avancar.forEach((btn) =>{
+avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
-        switch(etapaAtual){
+        switch (etapaAtual) {
             case 0:
                 funcionario.validarPrimeiraEtapa();
                 break;
             case 1:
                 funcionario.validarSegundaEtapa();
                 break;
-            case 2: 
+            case 2:
                 funcionario.validarTerceiraEtapa();
                 break;
-            case 3: 
+            case 3:
                 funcionario.validarQuartaEtapa();
                 break;
             case 4:
