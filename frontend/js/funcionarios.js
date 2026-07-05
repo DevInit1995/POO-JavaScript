@@ -80,6 +80,19 @@ class Cep extends Campo {
     }        
 }
 
+class Telefone extends Campo {
+    limpar = telefone => telefone.replace(/\D/g, "");
+
+    validar = telefone => {
+        // telefone geralmente tem 9 ou 10 dígitos
+        if(telefone.length < 11 || telefone.length > 11) return false;
+        // evita números todos iguais (ex: 111111111)
+        if(/^(\d)\1+$/.test(telefone)) return false;
+
+        return true;
+    }        
+}
+
 class Funcionario extends Pessoa {
     constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
         bairro, rua, numero, cep, complemento, telefone, celular, email, 
@@ -219,33 +232,6 @@ class Funcionario extends Pessoa {
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
         }
-    }
-
-    _criarTelefone = () => {
-        let valor = "";
-        const limpar = telefone => telefone.replace(/\D/g, "");
-
-        const validar = telefone => {
-            // telefone geralmente tem 9 ou 10 dígitos
-            if(telefone.length < 11 || telefone.length > 11) return false;
-            // evita números todos iguais (ex: 111111111)
-            if(/^(\d)\1+$/.test(telefone)) return false;
-
-            return true;
-        };
-
-        return {
-            set(telefone) {
-                const limpo = limpar(telefone);
-                if(!validar(limpo)){
-                    throw new Error("Telefone inválido");
-                }
-                valor = limpo;
-            },
-            get() {
-                return valor;
-            }
-        };
     }
 
     _criarEmail = () => {
