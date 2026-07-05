@@ -68,6 +68,18 @@ class RG extends Campo {
     };   
 }
 
+class Cep extends Campo {  
+    limpar = cep => cep.replace(/\D/g, "");
+
+    validar = cep => {
+        //CEP geralmente tem 8 digítos
+        if(cep.length < 8 || cep.length > 8) return false;
+        //evita números todos iguais (ex: 11111111)
+        if(/^(\d)\1+$/.test(cep)) return false;
+        return true;
+    }        
+}
+
 class Funcionario extends Pessoa {
     constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
         bairro, rua, numero, cep, complemento, telefone, celular, email, 
@@ -178,33 +190,6 @@ class Funcionario extends Pessoa {
             this.exibirAlerta("warning", "Erro", e.message);
         }
     }
-
-    _criarCEP = () => {
-        let valor = "";
-        const limpar = cep => cep.replace(/\D/g, "");
-
-        const validar = cep => {
-            //CEP geralmente tem 8 digítos
-            if(cep.length < 8 || cep.length > 8) return false;
-            //evita números todos iguais (ex: 11111111)
-            if(/^(\d)\1+$/.test(cep)) return false;
-
-            return true;
-        };
-
-        return {
-            set(cep) {
-                const limpo = limpar(cep);
-                if(!validar(limpo)) {
-                    throw new Error("CEP inválido");
-                }
-                valor = limpo;
-            },
-            get() {
-                return valor;
-            }
-        };
-    };
 
     validarTerceiraEtapa() {
         //validação dos campos
