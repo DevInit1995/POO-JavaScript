@@ -54,6 +54,20 @@ class CPF extends Campo {
     };   
 }
 
+class RG extends Campo {
+        
+    limpar = rg => rg.replace(/\D/g, "");
+    
+    validar = rg => {
+        // RG geralmente tem 9 ou 10 dígitos
+        if(rg.length < 6 || rg.length > 10) return false;
+        // evita números todos iguais (ex: 111111111)
+        if(/^(\d)\1+$/.test(rg)) return false;
+
+        return true;
+    };   
+}
+
 class Funcionario extends Pessoa {
     constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade, 
         bairro, rua, numero, cep, complemento, telefone, celular, email, 
@@ -133,35 +147,6 @@ class Funcionario extends Pessoa {
         }
     }    
     
-           
-
-    _criarRG = () => {
-        let valor = "";
-        const limpar = rg => rg.replace(/\D/g, "");
-
-        const validar = rg => {
-            // RG geralmente tem 9 ou 10 dígitos
-            if(rg.length < 6 || rg.length > 10) return false;
-            // evita números todos iguais (ex: 111111111)
-            if(/^(\d)\1+$/.test(rg)) return false;
-
-            return true;
-        };
-
-        return {
-            set(rg) {
-                const limpo = limpar(rg);
-                if(!validar(limpo)){
-                    throw new Error("RG inválido");
-                }
-                valor = limpo;
-            },
-            get() {
-                return valor;
-            }
-        };
-    };
-
     validarSegundaEtapa() {
         //validação dos campos
         const campos = [
