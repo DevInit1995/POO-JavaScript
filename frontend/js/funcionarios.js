@@ -45,7 +45,9 @@ class Campo {
 }
 
 class CPF extends Campo {
-    limpar = cpf => cpf.replace(/\D/g, "");
+    limpar(cpf) {
+        return cpf.replace(/\D/g, "");
+    }
 
     validar = cpf => {
         if (cpf.length !== 11) return false;
@@ -53,6 +55,8 @@ class CPF extends Campo {
         return true;
     };
 }
+
+const cpf = new CPF;
 
 class RG extends Campo {
 
@@ -68,6 +72,8 @@ class RG extends Campo {
     };
 }
 
+const rg = new RG;
+
 class Cep extends Campo {
     limpar = cep => cep.replace(/\D/g, "");
 
@@ -79,6 +85,8 @@ class Cep extends Campo {
         return true;
     }
 }
+
+const cep = new Cep;
 
 class Telefone extends Campo {
     limpar = telefone => telefone.replace(/\D/g, "");
@@ -93,6 +101,8 @@ class Telefone extends Campo {
     }
 }
 
+const telefone = new Telefone;
+
 class Email extends Campo {
     limpar = email => email.trim().toLowerCase();
 
@@ -101,6 +111,8 @@ class Email extends Campo {
         return regex.test(email);
     }
 }
+
+const email = new Email;
 
 class Salario {
     limpar = salario => {
@@ -145,6 +157,8 @@ class Salario {
     }
 }
 
+const salario = new Salario;
+
 class DataAdmissao {
     limpar = dataAdmissao => new Date(dataAdmissao);
 
@@ -177,6 +191,8 @@ class DataAdmissao {
     }
 }
 
+const dataAdmissao = new DataAdmissao;
+
 class Status {
     valoresValidos = ["ATIVO", "INATIVO"];
 
@@ -200,12 +216,13 @@ class Status {
     isInativo() {
         return valor === "INATIVO";
     }
-
 }
+
+const status = new Status;
 
 class Funcionario extends Pessoa {
     constructor(id, nomeCompleto, sexo, dataNascimento, estado, cidade,
-        bairro, rua, numero, cep, complemento, telefone, celular, email,
+        bairro, rua, numero, cep, complemento, ano, telefone, celular, email,
         cpf, rg, dataCadastro) {
         super(
             id,
@@ -230,8 +247,8 @@ class Funcionario extends Pessoa {
 
         this.cargo = cargo;
         this.setor = setor;
-        this.salario = this._criarSalario();
-        this.dataAdmissao = this._criarDataAdmissao();
+        this.salario = salario;
+        this.dataAdmissao = dataAdmissao;
         this.cargaHoraria = cargaHoraria;
         this.turno = turno;
         this.banco = banco;
@@ -242,7 +259,7 @@ class Funcionario extends Pessoa {
         this.pis = pis;
         this.tituloEleitor = tituloEleitor;
         this.certificadoReservista = certificadoReservista;
-        this.status = this._criarStatus();
+        this.status = status;
         this.dataCadastro = dataCadastro
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
@@ -274,8 +291,12 @@ class Funcionario extends Pessoa {
         });*/
 
         try {
-            this.cpf.set(document.getElementById("cpf").value);
-            this.rg.set(document.getElementById("rg").value);
+            const cpfDigitado = document.getElementById("cpf").value;
+            cpf.set(cpfDigitado);
+
+            const rgDigitado = document.getElementById("rg").value;
+            rg.set(rgDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -307,7 +328,9 @@ class Funcionario extends Pessoa {
         });*/
 
         try {
-            this.cep.set(document.getElementById("cep").value);
+            const cepDigitado = document.getElementById("cep").value;
+            cep.set(cepDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -336,8 +359,12 @@ class Funcionario extends Pessoa {
         });*/
 
         try {
-            this.telefone.set(document.getElementById("telefone").value);
-            this.email.set(document.getElementById("email").value);
+            const telefoneDigitado = document.getElementById("telefone").value;
+            telefone.set(telefoneDigitado);
+
+            const emailDigitado = document.getElementById("email").value;
+            email.set(emailDigitado);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -369,8 +396,12 @@ class Funcionario extends Pessoa {
         });*/
 
         try {
-            this.salario.set(document.getElementById("salario").value);
-            this.dataAdmissao.set(document.getElementById("dataAdmissao").value);
+            const salarioDigitado = document.getElementById("salario").value;
+            salario.set(salarioDigitado);
+
+            const dataAdmissaoDigitado = document.getElementById("dataAdmissao").value;
+            dataAdmissao.set(dataAdmissao);
+
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -455,7 +486,7 @@ class Funcionario extends Pessoa {
                 throw new Error("Selecione um status");
             }
 
-            this.status.set(statusSelecionado.value);
+            status.set(statusSelecionado.value);
             this.proximaEtapa();
         } catch (e) {
             this.exibirAlerta("warning", "Erro", e.message);
@@ -487,22 +518,22 @@ class Funcionario extends Pessoa {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             dataNascimento: document.getElementById("dataNascimento").value,
             sexo: document.getElementById("sexo").value,
-            cpf: this.cpf.get(),
-            rg: this.rg.get(),
+            cpf: cpf.get(),
+            rg: rg.get(),
             estadoCivil: document.getElementById("estadoCivil").value,
             estado: document.getElementById("estado").value,
             cidade: document.getElementById("cidade").value,
             bairro: document.getElementById("bairro").value,
             rua: document.getElementById("rua").value,
             numero: document.getElementById("numero").value,
-            cep: this.cep.get(),
-            telefone: this.telefone.get(),
-            email: this.email.get(),
+            cep: cep.get(),
+            telefone: telefone.get(),
+            email: email.get(),
             contatoEmergencia: document.getElementById("contatoEmergencia").value,
             cargo: document.getElementById("cargo").value,
             setor: document.getElementById("setor").value,
-            salario: this.salario.get(),
-            dataAdmissao: this.dataAdmissao.get(),
+            salario: salario.get(),
+            dataAdmissao: dataAdmissao.get(),
             cargaHoraria: document.getElementById("cargaHoraria").value,
             turno: document.getElementById("turno").value,
             banco: document.getElementById("banco").value,
@@ -513,7 +544,7 @@ class Funcionario extends Pessoa {
             tituloEleitor: document.getElementById("tituloEleitor").value,
             tipoConta: document.getElementById("tipoConta").value,
             id: document.getElementById("id").value,
-            status: this.status.get(),
+            status: status.get(),
             dataCadastro: document.getElementById("dataCadastro").value,
             ultimaAtualizacao: document.getElementById("ultimaAtualizacao").value
         }
