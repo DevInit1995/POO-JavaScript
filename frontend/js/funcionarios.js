@@ -114,8 +114,8 @@ class Email extends Campo {
 
 const email = new Email;
 
-class Salario {
-    limpar = salario => {
+class Salario extends Campo {
+    limpar(salario) {
         if (typeof salario === "string") {
             //salario = salario.replace(/\./g, "").replace(",", ".");
             salario = Number(
@@ -130,27 +130,15 @@ class Salario {
         return Number(salario);
     }
 
-    validar = salario => {
+    validar (salario) {
         if (isNaN(salario)) return false;
         if (salario <= 0) return false;
         if (salario > 1_000_000) return false; // limite realista
         return true;
     }
 
-    set(salario) {
-        const limpo = limpar(salario);
-        if (!validar(limpo)) {
-            throw new Error("Salário inválido");
-        }
-        valor = limpo;
-    }
-
-    get() {
-        return valor;
-    }
-
-    formatar() {
-        return valor.toLocaleString("pt-BR", {
+    formatar(valor) {
+        return this.valor.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL;"
         });
@@ -174,20 +162,21 @@ class DataAdmissao {
     }
 
     set(dataAdmissao) {
-        const dataObj = limpar(dataAdmissao);
-        if (!validar(dataObj)) {
+        const dataObj = this.limpar(dataAdmissao);
+        
+        if (!this.validar(dataObj)) {
             throw new Error("Data de admissão inválida");
         }
-        valor = dataObj;
+        this.valor = dataObj;
     }
 
     get() {
-        return valor;
+        return this.valor;
     }
 
     formatar() {
         if (!valor) return "";
-        return valor.toLocaleDateString("pt-BR");
+        return this.valor.toLocaleDateString("pt-BR");
     }
 }
 
