@@ -147,7 +147,7 @@ class Salario extends Campo {
 
 const salario = new Salario;
 
-class DataAdmissao {
+class DataAdmissao extends Campo {
     limpar = dataAdmissao => new Date(dataAdmissao);
 
     validar = dataAdmissao => {
@@ -161,21 +161,8 @@ class DataAdmissao {
         return true;
     }
 
-    set(dataAdmissao) {
-        const dataObj = this.limpar(dataAdmissao);
-        
-        if (!this.validar(dataObj)) {
-            throw new Error("Data de admissão inválida");
-        }
-        this.valor = dataObj;
-    }
-
-    get() {
-        return this.valor;
-    }
-
     formatar() {
-        if (!valor) return "";
+        if (!this.valor) return "";
         return this.valor.toLocaleDateString("pt-BR");
     }
 }
@@ -183,6 +170,8 @@ class DataAdmissao {
 const dataAdmissao = new DataAdmissao;
 
 class Status {
+    valor;
+
     valoresValidos = ["ATIVO", "INATIVO"];
 
     validar = status => valoresValidos.includes(status);
@@ -191,11 +180,11 @@ class Status {
         if (!validar(status)) {
             throw new Error("Status inválido");
         }
-        valor = status;
+        this.valor = status;
     }
 
     get() {
-        return valor;
+        return this.valor;
     }
 
     isAtivo() {
@@ -387,9 +376,9 @@ class Funcionario extends Pessoa {
         try {
             const salarioDigitado = document.getElementById("salario").value;
             salario.set(salarioDigitado);
-
+            
             const dataAdmissaoDigitado = document.getElementById("dataAdmissao").value;
-            dataAdmissao.set(dataAdmissao);
+            dataAdmissao.set(dataAdmissaoDigitado);
 
             this.proximaEtapa();
         } catch (e) {
