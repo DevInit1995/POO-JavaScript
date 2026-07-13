@@ -65,23 +65,7 @@ class Id {
 const id = new Id();
 document.getElementById("id").value = id.valor;
 
-class CNPJ {
-    #valor;
-
-    set(cnpj) {
-        const limpo = CNPJ.#limpar(cnpj);
-
-        if(!CNPJ.#validar(limpo)) {
-            throw new Error("CNPJ inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
+class CNPJ extends Campo {
     static #limpar(cnpj) {
         return cnpj.replace(/\D/g, '');
     }
