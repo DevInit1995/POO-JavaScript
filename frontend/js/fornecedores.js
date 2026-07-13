@@ -13,6 +13,32 @@ const dataCadastroInput = document.getElementById("dataCadastro");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
+class Campo {
+    #valor; // PRIVADO
+    
+    set(valor) {
+        const limpo = this.limpar(valor);
+
+        if(!this.validar(limpo)) {
+            throw new Error("Valor inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    limpar(valor) {
+        return valor;
+    }
+
+    validar() {
+        return true;
+    }
+}
+
 class Id {
     #valor;
 
