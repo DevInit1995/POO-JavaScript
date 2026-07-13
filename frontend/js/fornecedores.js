@@ -96,23 +96,7 @@ cnpjInput.addEventListener("input", e => {
     e.target.value = mascaraCNPJ(e.target.value);
 });
 
-class InscricaoEstadual {
-    #valor; 
-
-    set(inscricaoEstadual) {
-        const limpo = InscricaoEstadual.#limpar(inscricaoEstadual);
-
-        if(!InscricaoEstadual.#validar(limpo)) {
-            throw new Error("Inscrição Estadual inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-    
+class InscricaoEstadual extends Campo {    
     static #limpar(inscricaoEstadual) {
         return inscricaoEstadual.replace(/\D/g, "");
     }
