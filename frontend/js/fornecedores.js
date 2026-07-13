@@ -534,8 +534,13 @@ dataCadastroInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataCadastro(e.target.value);
 });
 
-class Fornecedores {
-    constructor() {
+class Fornecedores extends Pessoa {
+    constructor(estado, cidade, bairro, rua, numero, cep, complemento, 
+        telefone, celular, email, dataCadastro) {
+        
+        super(estado, cidade, bairro, rua, numero, cep, complemento, 
+        telefone, celular, email, dataCadastro);
+
         this.cnpj = new CNPJ();
         this.inscricaoEstadual = new InscricaoEstadual();
         this.cep = new Cep();
