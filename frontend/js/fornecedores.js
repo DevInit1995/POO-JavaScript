@@ -157,27 +157,7 @@ cepInput.addEventListener("input", e => {
     e.target.value = mascaraCep(e.target.value);
 });
 
-class Telefone {
-    #valor;
-
-    set(telefone) {
-        if (typeof telefone !== "string") {
-            throw new Error("Telefone deve ser uma string");
-        }
-
-        const limpo = Telefone.#limpar(telefone);
-
-        if (!Telefone.#validar(limpo)) {
-            throw new Error("Telefone inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return Telefone.#formatar(this.#valor);
-    }
-
+class Telefone extends Campo {
     static #limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
