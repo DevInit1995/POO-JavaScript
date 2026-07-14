@@ -127,23 +127,7 @@ inscricaoEstadualInput.addEventListener("input", e => {
     e.target.value = mascaraInscricaoEstadual(e.target.value);
 });
 
-class Cep {
-    #valor;
-
-    set(cep) {
-        const limpo = Cep.#limpar(cep);
-        
-        if(!Cep.#validar(limpo)) {
-            throw new Error("CEP inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
+class Cep extends Campo {
     static #limpar(cep) {
         return String(cep).replace(/\D/g, "");
     }
