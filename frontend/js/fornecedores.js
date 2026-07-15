@@ -247,23 +247,7 @@ celularInput.addEventListener("input", e => {
     e.target.value = mascaraCelular(e.target.value);
 });
 
-class Email {
-    #valor;
-    
-    set(email) {
-        const limpo = Email.#limpar(email);
-
-        if(!Email.#validar(limpo)) {
-            throw new Error("E-mail inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
+class Email extends Campo {
     static #limpar(email) {
         return email.trim().toLowerCase();
     }
