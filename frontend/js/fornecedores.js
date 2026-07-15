@@ -202,27 +202,7 @@ telefoneInput.addEventListener("input", e => {
     e.target.value = mascaraTelefone(e.target.value);
 });
 
-class Celular {   
-    #valor;
-
-    set(celular) {
-        if(typeof celular !== "string") {
-            throw new Error("Celular deve ser uma string");
-        }
-
-        const limpo = Celular.#limpar(celular);
-
-        if(!Celular.#validar(limpo)) {
-            throw new Error("Celular inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return Celular.#formatar(this.#valor);
-    }
-
+class Celular extends Campo {   
     static #limpar(celular) {
         return celular.replace(/\D/g, "");
     }
