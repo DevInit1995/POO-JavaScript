@@ -15,11 +15,11 @@ let etapaAtual = 0;
 
 class Campo {
     #valor; // PRIVADO
-    
+
     set(valor) {
         const limpo = this.limpar(valor);
 
-        if(!this.validar(limpo)) {
+        if (!this.validar(limpo)) {
             throw new Error("Valor inválido");
         }
 
@@ -43,7 +43,7 @@ class Id {
     #valor;
 
     constructor(valor = crypto.randomUUID()) {
-        if(!Id.#validar(valor)) {
+        if (!Id.#validar(valor)) {
             throw new Error("Id inválido");
         }
 
@@ -58,7 +58,7 @@ class Id {
     static #validar(valor) {
         return typeof valor === "string" &&
             /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-               .test(valor);
+                .test(valor);
     }
 }
 
@@ -71,7 +71,7 @@ class CNPJ extends Campo {
     }
 
     static #validar(cnpj) {
-        if(cnpj.length !== 14) return false;
+        if (cnpj.length !== 14) return false;
         return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
     }
 }
@@ -81,11 +81,11 @@ const cnpj = new CNPJ();
 function mascaraCNPJ(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 14) {
+    if (valor.length > 14) {
         valor = valor.slice(0, 14);
     }
 
-    return valor 
+    return valor
         .replace(/^(\d{2})(\d)/, "$1.$2")
         .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
         .replace(/\.(\d{3})(\d)/, ".$1/$2")
@@ -96,14 +96,14 @@ cnpjInput.addEventListener("input", e => {
     e.target.value = mascaraCNPJ(e.target.value);
 });
 
-class InscricaoEstadual extends Campo {    
+class InscricaoEstadual extends Campo {
     static #limpar(inscricaoEstadual) {
         return inscricaoEstadual.replace(/\D/g, "");
     }
 
     static #validar(inscricaoEstadual) {
         if (inscricaoEstadual.length !== 12) return false;
-       
+
         return true; // validação simplificada
     }
 }
@@ -113,11 +113,11 @@ const inscricaoEstadual = new InscricaoEstadual();
 function mascaraInscricaoEstadual(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 12) {
+    if (valor.length > 12) {
         valor = valor.slice(0, 12);
     }
 
-    return valor 
+    return valor
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d)/, "$1.$2")
         .replace(/(\d{3})(\d{1,3})$/, "$1.$2");
@@ -133,12 +133,12 @@ class Cep extends Campo {
     }
 
     static #validar(cep) {
-        if(cep.length !== 8) return false;
+        if (cep.length !== 8) return false;
         //evita números todos iguais (ex: 11111111)
-        if(/^(\d)\1+$/.test(cep)) return false;
+        if (/^(\d)\1+$/.test(cep)) return false;
 
         return true;
-    } 
+    }
 }
 
 const cep = new Cep();
@@ -146,7 +146,7 @@ const cep = new Cep();
 function mascaraCep(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 8){
+    if (valor.length > 8) {
         valor = valor.slice(0, 8);
     }
 
@@ -164,7 +164,7 @@ class Telefone extends Campo {
 
     static #validar(telefone) {
         if (telefone.length !== 11) return false;
-        if(/^(\d)\1+$/.test(telefone)) return false;
+        if (/^(\d)\1+$/.test(telefone)) return false;
         return true;
     }
 
@@ -188,7 +188,7 @@ const telefone = new Telefone();
 function mascaraTelefone(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 11) {
+    if (valor.length > 11) {
         valor = valor.slice(0, 11);
     }
 
@@ -202,19 +202,19 @@ telefoneInput.addEventListener("input", e => {
     e.target.value = mascaraTelefone(e.target.value);
 });
 
-class Celular extends Campo {   
+class Celular extends Campo {
     static #limpar(celular) {
         return celular.replace(/\D/g, "");
     }
 
     static #validar(celular) {
-        if(celular.length !== 11) return false;
-        if(/^(\d)\1+$/.test(celular)) return false;
+        if (celular.length !== 11) return false;
+        if (/^(\d)\1+$/.test(celular)) return false;
         return true;
     }
 
     static #formatar(valor) {
-        if(valor.length === 11) {
+        if (valor.length === 11) {
             return valor.replace(
                 /(\d{2}) (\d{5})(\d{4})/,
                 "($1) $2-$3"
@@ -233,7 +233,7 @@ const celular = new Celular();
 function mascaraCelular(valor) {
     valor = valor.replace(/\D/g, "");
 
-    if(valor.length > 11) {
+    if (valor.length > 11) {
         valor = valor.slice(0, 11);
     }
 
@@ -260,33 +260,11 @@ class Email extends Campo {
 
 const email = new Email();
 
-class Site {
-    #valor;
-    
-    set(site) {
-        if(typeof site !== "string") {
-            throw new Error("Site deve ser texto");
-        }
-
-        const limpo = site.trim();
-
-        const url = Site.#converterParaURL(limpo);
-
-        if(!url){
-            throw new Error("URL inválida")
-        }
-
-        this.#valor = url.toString();
-    }
-
-    get() {
-        return this.#valor;
-    }
-
+class Site extends Campo {
     static #converterParaURL(valor) {
         try {
-            if(!/^https?:\/\//i.test(valor)) {
-                valor = "https://" + valor;
+           if (!/^https?:\/\//i.test(valor)) {
+               valor = "https://" + valor;
             }
 
             return new URL(valor);
@@ -304,21 +282,21 @@ class LimiteCredito {
     set(limiteCredito) {
         const valor = Number(
             limiteCredito
-            .replace(/\s/g, "")
-            .replace("R$", "")
-            .replace(/\./g, "")
-            .replace(",", ".")
+                .replace(/\s/g, "")
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
         );
-        
-        if(typeof valor !== "number" || isNaN(valor)) {
+
+        if (typeof valor !== "number" || isNaN(valor)) {
             throw new Error("Limite de crédito inválido");
         }
 
-        if(valor <= 0 ) {
+        if (valor <= 0) {
             throw new Error("Limite não pode ser negativo");
         }
 
-        if(valor > 5000) {
+        if (valor > 5000) {
             throw new Error("Limite não pode ser maior que 5000")
         }
 
@@ -378,7 +356,7 @@ class PrecoUnitario {
     set(precoUnitario) {
         const limpo = PrecoUnitario.#limpar(precoUnitario);
 
-        if(!PrecoUnitario.#validar(limpo)) {
+        if (!PrecoUnitario.#validar(limpo)) {
             throw new Error("Preço inválido");
         }
         this.#valor = limpo;
@@ -392,7 +370,7 @@ class PrecoUnitario {
         if (typeof precoUnitario === "string") {
             precoUnitario = precoUnitario.replace(/\./g, "").replace(",", ".");
         }
-        
+
         return Number(precoUnitario);
     };
 
@@ -400,14 +378,16 @@ class PrecoUnitario {
         if (isNaN(precoUnitario)) return false;
         if (precoUnitario <= 0) return false;
         if (precoUnitario > 1_000_000) return false; // limite realista
-        
+
         return true;
     };
-    
-    #formatar(precoUnitario){
-        return precoUnitario.toLocaleString("pt-BR", 
-            {style: "currency", 
-                currency: "BRL;"});
+
+    #formatar(precoUnitario) {
+        return precoUnitario.toLocaleString("pt-BR",
+            {
+                style: "currency",
+                currency: "BRL;"
+            });
     }
 }
 
@@ -431,13 +411,13 @@ precoUnitarioInput.addEventListener("input", e => {
 
 class DataCadastro {
     #valor;
-    
+
     set(dataCadastro) {
-        if(typeof dataCadastro !== "string") {
+        if (typeof dataCadastro !== "string") {
             throw new Error("Data de cadastro do fornecedor deve ser texto");
         }
 
-        if(dataCadastro == "") {
+        if (dataCadastro == "") {
             throw new Error("Data de cadastro do fornecedor inválido")
         }
 
@@ -463,11 +443,11 @@ dataCadastroInput.addEventListener("formdata", e => {
 });
 
 class Fornecedores extends Pessoa {
-    constructor(estado, cidade, bairro, rua, numero, cep, complemento, 
+    constructor(estado, cidade, bairro, rua, numero, cep, complemento,
         telefone, celular, email, dataCadastro) {
-        
-        super(estado, cidade, bairro, rua, numero, cep, complemento, 
-        telefone, celular, email, dataCadastro);
+
+        super(estado, cidade, bairro, rua, numero, cep, complemento,
+            telefone, celular, email, dataCadastro);
 
         this.cnpj = new CNPJ();
         this.inscricaoEstadual = new InscricaoEstadual();
@@ -487,11 +467,11 @@ class Fornecedores extends Pessoa {
 
     validarPrimeiraEtapa() {
         const campos = [
-            {id: "razaoSocial", mensagem: "Preencha o campo razão social"},
-            {id: "nomeFantasia", mensagem: "Preencha o campo nome fantasia"},
-            {id: "cnpj", mensagem: "Preencha o campo cnpj"},
-            {id: "inscricaoEstadual", mensagem: "Preencha o campo inscrição estadual"},
-            {id: "segmento", mensagem: "Preencha o campo segmento"},            
+            { id: "razaoSocial", mensagem: "Preencha o campo razão social" },
+            { id: "nomeFantasia", mensagem: "Preencha o campo nome fantasia" },
+            { id: "cnpj", mensagem: "Preencha o campo cnpj" },
+            { id: "inscricaoEstadual", mensagem: "Preencha o campo inscrição estadual" },
+            { id: "segmento", mensagem: "Preencha o campo segmento" },
         ]
 
         /*for(let campo of campos){
@@ -518,13 +498,13 @@ class Fornecedores extends Pessoa {
     validarSegundaEtapa() {
         //validação dos campos
         const campos = [
-            {id: "estado", mensagem: "Preencha o campo estado "},
-            {id: "cidade", mensagem: "Preencha o campo cidade"},
-            {id: "bairro", mensagem: "Preencha o campo bairro"},
-            {id: "rua", mensagem: "Preencha o campo rua"},
-            {id: "numero", mensagem: "Preencha o campo numero"},
-            {id: "cep", mensagem: "Preencha o campo cep"},
-            {id: "complemento", mensagem: "Preencha o campo complemento"},
+            { id: "estado", mensagem: "Preencha o campo estado " },
+            { id: "cidade", mensagem: "Preencha o campo cidade" },
+            { id: "bairro", mensagem: "Preencha o campo bairro" },
+            { id: "rua", mensagem: "Preencha o campo rua" },
+            { id: "numero", mensagem: "Preencha o campo numero" },
+            { id: "cep", mensagem: "Preencha o campo cep" },
+            { id: "complemento", mensagem: "Preencha o campo complemento" },
         ]
 
         /*for(let campo of campos){
@@ -548,10 +528,10 @@ class Fornecedores extends Pessoa {
     validarTerceiraEtapa() {
         //validação de campos
         const campos = [
-            {id: "telefone", mensagem: "Preencha o campo telefone"},
-            {id: "celular", mensagem: "Preencha o campo celular"},
-            {id: "email", mensagem: "Preencha o campo email"},
-            {id: "site", mensagem: "Preencha o campo site"},
+            { id: "telefone", mensagem: "Preencha o campo telefone" },
+            { id: "celular", mensagem: "Preencha o campo celular" },
+            { id: "email", mensagem: "Preencha o campo email" },
+            { id: "site", mensagem: "Preencha o campo site" },
         ]
 
         /*for(let campo of campos){
@@ -584,10 +564,10 @@ class Fornecedores extends Pessoa {
     validarQuartaEtapa() {
         //validação de campos
         const campos = [
-            {id: "formaPagamento", mensagem: "Preencha o campo forma de pagamento"},
-            {id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento"},
-            {id: "limiteCredito", mensagem: "Preencha o campo limite de crédito"},
-            {id: "condicaoEntrega", mensagem: "Preencha o campo condição de entrega"},
+            { id: "formaPagamento", mensagem: "Preencha o campo forma de pagamento" },
+            { id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento" },
+            { id: "limiteCredito", mensagem: "Preencha o campo limite de crédito" },
+            { id: "condicaoEntrega", mensagem: "Preencha o campo condição de entrega" },
         ]
 
         /*for(let campo of campos){
@@ -611,8 +591,8 @@ class Fornecedores extends Pessoa {
     validarQuintaEtapa() {
         //validação de campos
         const campos = [
-            {id: "dataCadastro", mensagem: "Preencha o campo data de cadastro"},
-            {id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento"},
+            { id: "dataCadastro", mensagem: "Preencha o campo data de cadastro" },
+            { id: "prazoPagamento", mensagem: "Preencha o campo prazo de pagamento" },
         ]
 
         /*for(let campo of campos){
@@ -622,7 +602,7 @@ class Fornecedores extends Pessoa {
                 return false;
             }
         }*/
-       
+
         try {
             const dataCadastroDigitado = document.getElementById("dataCadastro").value;
             this.dataCadastro.set(dataCadastroDigitado);
@@ -636,10 +616,10 @@ class Fornecedores extends Pessoa {
     validarSextaEtapa() {
         //validação de campos
         const campos = [
-            {id: "nomeProduto", mensagem: "Preencha o campo nome do produto"},
-            {id: "marca", mensagem: "Preencha o campo marca"},
-            {id: "precoUnitario", mensagem: "Preencha o campo preço unitário"},
-            {id: "codigoProduto", mensagem: "Preencha o campo código do produto"},
+            { id: "nomeProduto", mensagem: "Preencha o campo nome do produto" },
+            { id: "marca", mensagem: "Preencha o campo marca" },
+            { id: "precoUnitario", mensagem: "Preencha o campo preço unitário" },
+            { id: "codigoProduto", mensagem: "Preencha o campo código do produto" },
         ]
 
         /*for(let campo of campos){
@@ -724,11 +704,11 @@ class Fornecedores extends Pessoa {
         etapaAtual--;
         passagem[etapaAtual].classList.add("active");
     }
-    
-    exibirAlerta(icone, titulo, texto){
-        Swal.fire ({
+
+    exibirAlerta(icone, titulo, texto) {
+        Swal.fire({
             icon: icone,
-            title: titulo, 
+            title: titulo,
             text: texto,
         });
     }
@@ -738,7 +718,7 @@ const fornecedores = new Fornecedores();
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
-        switch(etapaAtual){
+        switch (etapaAtual) {
             case 0:
                 fornecedores.validarPrimeiraEtapa();
                 break;
