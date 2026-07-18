@@ -15,7 +15,7 @@ let etapaAtual = 0;
 
 class Campo {
     #valor; // PRIVADO
-
+    
     set(valor) {
         const limpo = this.limpar(valor);
 
@@ -66,12 +66,13 @@ const id = new Id();
 document.getElementById("id").value = id.valor;
 
 class CNPJ extends Campo {
-    static #limpar(cnpj) {
+    limpar(cnpj) {
         return cnpj.replace(/\D/g, '');
     }
 
-    static #validar(cnpj) {
+    validar = cnpj => {
         if (cnpj.length !== 14) return false;
+        if (cnpj == null) return false;
         return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
     }
 }
@@ -97,11 +98,11 @@ cnpjInput.addEventListener("input", e => {
 });
 
 class InscricaoEstadual extends Campo {
-    static #limpar(inscricaoEstadual) {
+    limpar(inscricaoEstadual) {
         return inscricaoEstadual.replace(/\D/g, "");
     }
 
-    static #validar(inscricaoEstadual) {
+    validar = inscricaoEstadual => {
         if (inscricaoEstadual.length !== 12) return false;
 
         return true; // validação simplificada
@@ -128,11 +129,11 @@ inscricaoEstadualInput.addEventListener("input", e => {
 });
 
 class Cep extends Campo {
-    static #limpar(cep) {
+    limpar(cep) {
         return String(cep).replace(/\D/g, "");
     }
 
-    static #validar(cep) {
+    validar = cep => {
         if (cep.length !== 8) return false;
         //evita números todos iguais (ex: 11111111)
         if (/^(\d)\1+$/.test(cep)) return false;
@@ -158,17 +159,17 @@ cepInput.addEventListener("input", e => {
 });
 
 class Telefone extends Campo {
-    static #limpar(telefone) {
+    limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
 
-    static #validar(telefone) {
+    validar = telefone => {
         if (telefone.length !== 11) return false;
         if (/^(\d)\1+$/.test(telefone)) return false;
         return true;
     }
 
-    static #formatar(valor) {
+    formatar = valor => {
         if (valor.length === 11) {
             return valor.replace(
                 /(\d{2})(\d{5})(\d{4})/,
@@ -203,17 +204,17 @@ telefoneInput.addEventListener("input", e => {
 });
 
 class Celular extends Campo {
-    static #limpar(celular) {
+    limpar(celular) {
         return celular.replace(/\D/g, "");
     }
 
-    static #validar(celular) {
+    validar = celular => {
         if (celular.length !== 11) return false;
         if (/^(\d)\1+$/.test(celular)) return false;
         return true;
     }
 
-    static #formatar(valor) {
+    formatar = valor => {
         if (valor.length === 11) {
             return valor.replace(
                 /(\d{2}) (\d{5})(\d{4})/,
@@ -248,11 +249,11 @@ celularInput.addEventListener("input", e => {
 });
 
 class Email extends Campo {
-    static #limpar(email) {
+    limpar(email) {
         return email.trim().toLowerCase();
     }
 
-    static #validar(email) {
+    validar = email => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     }
@@ -261,7 +262,7 @@ class Email extends Campo {
 const email = new Email();
 
 class Site extends Campo {
-    static #converterParaURL(valor) {
+    converterParaURL = valor => {
         try {
            if (!/^https?:\/\//i.test(valor)) {
                valor = "https://" + valor;
@@ -366,7 +367,7 @@ class PrecoUnitario {
         return this.#valor;
     }
 
-    static #limpar(precoUnitario) {
+    #limpar = precoUnitario => {
         if (typeof precoUnitario === "string") {
             precoUnitario = precoUnitario.replace(/\./g, "").replace(",", ".");
         }
@@ -374,7 +375,7 @@ class PrecoUnitario {
         return Number(precoUnitario);
     };
 
-    static #validar(precoUnitario) {
+    #validar = precoUnitario => {
         if (isNaN(precoUnitario)) return false;
         if (precoUnitario <= 0) return false;
         if (precoUnitario > 1_000_000) return false; // limite realista
@@ -382,7 +383,7 @@ class PrecoUnitario {
         return true;
     };
 
-    #formatar(precoUnitario) {
+    formatar = precoUnitario => {
         return precoUnitario.toLocaleString("pt-BR",
             {
                 style: "currency",
