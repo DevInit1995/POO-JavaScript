@@ -13,4 +13,8 @@ class Mecanico extends Funcionario {
 
         this.especialidade = especialidade;
     }
+
+    realizandoManutencao() {
+        alert(this.nomeCompleto + "Está realizando manutenção.")
+    }
 }
