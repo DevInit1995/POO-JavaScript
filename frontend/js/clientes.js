@@ -400,25 +400,14 @@ class Ano {
     
     set(ano) {
         if(typeof ano !== "string") {
-            throw new Error("Data inválida!");
+            throw new Error("Ano do carro deve ser texto");
         }
 
-        if(!ano.trim()) {
-            throw new Error("Data obrigatória!");
+        if(ano == "") {
+            throw new Error("Ano do carro inválido")
         }
 
-        const data = new Date(ano);
-
-        if(isNaN(data.getTime())) {
-            throw new Error("Data de cadastro inválida!");
-        };
-
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
-
-        if(data > hoje){
-            throw new Error("Data não pode ser futura!");
-        }
+        return this.#valor = ano;
 
         this.#valor = data;
     }
@@ -426,10 +415,6 @@ class Ano {
     get() {
         //se precisar do objeto Date internamente
         return this.#valor;
-    }
-
-    formatar() {
-        return this.#valor.toLocaleDateString("pt-BR")
     }
 }
 
