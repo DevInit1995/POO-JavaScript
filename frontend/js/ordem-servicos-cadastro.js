@@ -159,28 +159,12 @@ telefoneInput.addEventListener("input", e => {
     e.target.value = mascaraTelefone(e.target.value);
 });
 
-class Cep {
-    #valor;
-
-    set(cep) {
-        const limpo = Cep.#limpar(cep);
-        
-        if(!Cep.#validar(limpo)) {
-            throw new Error("CEP inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
-    static #limpar(cep) {
+class Cep extends Campo {
+    limpar(cep) {
         return String(cep).replace(/\D/g, "");
     }
 
-    static #validar(cep) {
+    validar(cep) {
         if(cep.length !== 8) return false;
         //evita números todos iguais (ex: 11111111)
         if(/^(\d)\1+$/.test(cep)) return false;
