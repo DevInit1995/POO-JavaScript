@@ -328,16 +328,6 @@ class DataSaida extends DataEntrada {
 
 const entrega = new DataSaida();
 
-function mascaraDataEntrega(data){
-    data = new Date();
-
-    return data = new Intl.toLocaleDateString("pt-BR").format(data);
-}
-
-dataEntregaInput.addEventListener("formdata", e => {
-    e.target.value = mascaraDataEntrega(e.target.value);
-});
-
 function mascaraDataConclusao(data) {
     data = new Date();
 
@@ -398,24 +388,41 @@ limiteCreditoInput.addEventListener("input", e => {
     e.target.value = mascaraLimiteCredito(e.target.value);
 });
 
-class DataCadastro {
+class DataCadastro  extends DataEntrada {
     #valor;
     
-    set(dataCadastro) {
-        if(typeof dataCadastro !== "string") {
-            throw new Error("Data de cadastro deve ser texto");
+    set(dataEntrada) {
+        if(typeof dataEntrada !== "string") {
+            throw new Error("Data deve ser texto!");
         }
 
-        if(dataCadastro == "") {
-            throw new Error("Data de cadastro inválida")
+        if(!dataEntrada.trim()) {
+            throw new Error("Data obrigatória!")
         }
 
-        return this.#valor = dataCadastro;
+        const data = new Date(dataEntrada);
+
+        if(isNaN(data.getTime())) {
+            throw new Error("Data inválida!");
+        }
+
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if(data > hoje) {
+            throw new Error("Data não pode ser futura!");
+        }
+
+        this.#valor = data;        
     }
 
     get() {
         //se precisar do objeto Date internamente
         return this.#valor;
+    }
+
+    formatar() {
+        return this.#valor.toLocaleDateString("pt-BR");
     }
 }
 
