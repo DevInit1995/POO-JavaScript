@@ -70,28 +70,12 @@ class Id {
 const id = new Id();
 document.getElementById("id").value = id.valor;
 
-class CPF {
-    #valor; // PRIVADO
-
-    set(cpf) {
-        const limpo = CPF.#limpar(cpf);
-
-        if(!CPF.#validar(limpo)) {
-            throw new Error("CPF inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-    
-    static #limpar(cpf) {
+class CPF extends Campo {
+    limpar(cpf) {
         return cpf.replace(/\D/g, "");
     }
 
-    static #validar(cpf) {
+    validar(cpf) {
         if (cpf.length !== 11) return false;
         if (/^(\d)\1{10}$/.test(cpf)) return false;
         return true; // validação simplificada
