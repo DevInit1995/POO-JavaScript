@@ -136,24 +136,24 @@ class DataNascimento {
     
     set(dataNascimento) {
         if(typeof dataNascimento !== "string") {
-            throw new Error("Data de nascimento deve ser texto");
+            throw new Error("Data não deve ser texto!");
         }
 
         if(!dataNascimento.trim()) {
-            throw new Error("Data de nascimento obrigatória");
+            throw new Error("Data obrigatória!");
         }
 
         const data = new Date(dataNascimento);
 
         if(isNaN(data.getTime())) {
-            throw new Error("Data de nascimento inválida");
+            throw new Error("Data inválida!");
         }
 
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
 
         if(data > hoje) {
-            throw new Error("Data de nasciemnto não pode ser futura");
+            throw new Error("Data não pode ser futura!");
         }
 
         this.#valor = data;
@@ -420,44 +420,7 @@ class Ano {
 
 const ano = new Ano();
 
-class DataCadastro {
-    #valor;
-    
-    set(dataCadastro) {
-        if(typeof dataCadastro !== "string") {
-            throw new Error("Data de cadastro do carro deve ser texto");
-        }
-
-        if(!dataCadastro.trim()) {
-            throw new Error("Data de cadastro do carro obrigatória")
-        }
-
-        const data = new Date(dataCadastro);
-
-        if(isNaN(data.getTime())) {
-            throw new Error("Data de cadastro inválida");
-        };
-
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
-
-        if(data > hoje){
-            throw new Error("Data de nascimento não pode set futura");
-        }
-
-        this.#valor = data;
-
-        //return this.#valor = dataCadastro;
-    }
-
-    get() {
-        //se precisar do objeto Date internamente
-        return this.#valor;
-    }
-
-    formatar() {
-        return this.#valor.toLocaleDateString("pt-BR")
-    }
+class DataCadastro extends DataNascimento {
 }
 
 const dataCadastro = new DataCadastro();
