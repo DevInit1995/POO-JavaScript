@@ -435,42 +435,7 @@ dataCadastroInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataCadastro(e.target.value);
 });
 
-class UltimaVisita {
-    #valor;
-    
-    set(ultimaVisita) {
-        if(typeof ultimaVisita !== "string") {
-            throw new Error("Data da última visita deve ser texto");
-        }
-
-        if(!ultimaVisita.trim()) {
-            throw new Error("Data da última visita obrigatória")
-        }
-
-        const data = new Date(ultimaVisita);
-
-        if(isNaN(data.getTime())) {
-            throw new Error("Data da última visita inválida");
-        }
-
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
-
-        if(data > hoje) {
-            throw new Error("Data da última visita não poder futura");
-        }
-
-        this.#valor = data;        
-    }
-
-    get() {
-        //se precisar do objeto Date internamente
-        return this.#valor;
-    }
-
-    formatar() {
-        return this.#valor.toLocaleDateString("pt-BR");
-    }
+class UltimaVisita extends DataNascimento {
 }
 
 const ultimaVisita = new UltimaVisita();
