@@ -189,6 +189,25 @@ cepInput.addEventListener("input", e => {
     e.target.value = mascaraCep(e.target.value);
 });
 
+class Placa extends Campo {
+    limpar(placa) {
+        return String(placa).toUpperCase()
+        .replace(/[^A-Z0-9]/g, "");
+    }
+
+    validar(placa) {
+        if(placa.length !== 7) return false;
+
+        // LLLNLNN (padrão Mercosul)
+        const mercosul = /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/;
+        const antigo = /^[A-Z]{3}[0-9]{4}$/;
+        
+        return mercosul.test(placa) || antigo.test(placa);
+    }
+}
+
+const placa = new Placa();
+
 function mascaraPlaca(valor) {
     valor = valor
         .toUpperCase()
@@ -210,41 +229,6 @@ function mascaraPlaca(valor) {
 placaInput.addEventListener("input", e => {
     e.target.value = mascaraPlaca(e.target.value);
 });
-
-class Placa {
-    #valor;
-
-    set(placa) {
-        const limpo = Placa.#limpar(placa);
-
-        if(!Placa.#validar(limpo)) {
-            throw new Error("Placa inválida")
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return this.#valor;
-    }
-
-    static #limpar(placa) {
-        return String(placa).toUpperCase()
-        .replace(/[^A-Z0-9]/g, "");
-    }
-
-    static #validar(placa) {
-        if(placa.length !== 7) return false;
-
-        // LLLNLNN (padrão Mercosul)
-        const mercosul = /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/;
-        const antigo = /^[A-Z]{3}[0-9]{4}$/;
-        
-        return mercosul.test(placa) || antigo.test(placa);
-    }
-}
-
-const placa = new Placa();
 
 class Ano {
     #valor;
