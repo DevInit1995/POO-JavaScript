@@ -114,38 +114,18 @@ class Email extends Campo {
 
 const email = new Email();
 
-class Telefone {
-    #valor;
-
-    set(telefone) {
-        if (typeof telefone !== "string") {
-            throw new Error("Telefone deve ser uma string");
-        }
-
-        const limpo = Telefone.#limpar(telefone);
-
-        if (!Telefone.#validar(limpo)) {
-            throw new Error("Telefone inválido");
-        }
-
-        this.#valor = limpo;
-    }
-
-    get() {
-        return Telefone.#formatar(this.#valor);
-    }
-
-    static #limpar(telefone) {
+class Telefone extends Campo {
+    limpar(telefone) {
         return telefone.replace(/\D/g, "");
     }
 
-    static #validar(telefone) {
+    validar(telefone) {
         if (telefone.length !== 11) return false;
         if(/^(\d)\1+$/.test(telefone)) return false;
         return true;
     }
 
-    static #formatar(valor) {
+    formatar(valor) {
         if (valor.length === 11) {
             return valor.replace(
                 /(\d{2})(\d{5})(\d{4})/,
@@ -777,6 +757,8 @@ class OrdemServicosCadastro {
             nomeCompleto: document.getElementById("nomeCompleto").value,
             cpf: this.cpf.get(),
             email: this.email.get(),
+            telefone: this.telefone.get(),
+            cep: this.telefone.get(),
             placa: this.placa.get(),
             marca: document.getElementById("marca").value,
             modelo: document.getElementById("modelo").value,
