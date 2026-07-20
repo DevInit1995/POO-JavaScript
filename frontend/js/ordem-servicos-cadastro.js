@@ -323,25 +323,7 @@ anoInput.addEventListener("formdata", e => {
     e.target.value = mascaraDataAno(e.target.value);
 });*/
 
-class DataSaida {
-    #valor;
-    
-    set(dataSaida) {
-        if(typeof dataSaida !== "string") {
-            throw new Error("Data de saída deve ser texto");
-        }
-
-        if(dataSaida == "") {
-            throw new Error("Data de saída inválida")
-        }
-
-        return this.#valor = dataSaida;
-    }
-
-    get() {
-        //se precisar do objeto Date internamente
-        return this.#valor;
-    }
+class DataSaida extends DataEntrada {
 }
 
 const entrega = new DataSaida();
