@@ -18,6 +18,31 @@ const btnConcluir = document.querySelectorAll(".btnConcluir");
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
+class Campo {
+    #valor; // PRIVADO
+    
+    set(valor) {
+        const limpo = this.limpar(valor);
+
+        if(!this.validar(limpo)) {
+            throw new Error("Valor inválido");
+        }
+
+        this.#valor = limpo;
+    }
+
+    get() {
+        return this.#valor;
+    }
+
+    limpar(valor) {
+        return valor;
+    }
+
+    validar() {
+        return true;
+    }
+}
 
 class Id {
     #valor;
