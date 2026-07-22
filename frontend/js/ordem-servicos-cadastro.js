@@ -242,6 +242,13 @@ class Ano {
             throw new Error("Ano do carro inválido")
         }
 
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        if(ano > hoje) {
+            throw new Error("Ano não pode ser futuro!");
+        }
+
         return this.#valor = ano;
     }
 
