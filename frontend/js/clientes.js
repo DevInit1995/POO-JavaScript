@@ -407,6 +407,18 @@ class Ano {
             throw new Error("Ano do carro inválido")
         }
 
+        const anoLimite = Number(ano);
+        const anoMinimo = 1900;
+        const anoMaximo = 2100;
+
+        if(anoLimite < anoMinimo) {
+            throw new Error("Ano muito antigo! Escolha uma data mais recente.");
+        }
+
+        else if(anoLimite > anoMaximo) {
+            throw new Error("Ano muito longo! Escolha uma data inferior!")
+        }
+
         return this.#valor = ano;
 
         this.#valor = data;
