@@ -239,16 +239,21 @@ class Ano {
         }
 
         if(ano == "") {
-            throw new Error("Ano do carro inválido")
+            throw new Error("Ano do carro inválido");
         }
 
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
+        const anoLimite = Number(ano);
+        const anoMinimo = 1900;
+        const anoMaximo = 2100;
 
-        if(ano > hoje) {
-            throw new Error("Ano não pode ser futuro!");
+        if(anoLimite < anoMinimo) {
+            throw new Error("Ano muito antigo! Escolha uma data mais recente.");
         }
 
+        else if(anoLimite > anoMaximo) {
+            throw new Error("Ano muito longo! Escolha uma data inferior!")
+        }
+        
         return this.#valor = ano;
     }
 
