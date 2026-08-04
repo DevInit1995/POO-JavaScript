@@ -5,15 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="icon" href="/frontend/img/login.png">
+    <link rel="stylesheet" href="/frontend/css/login.css">
 </head>
+
 <body>
-    <h1>Olá, página destinada a cadastro e login no sistema!</h1>
+    <header>
+        <nav class="cabecalho">
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <span class="icone-fechar">
+            <ion-icon name="close"></ion-icon>
+        </span>
+
+        <div class="form-box login">
+            <h2>Login</h2>
+
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" required>
+                    <label>Senha</label>
+                </div>
+
+                <div class="relembre-senha">
+                    <label><input type="checkbox">Relembre me</label>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btnLogon">Login</button>
+                
+                <div class="login-register">
+                    <p>Não tem uma conta?
+                        <a href="#" class="login-link">Registrar</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registrar</h2>
+
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="person"></ion-icon>
+                    </span>
+                    <input type="text" required>
+                    <label>Usuário</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"></ion-icon>
+                    </span>
+                    <input type="text" required>
+                    <label>Senha</label>
+                </div>
+
+                <div class="relembre-senha">
+                    <label><input type="checkbox">Aceitar os termos e condições!</label>
+                </div>
+
+                <button type="submit" class="btnRegistrar">Registrar</button>
+            
+                <div class="login-register">
+                    <p>Já possui uma conta?
+                        <a href="#" class="register-link">Login</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+    <script src="/frontend/js/login.js"></script>
+    <!--
+    <div class="rodape">
+        <footer>Copyright 2026&copy; - JHON SANTOS</footer>
+    </div> -->
 </body>
-<style>
-    h1 {
-        text-align: center;
-        font-size: 40px;
-        color: #182540;
-    }
-</style>
 </html>

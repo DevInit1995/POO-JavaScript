@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('/frontend/img/background-login.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/frontend/img/background-login.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.opcoes {
+    display: flex;
+    gap: 5em;
+    margin: 13em;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.clientes, .fornecedores, .servicos {
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+}
+
+img {
+    height: 8em;
+    background: #D8BFD8;
+    border-radius: 15px;
+}
+
+img:hover {
+    height: 10em;
+    transition: 0.5s;
+}
+
+.clientes, .fornecedores, .servicos, figcaption {
+    margin-top: 8px;
+    color: #555
+}
+

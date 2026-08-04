@@ -5,105 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link rel="icon" type="image/png" href="/frontend/img/icon-home2.png">
-    <link rel="stylesheet" href="/frontend/css/menu2.css">
+    <link rel="stylesheet" href="/frontend/css/menu.css">
 </head>
 <body>
-    <header>
-        <nav class="cabecalho">
-            <button class="btnLogin-popup">Login</button>
-        </nav>
-    </header>
+    <div class="opcoes">
+        <figure class="clientes">
+            <img src="/frontend/img/cliente.png" alt="Clientes">
+            <figcaption>Clientes</figcaption>
+        </figure>
 
-    <div class="wrapper">
-        <span class="icone-fechar">
-            <ion-icon name="close"></ion-icon>
-        </span>
+        <figure class="fornecedores">
+            <img src="/frontend/img/fornecedor.png" alt="Fornecedores">
+            <figcaption>Fornecedores</figcaption>
+        </figure>
 
-        <div class="form-box login">
-            <h2>Login</h2>
-
-            <form action="#">
-                <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="mail"></ion-icon>
-                    </span>
-                    <input type="email" required>
-                    <label>Email</label>
-                </div>
-
-                <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="lock-closed"></ion-icon>
-                    </span>
-                    <input type="password" required>
-                    <label>Senha</label>
-                </div>
-
-                <div class="relembre-senha">
-                    <label><input type="checkbox">Relembre me</label>
-                    <a href="#">Esqueceu a senha?</a>
-                </div>
-
-                <button type="submit" class="btnLogon">Login</button>
-                
-                <div class="login-register">
-                    <p>Não tem uma conta?
-                        <a href="#" class="login-link">Registrar</a>
-                    </p>
-                </div>
-            </form>
-        </div>
-
-        <div class="form-box register">
-            <h2>Registrar</h2>
-
-            <form action="#">
-                <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="person"></ion-icon>
-                    </span>
-                    <input type="text" required>
-                    <label>Usuário</label>
-                </div>
-
-                <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="mail"></ion-icon>
-                    </span>
-                    <input type="email" required>
-                    <label>Email</label>
-                </div>
-
-                <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="mail"></ion-icon>
-                    </span>
-                    <input type="text" required>
-                    <label>Senha</label>
-                </div>
-
-                <div class="relembre-senha">
-                    <label><input type="checkbox">Aceitar os termos e condições!</label>
-                </div>
-
-                <button type="submit" class="btnRegistrar">Registrar</button>
-            
-                <div class="login-register">
-                    <p>Já possui uma conta?
-                        <a href="#" class="register-link">Login</a>
-                    </p>
-                </div>
-            </form>
-        </div>
+        <figure class="servicos">
+            <img src="/frontend/img/processo.png" alt="Serviços">
+            <figcaption>Serviços</figcaption>
+        </figure>
     </div>
-
-    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
-    <script src="/frontend/js/menu2.js"></script>
-    <!--
-    <div class="rodape">
-        <footer>Copyright 2026&copy; - JHON SANTOS</footer>
-    </div> -->
 </body>
 </html>
 
