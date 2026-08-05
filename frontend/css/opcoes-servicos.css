@@ -17,7 +17,7 @@ body {
     background-position: center;
 }
 
-.voltar {
+nav, #voltar {
     margin-bottom: 60em;
     font-size: 8px;
 }
@@ -49,9 +49,5 @@ img:hover {
     transition: 1.50s;
 }
 
-figcaption {
-    margin-top: 8px;
-    color: #555;
-    font-size: 20px;
-}
+
 

@@ -19,18 +19,28 @@ class Menu {
         trocarBanner();
     }*/
 
-    paginaCadastroOS = () => {
-      const botao = document.getElementById("btnCadastrarOS");
-      const urlParaAbrir = "ordem-servicos-cadastro.html";
+    voltar = () => {
+      const botao = document.getElementById('btnVoltar');
+      console.log(botao);
+      const urlParaAbrir = 'menu2.html';
 
       botao.addEventListener('click', function() {
         window.open(urlParaAbrir, '_blank');
       });
     }
 
+    /*paginaFuncionariosCadastro = () => {
+      const botao = document.getElementById("btnFuncionarios");
+      const urlParaAbrir = "funcionarios.html";
+
+      botao.addEventListener('click', function() {
+        window.open(urlParaAbrir, '_blank');
+      });
+    }*/
+
     paginaClientesCadastro = () => {
-      const botao = document.getElementById("btnClientes");
-      const urlParaAbrir = "clientes.html";
+      const botao = document.getElementById('btnClientes');
+      const urlParaAbrir = 'clientes.html';
 
       botao.addEventListener('click', function() {
         window.open(urlParaAbrir, '_blank');
@@ -38,20 +48,31 @@ class Menu {
     }
 
     paginaFornecedoresCadastro = () => {
-      const botao = document.getElementById("btnFornecedores");
-      const urlParaAbrir = "fornecedores.html";
+      const botao = document.getElementById('btnFornecedores');
+      const urlParaAbrir = 'fornecedores.html';
 
       botao.addEventListener('click', function() {
         window.open(urlParaAbrir, '_blank');
       });
     }
 
+    paginaCadastroOS = () => {
+      const botao = document.getElementById('btnCadastrarOS');
+      const urlParaAbrir = 'ordem-servicos-cadastro.html';
+
+      botao.addEventListener('click', function() {
+        window.open(urlParaAbrir, '_blank');
+      });
+    }
 }
 
 menu = new Menu();
-
-menu.paginaFucionarioCadastro();
-menu.paginaCadastroOSS();
+/*menu.voltar();
+menu.paginaClientesCadastro();
+menu.paginaCadastroOS();
 menu.paginaFornecedoresCadastro();
-//menu.banner();
+//menu.banner();*/
 
+document.addEventListener("DOMContentLoaded", () => {
+    voltar();
+});

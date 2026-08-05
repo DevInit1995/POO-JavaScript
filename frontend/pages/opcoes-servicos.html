@@ -8,27 +8,35 @@
     <title>Serviços</title>
 </head>
 <body>
-    <nav class="voltar">
-        <img src="/frontend/img/botao-voltar.png" alt="Voltar">
+    <nav>
+        <a id="btnVoltar" href="menu2.html">
+            <img src="/frontend/img/botao-voltar.png" alt="Voltar">
+        </a>
     </nav>
     
     <div class="opcoes-servicos">
         <figure class="cadastrar-os">
-            <img src="/frontend/img/cadastro-os.png" alt="OS" id="btnCadastrarOS" href="/frontend/pages/ordem-servicos-cadastro.html" target="_blank">
-            <figcaption>Cadastrar O.S</figcaption>
+            <a href="ordem-servicos-cadastro.html" target="_blank">
+                <img src="/frontend/img/cadastro-os.png" alt="OS" id="btnCadastrarOS">
+            </a>
+            <figcaption>O.S</figcaption>
         </figure>
 
         <figure class="adicionar-servicos-pecas">
-            <img src="/frontend/img/adicionar-servicos-pecas.png" alt="Serviços e Peças">
-            <figcaption>Adicionar Serviços e Peças</figcaption>
+            <a href="cadastroServicosPecas.html">
+                <img src="/frontend/img/adicionar-servicos-pecas.png" alt="Serviços e Peças">
+            </a>
+            <figcaption>Serviços e Peças</figcaption>
         </figure>
 
         <figure class="cadastrar-pecas">
-            <img src="/frontend/img/adicionar-pecas.png" alt="Peças">
-            <figcaption>Cadastrar Peças</figcaption>
+            <a href="cadastroPecas.html">
+                <img src="/frontend/img/adicionar-pecas.png" alt="Serviços e Peças">
+            </a>
+            <figcaption>Peças</figcaption>
         </figure>
     </div>
 
-    <script src="/frontend/js/menu.js"></script>
+    
 </body>
 </html>

@@ -25,7 +25,9 @@ body {
     cursor: pointer;
 }
 
-.clientes, .fornecedores, .servicos {
+
+
+figure, #btnClientes, #fornecedores, #servicos {
     display: inline-block;
     margin: 0;
     text-align: center;
