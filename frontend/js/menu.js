@@ -1,5 +1,5 @@
 class Menu {
-    banner = () => {
+    /*banner = () => {
         let banners = ["img/ferramentas.jpg", "img/mecanico.jpg", "img/motor.jpg", "img/roda.jpg"];
         let bannerAtual = 0;
        
@@ -17,11 +17,11 @@ class Menu {
            setInterval(trocarBanner, 3000);
         }
         trocarBanner();
-    }
+    }*/
 
-    paginaFucionarioCadastro = () => {
-      const botao = document.getElementById("btnFuncionarios");
-      const urlParaAbrir = "funcionarios.html";
+    paginaCadastroOS = () => {
+      const botao = document.getElementById("btnCadastrarOS");
+      const urlParaAbrir = "ordem-servicos-cadastro.html";
 
       botao.addEventListener('click', function() {
         window.open(urlParaAbrir, '_blank');
@@ -51,7 +51,7 @@ class Menu {
 menu = new Menu();
 
 menu.paginaFucionarioCadastro();
-menu.paginaClientesCadastro();
+menu.paginaCadastroOSS();
 menu.paginaFornecedoresCadastro();
 //menu.banner();
 

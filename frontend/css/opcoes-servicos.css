@@ -17,15 +17,22 @@ body {
     background-position: center;
 }
 
-.opcoes {
+.voltar {
+    margin-bottom: 60em;
+    font-size: 8px;
+}
+
+.opcoes-servicos {
     display: flex;
     gap: 5em;
     margin: 13em;
     justify-content: center;
     cursor: pointer;
+
+   
 }
 
-.clientes, .fornecedores, .servicos {
+.cadastrar-os, .adicionar-servicos-pecas, .cadastrar-pecas {
     display: inline-block;
     margin: 0;
     text-align: center;
