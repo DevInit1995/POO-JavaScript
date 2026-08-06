@@ -17,19 +17,28 @@ body {
     background-position: center;
 }
 
-nav, #voltar {
-    margin-bottom: 60em;
-    font-size: 8px;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(215, 234, 252);
+    margin-top: 14px;
+    padding: 20px 20px;  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    border-radius: 10px;
+    font-size: 5px;
 }
 
 .opcoes-servicos {
     display: flex;
     gap: 5em;
-    margin: 13em;
+    margin-left: 5px;
     justify-content: center;
     cursor: pointer;
-
-   
 }
 
 .cadastrar-os, .adicionar-servicos-pecas, .cadastrar-pecas {
