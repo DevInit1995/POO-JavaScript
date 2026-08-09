@@ -1,22 +1,21 @@
-const modal = document.querySelector('.modal-container');
+const modal = document.querySelector('.modal-container')
 const tbody = document.querySelector('tbody');
 const sNome = document.querySelector('#m-nome');
-const sFuncao = document.querySelector('#m-funcao');
 const sEmail = document.querySelector('#m-email');
-const sContato = document.querySelector('#m-contato');
-const btnSalvar = document.querySelector('#btnSalvar');
+const sCelular = document.querySelector('#m-celular');
+const sDataCadastro = document.querySelector('#m-data-cadastro');
 
 let itens;
-let id;
+let ids;
 
-const getItensBD = () => JSON.parse(localStorage.getItem('dbfun')) ?? [];
-const setItensBD = () => localStorage.setItem('dbfunc', JSON.stringify(itens));
+const getItensBD = () => JSON.parse(localStorage.getItem('clientes')) ?? [];
+const setItensBD = () => localStorage.setItem('clientes', JSON.stringify(itens));
 
 function loadItens() {
-    itens = getItensBD()
-    tbody.innerHTML = ''
+    itens = getItensBD();
+    tbody.innerHTML = '';
     itens.forEach((item, index) => {
-        insertItem(item, index)
+        insertItem(item, index);
     });
 }
 
@@ -27,15 +26,17 @@ function insertItem(item, index) {
 
     tr.innerHTML = `
         <td>${item.nome}</td>
-        <td>${item.funcao}</td>
         <td>${item.email}</td>
-        <td>${item.contato}</td>
+        <td>${item.celular}</td>
+        <td>${item.dataCadastro}</td>
         <td class="acao">
-            <button onclick="editItem(${index})"><i class='bx bx-edit' >
-        <i/></button>
-            </td>
+            <button onclick="editItem(${index})"><i class='bx bx-edit' ></i></button>
+        </td>
+        <td class="acao">
+            <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
+        </td>
         `
-            tbody.appendChild(tr);
+        tbody.appendChild(tr);
 }
 
 function editItem(index) {
@@ -48,7 +49,7 @@ function deleteItem(index) {
     loadItens();
 }
 
-/*function openModal(edit = false, index = 0) {
+function openModal(edit = false, index = 0) {
     modal.classList.add('active');
 
     modal.onclick = e => {
@@ -59,21 +60,21 @@ function deleteItem(index) {
 
     if (edit) {
         sNome.value = itens[index].nome;
-        sFuncao.value = itens[index].funcao;
         sEmail.value = itens[index].email;
-        sContato.value = itens[index].contato;
-        id = index;
+        sCelular.value = itens[index].celular;
+        sDataCadastro.value = itens[index].dataCadastro;
+        ids = index;
     } else {
         sNome.value = '';
-        sFuncao.value = '';
         sEmail.value = '';
-        sContato.value = '';
+        sCelular.value = '';
+        sDataCadastro.value = '';
     }
-}*/
+}
 
-/*btnSalvar.onclick = e => {
-    if(sNome.value == '' || sFuncao.value == '' || 
-        sEmail.value == '' || sContato.value == '') {
+btnConcluir.onclick = (e) => {
+    if(sNome.value == '' || sEmail.value == '' || 
+    sCelular.value == '' || sDataCadastro.value == '') {
             return;
     }
 
@@ -81,12 +82,12 @@ function deleteItem(index) {
 
     if(id !== undefined) {
         itens[id].nome = sNome.value;
-        itens[id].funcao = sFuncao.value;
         itens[id].email = sEmail.value;
-        itens[id].contato = sContato.value;
+        itens[id].celular = sCelular.value;
+        itens[id].dataCadastro = sDataCadastro.value;
     } else {
-        itens.push({'nome': sNome.value, 'funcao': sFuncao.value,
-            'email': sEmail.value, 'contato': sContato.value
+        itens.push({'nome': sNome.value, 'email': sEmail.value, 
+            'celular': sCelular.value, 'dataCadastro': sDataCadastro.value
         });
     }
 
@@ -95,4 +96,4 @@ function deleteItem(index) {
     modal.classList.remove('active');
     loadItens();
     id = undefined;
-}*/
+}

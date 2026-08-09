@@ -66,7 +66,7 @@ class Id {
 }
 
 const id = new Id();
-document.getElementById("id").value = id.valor;
+//document.getElementById("id").value = id.valor;
 
 class CPF extends Campo {
     limpar(cpf) {

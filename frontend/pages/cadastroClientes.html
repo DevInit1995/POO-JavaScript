@@ -6,13 +6,14 @@
     <title>Cadastro de clientes</title>
     <link rel="stylesheet" href="/frontend/css/cadastro-clientes.css">
     <link rel="icon" href="/frontend/img/cadastroclientes.png">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <span>Cadastro de Clientes</span>
             <a href="clientes.html">
-                <button id="new">Incluir</i></button>
+                <button onclick="openModal()" id="new">Incluir</i></button>
             </a>
         </div>
 
@@ -21,9 +22,9 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Função</th>
                         <th>E-mail</th>
-                        <th>Contato</th>
+                        <th>Celular</th>
+                        <th>Data Cadastro</th>
                         <th class="acao">Editar</th>
                         <th class="acao">Excluir</th>
                     </tr>
@@ -31,28 +32,9 @@
                 <tbody></tbody>
             </table>
         </div>
-
-        <!--<div class="modal-container">
-            <div class="modal">
-                <form>
-                    <label for="m-nome">Nome:</label>
-                    <input id="m-nome" type="text" required>
-
-                    <label for="m-funcao">Função:</label>
-                    <input id="m-funcao" type="text" required>
-
-                    <label for="m-email">E-mail:</label>
-                    <input id="m-email" type="email" required>
-
-                    <label for="m-contato">Contato:</label>
-                    <input id="m-contato" type="text" required>
-
-                    <button id="btnSalvar">Salvar</button>
-                </form>
-            </div>
-        </div>-->
     </div>
-
+    <script src="/frontend/js/clientes.js"></script>
     <script src="/frontend/js/cadastro-clientes.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
 </body>
 </html>
