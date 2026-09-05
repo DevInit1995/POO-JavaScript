@@ -12,6 +12,7 @@ const chassiInput = document.getElementById("chassi");
 const dataCadastroInput = document.getElementById("dataCadastro");
 const dataUltimaVisitaInput = document.getElementById("dataUltimaVisita");
 const btnConcluir = document.querySelectorAll(".btnConcluir");
+
 let etapaAtual = 0;
 
 //ENCAPSULAMENTO POR CLASSES E MÉTODOS PRIVADOS
@@ -64,9 +65,6 @@ class Id {
                .test(valor);
     } 
 }
-
-const id = new Id();
-//document.getElementById("id").value = id.valor;
 
 class CPF extends Campo {
     limpar(cpf) {
@@ -690,8 +688,88 @@ class Clientes extends Pessoa {
         });
     }
 
+    preencherFormulario(cliente) {
+        document.getElementById("id").value = cliente.id;
+
+        document.getElementById("nomeCompleto").value = cliente.nomeCompleto;
+
+        document.getElementById("cpf").value = cliente.cpf;
+
+        /*document.getElementById("rg").value =
+            cliente.rg;
+
+        document.getElementById("dataNascimento").value =
+            cliente.dataNascimento;
+
+        document.getElementById("telefone").value =
+            cliente.telefone;*/
+
+        document.getElementById("celular").value = cliente.celular;
+
+        document.getElementById("email").value = cliente.email;
+
+        /*document.getElementById("estado").value =
+            cliente.estado;
+
+        document.getElementById("cidade").value =
+            cliente.cidade;
+
+        document.getElementById("bairro").value =
+            cliente.bairro;
+
+        document.getElementById("rua").value =
+            cliente.rua;
+
+        document.getElementById("numero").value =
+            cliente.numero;
+
+        document.getElementById("cep").value =
+            cliente.cep;
+
+        document.getElementById("complemento").value =
+            cliente.complemento;
+
+        document.getElementById("placa").value =
+            cliente.placa;
+
+        document.getElementById("marca").value =
+            cliente.marca;
+
+        document.getElementById("modelo").value =
+            cliente.modelo;
+
+        document.getElementById("ano").value =
+            cliente.ano;
+
+        document.getElementById("cor").value =
+            cliente.cor;
+
+        document.getElementById("chassi").value =
+            cliente.chassi;
+
+        document.getElementById("kmAtual").value =
+            cliente.kmAtual;
+
+        document.getElementById("tipoCombustivel").value =
+            cliente.tipoCombustivel;
+
+        document.getElementById("observacoes").value =
+            cliente.observacoesVeiculo;*/
+
+        document.getElementById("dataCadastro").value = cliente.dataCadastro;
+
+        /*document.getElementById("historicoServicos").value =
+            cliente.historicoServicos;
+
+        document.getElementById("dataUltimaVisita").value =
+            cliente.dataUltimaVisita;
+
+        document.getElementById("observacao").value =
+            cliente.observacoes;*/
+    }
+    
     //LocalStorage
-    concluir() {
+    concluir = () => {
         const registro = {
             id: document.getElementById("id").value,
             nomeCompleto: document.getElementById("nomeCompleto").value,
@@ -727,19 +805,70 @@ class Clientes extends Pessoa {
             dataUltimaVisita: document.getElementById("dataUltimaVisita").value,
             observacoes: document.getElementById("observacoes").value
         };
-
+        //console.log("REGISTRO CRIADO:", registro);
         //Buscar a "tabela" no localStorage (ou criar vazia)
         let tabela = JSON.parse(localStorage.getItem("clientes")) || [];
+        //console.log("TABELA ANTES:", tabela);
+        
+        const clienteStorage = JSON.parse(localStorage.getItem("clientes")) ?? [];
+        const params = new URLSearchParams(window.location.search);
+        const idEdicao = params.get("id");
+        const cliente = clienteStorage.find(cliente => String(cliente.id) === String(idEdicao));
 
-        //Colocar o novo registro
-        tabela.push(registro);
+        /*console.log("CLIENTE ENCONTRADO:", cliente);
+        document.getElementById("id").value = cliente.id;
+        document.getElementById("nomeCompleto").value = cliente.nomeCompleto;*/
 
-        //Salvar novamente no localStorage
+        //console.log("ID EDIÇÃO:", idEdicao);
+
+        if (idEdicao) {
+            // EDIÇÃO
+            const indice = tabela.findIndex(
+                cliente => String(cliente.id) === String(idEdicao)
+            );
+
+            if (indice !== -1) {
+                tabela[indice] = registro;
+            }
+
+        } else {
+            // CADASTRO
+            tabela.push(registro);
+        }
+
         localStorage.setItem("clientes", JSON.stringify(tabela));
     }
 }
 
+const clienteStorage =
+    JSON.parse(localStorage.getItem("clientes")) ?? [];
+
+const params = new URLSearchParams(window.location.search);
+const idEdicao = params.get("id");
+
+const cliente = clienteStorage.find(
+    cliente => String(cliente.id) === String(idEdicao)
+);
+
 const clientes = new Clientes();
+
+if (idEdicao) {
+    // EDIÇÃO
+    if (!cliente) {
+        Swal.fire({
+            icon: "error",
+            title: "Erro",
+            text: "Cliente não encontrado."
+        });
+    } else {
+        clientes.preencherFormulario(cliente);
+    }
+
+} else {
+    // CADASTRO
+    const novoId = new Id();
+    document.getElementById("id").value = novoId.valor;
+}
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -763,7 +892,7 @@ avancar.forEach((btn) => {
                 clientes.proximaEtapa();
         }
     });
-});
+}); 
 
 //voltar
 voltar.forEach(btn => {

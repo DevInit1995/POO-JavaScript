@@ -1,12 +1,48 @@
-const modal = document.querySelector('.modal-container')
+//const modal = document.querySelector('.modal');
 const tbody = document.querySelector('tbody');
-const sNome = document.querySelector('#m-nome');
-const sEmail = document.querySelector('#m-email');
-const sCelular = document.querySelector('#m-celular');
-const sDataCadastro = document.querySelector('#m-data-cadastro');
+const btnIncluir = document.querySelector('.btnIncluir');
+
+//const idP = document.querySelector('#id');
+const nomeCompleto = document.querySelector('#nomeCompleto');
+/*const cpf = document.querySelector('#cpf');
+const rg = document.querySelector('#rg');
+const dataNascimento = document.querySelector('#dataNascimento');
+
+const masculino = document.querySelector('#masculino');
+const feminino = document.querySelector('#feminino');
+
+const solteiro = document.querySelector('#solteiro');
+const separado = document.querySelector('#separado');
+const viuvo = document.querySelector('#viuvo');
+
+const telefone = document.querySelector('#telefone');
+const celular = document.querySelector('#celular');
+const email = document.querySelector('#email');
+
+const estado = document.querySelector('#estado');
+const cidade = document.querySelector('#cidade');
+const bairro = document.querySelector('#bairro');
+const rua = document.querySelector('#rua');
+const numero = document.querySelector('#numero');
+const cep = document.querySelector('#cep');
+const complemento = document.querySelector('#complemento');
+
+const placa = document.querySelector('#placa');
+const marca = document.querySelector('#marca');
+const modelo = document.querySelector('#modelo');
+const ano = document.querySelector('#ano');
+const cor = document.querySelector('#cor');
+const chassi = document.querySelector('#chassi');
+const kmAtual = document.querySelector('#kmAtual');
+const tipoCombustivel = document.querySelector('#tipoCombustivel');
+const observacoesVeiculo = document.querySelector('#observacoes');
+
+const dataCadastro = document.querySelector('#dataCadastro');
+const historicoServicos = document.querySelector('#historicoServicos');
+const dataUltimaVisita = document.querySelector('#dataUltimaVisita');
+const observacoesRelacionamento = document.querySelector('#observacoes');*/
 
 let itens;
-let ids;
 
 const getItensBD = () => JSON.parse(localStorage.getItem('clientes')) ?? [];
 const setItensBD = () => localStorage.setItem('clientes', JSON.stringify(itens));
@@ -25,7 +61,7 @@ function insertItem(item, index) {
     let tr = document.createElement('tr');
 
     tr.innerHTML = `
-        <td>${item.nome}</td>
+        <td>${item.nomeCompleto}</td>
         <td>${item.email}</td>
         <td>${item.celular}</td>
         <td>${item.dataCadastro}</td>
@@ -40,7 +76,9 @@ function insertItem(item, index) {
 }
 
 function editItem(index) {
-    openModal(true, index);
+    const cliente = itens[index];
+   
+    window.open(`clientes.html?id=${cliente.id}`, '_blank');
 }
 
 function deleteItem(index) {
@@ -49,51 +87,35 @@ function deleteItem(index) {
     loadItens();
 }
 
-function openModal(edit = false, index = 0) {
-    modal.classList.add('active');
-
-    modal.onclick = e => {
-        if(e.target.className.indexOf('modal-container') !== -1) {
-            modal.classList.remove('active');
-        }
-    }
-
-    if (edit) {
-        sNome.value = itens[index].nome;
-        sEmail.value = itens[index].email;
-        sCelular.value = itens[index].celular;
-        sDataCadastro.value = itens[index].dataCadastro;
-        ids = index;
-    } else {
-        sNome.value = '';
-        sEmail.value = '';
-        sCelular.value = '';
-        sDataCadastro.value = '';
+btnIncluir.addEventListener = (e) => {
+    function btnIncluir () {
+        window.location.href = 'clientes.html';
     }
 }
 
-btnConcluir.onclick = (e) => {
-    if(sNome.value == '' || sEmail.value == '' || 
-    sCelular.value == '' || sDataCadastro.value == '') {
-            return;
-    }
+function salvarCliente() {  
+    const clientes = JSON.parse(localStorage.getItem('clientes')) ?? [];
+ 
+    if (idEdicao) {
 
-    e.preventDefault();
+        const index = clientes.findIndex(
+            cliente => String(cliente.id) === String(idEdicao)
+        );
 
-    if(id !== undefined) {
-        itens[id].nome = sNome.value;
-        itens[id].email = sEmail.value;
-        itens[id].celular = sCelular.value;
-        itens[id].dataCadastro = sDataCadastro.value;
+        if (index !== -1) {
+            clientes[index] = {
+                ...clientes[index],
+                ...clienteAtualizado,
+                id: clientes[index].id
+            };
+        }
+
     } else {
-        itens.push({'nome': sNome.value, 'email': sEmail.value, 
-            'celular': sCelular.value, 'dataCadastro': sDataCadastro.value
+        clientes.push({
+            id: Date.now(),
+            ...clienteAtualizado
         });
     }
 
-    setItensBD();
-
-    modal.classList.remove('active');
-    loadItens();
-    id = undefined;
+    localStorage.setItem('clientes', JSON.stringify(clientes));
 }
