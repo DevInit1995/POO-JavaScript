@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('/frontend/img/background-login.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/frontend/img/background-login.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.opcoes {
+    display: flex;
+    gap: 5em;
+    margin: 13em;
+    justify-content: center;
+    cursor: pointer;
+}
+
+figure, #btnNovoUsuario {
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+}
+
+img {
+    height: 10em;
+    background: #DAEBFD;
+    border-radius: 15px;
+}
+
+img:hover {
+    height: 12em;
+    transition: 1.50s;
+}
+
+figcaption {
+    margin-top: 8px;
+    color: #555;
+    font-size: 20px;
+    display: block;
+}
+
