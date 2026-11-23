@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Fornecedores</title>
+    <link rel="stylesheet" href="/frontend/css/cadastro-fornecedores.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <span>Cadastro de Fornecedores</span>
+            <a href="fornecedores.html" target="_blank">
+                <button 
+                    type="button" 
+                    value="concluir" 
+                    class="btnConcluir" 
+                    onclick="btnIncluir()"
+                    id="new">Incluir</i>
+                </button>
+            </a>
+        </div>
+
+        <div class="divTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Razão Social</th>
+                        <th>Nome Fantasia</th>
+                        <th>CNPJ</th>
+                        <th>Inscrição Estadual</th>
+                        <th class="acao">Editar</th>
+                        <th class="acao">Excluir</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="/frontend/js/cadastro-fornecedores.js"></script>
+    <script src="/frontend/js/fornecedores.js"></script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+</body>
+</html>

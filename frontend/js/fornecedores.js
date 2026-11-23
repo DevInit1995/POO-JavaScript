@@ -62,8 +62,8 @@ class Id {
     }
 }
 
-const id = new Id();
-document.getElementById("id").value = id.valor;
+//const id = new Id();
+//document.getElementById("id").value = id.valor;
 
 class CNPJ extends Campo {
     limpar(cnpj) {
@@ -687,11 +687,35 @@ class Fornecedores extends Pessoa {
         //Buscar a "tabela" no localStorage (ou criar vazia)
         let tabela = JSON.parse(localStorage.getItem("fornecedores")) || [];
 
-        //Colocar o novo registro
-        tabela.push(registro);
+        const params = new URLSearchParams(window.location.search);
+        const idEdicao = params.get("id");
+        const fornecedores = fornecedoresStorage.find(fornecedores => String(fornecedores.id) === String(idEdicao));
+
+        if(idEdicao){
+            // EDIÇÃO
+            const indice = tabela.findIndex(
+                cliente => String(cliente.id) === String(idEdicao)
+            );
+
+            if (indice !== -1) {
+                tabela[indice] = registro;
+            }
+
+        } else {
+            //Colocar o novo registro
+            tabela.push(registro);
+        }
 
         //Salvar novamente no localStorage
         localStorage.setItem("fornecedores", JSON.stringify(tabela));
+    }
+
+    exibirAlerta(icone, titulo, texto) {
+        Swal.fire({
+            icon: icone,
+            title: titulo,
+            text: texto,
+        });
     }
 
     proximaEtapa() {
@@ -706,16 +730,37 @@ class Fornecedores extends Pessoa {
         passagem[etapaAtual].classList.add("active");
     }
 
-    exibirAlerta(icone, titulo, texto) {
-        Swal.fire({
-            icon: icone,
-            title: titulo,
-            text: texto,
-        });
-    }
 }
 
+const fornecedoresStorage =
+    JSON.parse(localStorage.getItem("fornecedores")) ?? [];
+
+const params = new URLSearchParams(window.location.search);
+const idEdicao = params.get("id");
+
+const fornecedor = fornecedoresStorage.find(
+    fornecedor => String(fornecedor.id) === String(idEdicao)
+);
+
 const fornecedores = new Fornecedores();
+
+if (idEdicao) {
+    // EDIÇÃO
+    if (!fornecedor) {
+        Swal.fire({
+            icon: "error",
+            title: "Erro",
+            text: "Fornecedor não encontrado."
+        });
+    } else {
+        fornecedores.preencherFormulario(fornecedor);
+    }
+
+} else {
+    // CADASTRO
+    const novoId = new Id();
+    document.getElementById("id").value = novoId.valor;
+}
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
