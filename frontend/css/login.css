@@ -246,7 +246,7 @@ header {
     text-decoration: underline;
 }
 
-.btnLogon, .btnRegistrar {
+.btnLogon {
     width: 100%;
     height: 45px;
     background: #162938;
@@ -257,24 +257,6 @@ header {
     font-size: 1em;
     color: #fff;
     font-weight: 500;
-}
-
-.login-register {
-    font-size: .9em;
-    color: #162938;
-    text-align: center;
-    font-weight: 500;
-    margin: 25px 0 10px;
-}
-
-.login-register, p a {
-    color: #162938;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.login-register p a:hover {
-    text-decoration: underline;
 }
 
 .login-link p a:hover {

@@ -1,6 +1,6 @@
 //const modal = document.querySelector('.modal');
 const tbody = document.querySelector('tbody');
-const btnIncluir = document.querySelector('.btnIncluir');
+//const btnIncluir = document.querySelector('.btnIncluir');
 
 //const idP = document.querySelector('#id');
 const nomeCompleto = document.querySelector('#nomeCompleto');
@@ -87,13 +87,13 @@ function deleteItem(index) {
     loadItens();
 }
 
-btnIncluir.addEventListener = (e) => {
+/*btnIncluir.addEventListener = (e) => {
     function btnIncluir () {
         window.location.href = 'clientes.html';
     }
-}
+}*/
 
-function salvarCliente() {  
+/*function salvarCliente() {  
     const clientes = JSON.parse(localStorage.getItem('clientes')) ?? [];
  
     if (idEdicao) {
@@ -118,4 +118,4 @@ function salvarCliente() {
     }
 
     localStorage.setItem('clientes', JSON.stringify(clientes));
-}
+}*/
