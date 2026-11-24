@@ -778,15 +778,63 @@ class OrdemServicosCadastro {
         //Buscar a "tabela" no localStorage (ou criar vazia)
         let tabela = JSON.parse(localStorage.getItem("ordem-servicos-cadastro")) || [];
 
+        const ordemServicoStorage = JSON.parse(localStorage.getItem("ordemServicoCadastro")) ?? [];
+        const params = new URLSearchParams(window.location.search);
+        const idEdicao = params.get("id");
+        const ordemServicoCadastro = ordemServicoStorage.find(ordemServicoCadastro => String(ordemServicoCadastro.id) === String(idEdicao));
+
         //Colocar o novo registro
-        tabela.push(registro);
+        //tabela.push(registro);
+
+        if (idEdicao) {
+            // EDIÇÃO
+            const indice = tabela.findIndex(
+                ordemServicoCadastro => String(ordemServicoCadastro.id) === String(idEdicao)
+            );
+
+            if (indice !== -1) {
+                tabela[indice] = registro;
+            }
+
+        } else {
+            // CADASTRO
+            tabela.push(registro);
+        }
 
         //Salvar novamente no localStorage
         localStorage.setItem("ordem-servicos-cadastro", JSON.stringify(tabela));
     }    
 }
 
+const ordemServicoStorage =
+    JSON.parse(localStorage.getItem("clientes")) ?? [];
+
+const params = new URLSearchParams(window.location.search);
+const idEdicao = params.get("id");
+
+const ordemServicoCadastro = ordemServicoStorage.find(
+    ordemServicoCadastro => String(ordemServicoCadastro.id) === String(idEdicao)
+);
+
 const ordemServicosCadastro = new OrdemServicosCadastro();
+
+if (idEdicao) {
+    // EDIÇÃO
+    if (!ordemServicosCadastro) {
+        Swal.fire({
+            icon: "error",
+            title: "Erro",
+            text: "Cliente não encontrado."
+        });
+    } else {
+        ordemServicosCadastro.preencherFormulario(ordemServicoCadastro);
+    }
+
+} else {
+    // CADASTRO
+    const novoId = new Id();
+    document.getElementById("id").value = novoId.valor;
+}
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
