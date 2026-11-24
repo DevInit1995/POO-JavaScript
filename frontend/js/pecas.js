@@ -35,8 +35,8 @@ class Id {
     }    
 }
 
-const id = new Id();
-document.getElementById("id").value = id.valor;
+//const id = new Id();
+//document.getElementById("id").value = id.valor;
 
 class CodigoInterno {
     #valor;
@@ -491,13 +491,59 @@ class CadastroPecas {
 
         let tabela = JSON.parse(localStorage.getItem("cadastroPecas")) || [];
 
-        tabela.push(registro);
+        const pecaStorage = JSON.parse(localStorage.getItem("pecas")) ?? [];
+        const params = new URLSearchParams(window.location.search);
+        const idEdicao = params.get("id");
+        const peca = pecaStorage.find(peca => String(peca.id) === String(idEdicao));
+
+        if (idEdicao) {
+            // EDIÇÃO
+            const indice = tabela.findIndex(
+                peca => String(peca.id) === String(idEdicao)
+            );
+
+            if (indice !== -1) {
+                tabela[indice] = registro;
+            }
+
+        } else {
+            // CADASTRO
+            tabela.push(registro);
+        }
 
         localStorage.setItem("cadastroPecas", JSON.stringify(tabela));
     }
 }
 
+const pecaStorage =
+    JSON.parse(localStorage.getItem("pecas")) ?? [];
+
+const params = new URLSearchParams(window.location.search);
+const idEdicao = params.get("id");
+
+const peca = pecaStorage.find(
+    peca => String(peca.id) === String(idEdicao)
+);
+
 const cadastroPecas = new CadastroPecas();
+
+if (idEdicao) {
+    // EDIÇÃO
+    if (!peca) {
+        Swal.fire({
+            icon: "error",
+            title: "Erro",
+            text: "Cliente não encontrado."
+        });
+    } else {
+        peca.preencherFormulario(peca);
+    }
+
+} else {
+    // CADASTRO
+    const novoId = new Id();
+    document.getElementById("id").value = novoId.valor;
+}
 
 avancar.forEach((btn) => {
     btn.addEventListener("click", () => {
