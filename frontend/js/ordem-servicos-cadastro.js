@@ -68,7 +68,7 @@ class Id {
 }
 
 const id = new Id();
-document.getElementById("id").value = id.valor;
+//document.getElementById("id").value = id.valor;
 
 class CPF extends Campo {
     limpar(cpf) {
@@ -736,6 +736,62 @@ class OrdemServicosCadastro {
         });
     }
 
+    preencherFormulario(ordemServico) {
+        document.getElementById("id").value = 
+            ordemServico.id;
+
+        document.getElementById("nomeCompleto").value = 
+            ordemServico.nomeCompleto;
+
+        document.getElementById("cpf").value = 
+            ordemServico.cpf;
+
+        document.getElementById("email").value = 
+            ordemServico.email;
+
+        document.getElementById("telefone").value =
+            ordemServico.telefone;
+
+        document.getElementById("cep").value =
+            ordemServico.cep;
+        
+        document.getElementById("placa").value = 
+            ordemServico.placa;
+
+        document.getElementById("ano").value =
+            ordemServico.ano;
+
+        document.getElementById("email").value =
+            ordemServico.email;
+
+        document.getElementById("entrada").value = 
+            ordemServico.entrada;
+
+        document.getElementById("entrega").value =
+            ordemServico.entrega;
+
+        document.getElementById("prazoPagamento").value =
+            ordemServico.prazoPagamento;
+
+        document.getElementById("precoUnitario").value =
+            ordemServico.precoUnitario;
+        
+        document.getElementById("limiteCredito").value =
+            ordemServico.limiteCredito;
+
+        document.getElementById("dataCadastro").value =
+            ordemServico.dataCadastro;
+        
+        document.getElementById("nomeProduto").value =
+            ordemServico.nomeProduto;
+        
+        document.getElementById("precoUnitario").value =
+            ordemServico.precoUnitario;
+        
+        document.getElementById("codigoProduto").value =
+            ordemServico.codigoProduto;
+    }
+
     //LocalStorage
     concluir() {
         const registro = {
@@ -781,7 +837,7 @@ class OrdemServicosCadastro {
         const ordemServicoStorage = JSON.parse(localStorage.getItem("ordemServicoCadastro")) ?? [];
         const params = new URLSearchParams(window.location.search);
         const idEdicao = params.get("id");
-        const ordemServicoCadastro = ordemServicoStorage.find(ordemServicoCadastro => String(ordemServicoCadastro.id) === String(idEdicao));
+        const ordemServico = ordemServicoStorage.find(ordemServico => String(ordemServico.id) === String(idEdicao));
 
         //Colocar o novo registro
         //tabela.push(registro);
@@ -789,7 +845,7 @@ class OrdemServicosCadastro {
         if (idEdicao) {
             // EDIÇÃO
             const indice = tabela.findIndex(
-                ordemServicoCadastro => String(ordemServicoCadastro.id) === String(idEdicao)
+                ordemServico => String(ordemServico.id) === String(idEdicao)
             );
 
             if (indice !== -1) {
@@ -807,13 +863,13 @@ class OrdemServicosCadastro {
 }
 
 const ordemServicoStorage =
-    JSON.parse(localStorage.getItem("clientes")) ?? [];
+    JSON.parse(localStorage.getItem("ordem-servicos-cadastro")) ?? [];
 
 const params = new URLSearchParams(window.location.search);
 const idEdicao = params.get("id");
 
 const ordemServicoCadastro = ordemServicoStorage.find(
-    ordemServicoCadastro => String(ordemServicoCadastro.id) === String(idEdicao)
+    ordemServico => String(ordemServico.id) === String(idEdicao)
 );
 
 const ordemServicosCadastro = new OrdemServicosCadastro();

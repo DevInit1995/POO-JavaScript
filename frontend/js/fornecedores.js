@@ -644,6 +644,49 @@ class Fornecedores extends Pessoa {
         }
     }
 
+    preencherFormulario(fornecedor) {
+        document.getElementById("id").value = 
+            fornecedor.id;
+
+        document.getElementById("razaoSocial").value = 
+            fornecedor.razaoSocial;
+
+        document.getElementById("nomeFantasia").value = 
+            fornecedor.nomeFantasia;
+
+        document.getElementById("cnpj").value = 
+            fornecedor.cnpj;
+
+        document.getElementById("inscricaoEstadual").value =
+            fornecedor.inscricaoEstadual;
+
+        document.getElementById("cep").value =
+            fornecedor.cep;
+        
+        document.getElementById("telefone").value = 
+            fornecedor.telefone;
+
+        document.getElementById("celular").value =
+            fornecedor.celular;
+
+        document.getElementById("email").value =
+            fornecedor.email;
+
+        document.getElementById("limiteCredito").value = 
+            fornecedor.limiteCredito;
+
+        document.getElementById("dataCadastro").value =
+            fornecedor.dataCadastro;
+
+        document.getElementById("email").value =
+            fornecedor.email;
+        document.getElementById("precoUnitario").value =
+            fornecedor.precoUnitario;
+        
+        document.getElementById("codigoProduto").value =
+            fornecedor.codigoProduto;
+    }
+
     //LocalStorage
     concluir() {
         const registro = {

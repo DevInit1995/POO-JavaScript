@@ -695,14 +695,21 @@ class Clientes extends Pessoa {
 
         document.getElementById("cpf").value = cliente.cpf;
 
-        /*document.getElementById("rg").value =
+        document.getElementById("rg").value =
+            cliente.rg;document.getElementById("id").value = cliente.id;
+
+        document.getElementById("nomeCompleto").value = cliente.nomeCompleto;
+
+        document.getElementById("cpf").value = cliente.cpf;
+
+        document.getElementById("rg").value =
             cliente.rg;
 
         document.getElementById("dataNascimento").value =
             cliente.dataNascimento;
 
         document.getElementById("telefone").value =
-            cliente.telefone;*/
+            cliente.telefone;
 
         document.getElementById("celular").value = cliente.celular;
 
@@ -721,13 +728,13 @@ class Clientes extends Pessoa {
             cliente.rua;
 
         document.getElementById("numero").value =
-            cliente.numero;
+            cliente.numero;*/
 
         document.getElementById("cep").value =
             cliente.cep;
 
-        document.getElementById("complemento").value =
-            cliente.complemento;
+        /*document.getElementById("complemento").value =
+            cliente.complemento;*/
 
         document.getElementById("placa").value =
             cliente.placa;
@@ -735,19 +742,19 @@ class Clientes extends Pessoa {
         document.getElementById("marca").value =
             cliente.marca;
 
-        document.getElementById("modelo").value =
-            cliente.modelo;
+        /*document.getElementById("modelo").value =
+            cliente.modelo;*/
 
         document.getElementById("ano").value =
             cliente.ano;
 
-        document.getElementById("cor").value =
-            cliente.cor;
+        /*document.getElementById("cor").value =
+            cliente.cor;*/
 
         document.getElementById("chassi").value =
             cliente.chassi;
 
-        document.getElementById("kmAtual").value =
+        /*document.getElementById("kmAtual").value =
             cliente.kmAtual;
 
         document.getElementById("tipoCombustivel").value =
@@ -759,13 +766,13 @@ class Clientes extends Pessoa {
         document.getElementById("dataCadastro").value = cliente.dataCadastro;
 
         /*document.getElementById("historicoServicos").value =
-            cliente.historicoServicos;
+            cliente.historicoServicos;*/
 
         document.getElementById("dataUltimaVisita").value =
             cliente.dataUltimaVisita;
 
         document.getElementById("observacao").value =
-            cliente.observacoes;*/
+            cliente.observacoes;
     }
     
     //LocalStorage
@@ -861,6 +868,7 @@ if (idEdicao) {
             text: "Cliente não encontrado."
         });
     } else {
+        debugger
         clientes.preencherFormulario(cliente);
     }
 

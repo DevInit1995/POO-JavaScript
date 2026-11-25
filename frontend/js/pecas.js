@@ -450,7 +450,7 @@ class CadastroPecas {
     }
 
     //popular os fornecedores por ids
-    carregarFornecedores() {
+    /*carregarFornecedores() {
         const selectFornecedor = document.getElementById("fornecedorId");
         const fornecedores = JSON.parse(localStorage.getItem("fornecedores")) || [];
         
@@ -462,6 +462,42 @@ class CadastroPecas {
             
             selectFornecedor.appendChild(option);
         });
+    }*/
+
+    preencherFormulario(pecas) {
+        document.getElementById("id").value = 
+            pecas.id;
+
+        document.getElementById("nomeProduto").value = 
+            pecas.nomeProduto;
+
+        document.getElementById("codigoInterno").value = 
+            pecas.codigoInterno;
+        
+        document.getElementById("categoria").value = 
+            pecas.categoria;
+
+        document.getElementById("quantidadeEstoque").value =
+            pecas.quantidadeEstoque;
+
+        document.getElementById("precoCusto").value = 
+            pecas.precoCusto;
+
+        document.getElementById("precoVenda").value = 
+            pecas.precoVenda;
+
+        document.getElementById("codigoFabricante").value =
+            pecas.codigoFabricante;
+
+        document.getElementById("dataCadastro").value =
+            pecas.dataCadastro;
+
+        /*document.getElementById("telefone").value =
+            cliente.telefone;
+
+        document.getElementById("celular").value = cliente.celular;
+
+        document.getElementById("email").value = cliente.email;*/
     }
 
     //LocalStorage
@@ -490,7 +526,7 @@ class CadastroPecas {
         };
 
         let tabela = JSON.parse(localStorage.getItem("cadastroPecas")) || [];
-
+        
         const pecaStorage = JSON.parse(localStorage.getItem("pecas")) ?? [];
         const params = new URLSearchParams(window.location.search);
         const idEdicao = params.get("id");
@@ -516,12 +552,12 @@ class CadastroPecas {
 }
 
 const pecaStorage =
-    JSON.parse(localStorage.getItem("pecas")) ?? [];
+    JSON.parse(localStorage.getItem("cadastroPecas")) ?? [];
 
 const params = new URLSearchParams(window.location.search);
 const idEdicao = params.get("id");
 
-const peca = pecaStorage.find(
+const pecas = pecaStorage.find(
     peca => String(peca.id) === String(idEdicao)
 );
 
@@ -529,14 +565,15 @@ const cadastroPecas = new CadastroPecas();
 
 if (idEdicao) {
     // EDIÇÃO
-    if (!peca) {
+    if (!pecas) {
+        debugger
         Swal.fire({
             icon: "error",
             title: "Erro",
             text: "Cliente não encontrado."
         });
     } else {
-        peca.preencherFormulario(peca);
+        cadastroPecas.preencherFormulario(pecas);
     }
 
 } else {
@@ -576,9 +613,9 @@ document.querySelectorAll(".btnConcluir").forEach(btn => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     cadastroPecas.carregarFornecedores();
-});
+});*/
     
 
 

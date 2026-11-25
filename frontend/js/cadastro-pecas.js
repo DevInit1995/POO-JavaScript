@@ -35,6 +35,7 @@ function insertItem(item, index) {
 }
 
 function editItem(index) {
+    //debugger
     const pecas = itens[index];
    
     window.open(`pecas.html?id=${pecas.id}`, '_blank');
